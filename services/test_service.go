@@ -1,24 +1,24 @@
 package services
 
 import (
-	"fmt"
-
+	"github.com/subodhqss/go-training/models"
 	"github.com/subodhqss/go-training/repository"
 )
 
 type TestService interface {
-	PrintTest()
+	PrintTest() *models.Test
 }
 
 type testSrv struct {
 	testRepo repository.TestRepository
 }
 
-func NewTestService() TestService {
-	return &testSrv{}
+func NewTestService(testRepo repository.TestRepository) TestService {
+	return &testSrv{testRepo: testRepo}
 }
 
-func (ts *testSrv) PrintTest() {
-	ts.testRepo.PrintTest()
-	fmt.Println("this is test service")
+func (ts *testSrv) PrintTest() *models.Test {
+	test := ts.testRepo.PrintTest()
+	// test := &models.Test{ID: 1, Message: "Hi SUbodh"}
+	return test
 }

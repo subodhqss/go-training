@@ -1,7 +1,20 @@
 package controllers
 
-import "fmt"
+import (
+	"encoding/json"
+	"net/http"
 
-func Test() {
-	fmt.Println("Test contorllers")
+	"github.com/subodhqss/go-training/repository"
+	"github.com/subodhqss/go-training/services"
+)
+
+var testService = services.NewTestService(repository.NewTestRepo())
+
+func GetTest(rw http.ResponseWriter, r *http.Request) {
+	data := testService.PrintTest()
+
+	jsonData, _ := json.Marshal(data)
+	rw.Header().Set("Content-Type", "application/json")
+	rw.WriteHeader(200)
+	rw.Write(jsonData)
 }
