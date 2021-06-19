@@ -1,0 +1,29 @@
+Hi all
+1.Please clone the code using the below command
+git clone https://github.com/subodhqss/go-training.git
+
+2.Go to your branch using
+git checkout alamgeer/basics
+git checkout gurneet/basics
+git checkout subi/basics
+git checkout rajnish/basics
+
+Task :
+1.Create a server
+2.When I hit the url localhost:4000/employee it should return the json
+{
+"name": "Your Name",
+"add": "company address ",
+"designation": "your designation",
+"company_name": "your company name",
+"date_of_joining": "your date of joining",
+"emp_code": "your emp code"
+}
+according to your office timing you can start it.
+Make the below files and start taking the reference of test files in all the folders
+model named employee.go
+conroller employee_controller.go
+repository employee_repository.go
+service employee_service.go
+
+git pull origin master
