@@ -1,6 +1,6 @@
-package models
+// package models
 
-type Test struct {
-	ID      int
-	Message string
-}
+// type Test struct {
+// 	ID      int
+// 	Message string
+// }
