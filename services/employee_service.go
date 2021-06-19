@@ -9,15 +9,15 @@ type employeService interface {
 	PrintEmploye() *models.Employee
 }
 
-type empSrv struct {
-	empRepo repository.employeReposiotry
+type empServ struct {
+	empRepo repository.EmployeReposiotry
 }
 
-func NewEmployeService(empRepo repository.employeReposiotry) employeService {
+func NewEmployeService(empRepo repository.EmployeReposiotry) employeService {
 	return &empServ{empRepo: empRepo}
 }
 
-func (es *empSrv) PrintEmploye() *models.Employee {
+func (es *empServ) PrintEmploye() *models.Employee {
 	emp := es.empRepo.PrintEmploye()
 	return emp
 }

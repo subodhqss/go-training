@@ -4,11 +4,11 @@ import (
 	"github.com/subodhqss/go-training/models"
 )
 
-type employeReposiotry interface {
+type EmployeReposiotry interface {
 	PrintEmploye() *models.Employee
 }
 
-func NewEmpRepo() employeReposiotry {
+func NewEmpRepo() EmployeReposiotry {
 	return &empRepo{}
 }
 
