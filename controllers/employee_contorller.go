@@ -8,10 +8,10 @@ import (
 	"github.com/subodhqss/go-training/services"
 )
 
-var testService = services.NewTestService(repository.NewTestRepo())
+var employeeService = services.NewEmployeeService(repository.NewEmpRepo())
 
-func GetTest(rw http.ResponseWriter, r *http.Request) {
-	data := testService.PrintTest()
+func GetEmployee(rw http.ResponseWriter, r *http.Request) {
+	data := employeeService.PrintEmp()
 
 	jsonData, _ := json.Marshal(data)
 	rw.Header().Set("Content-Type", "application/json")

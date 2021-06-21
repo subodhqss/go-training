@@ -1,9 +1,11 @@
 package repository
 
-import "fmt"
+import (
+	"github.com/subodhqss/go-training/models"
+)
 
 type TestRepository interface {
-	PrintTest()
+	PrintTest() *models.Test
 }
 
 func NewTestRepo() TestRepository {
@@ -12,6 +14,8 @@ func NewTestRepo() TestRepository {
 
 type testRepo struct{}
 
-func (tr *testRepo) PrintTest() {
-	fmt.Println("this is test repo")
+func (tr *testRepo) PrintTest() *models.Test {
+	test := &models.Test{ID: 1, Message: "Hello trainee!"}
+
+	return test
 }
