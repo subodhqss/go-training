@@ -14,7 +14,7 @@ func main() {
 func StartServer() {
 	r := controllers.NewRouter()
 	server := &http.Server{
-		Addr:    ":8520",
+		Addr:    ":8000",
 		Handler: r,
 	}
 	fmt.Println("Server is running at ", server.Addr)
