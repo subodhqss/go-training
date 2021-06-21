@@ -15,7 +15,14 @@ func NewEmpRepo() EmployeeRepository {
 type employeeRepo struct{}
 
 func (tr *employeeRepo) PrintEmployee() *models.Employee {
-	employee := &models.Employee{Name: "Rajnish", Add: "Noida", Designation: "Software Engg", Company_name: "Qss Org", Date_of_joining: "18/06/2021", Emp_code: 1002}
+	employee := &models.Employee{
+		Name:            "Rajnish",
+		Add:             "Noida",
+		Designation:     "Software Engg",
+		Company_name:    "Qss Org",
+		Date_of_Joining: "21/06/2021",
+		Emp_Code:        1002,
+	}
 
 	return employee
 }
