@@ -8,6 +8,7 @@ import (
 
 type EmployeeRepository interface {
 	PrintEmployee() []*models.Employee
+	SaveEmployee(models.Employee) int64
 }
 
 func NewEmpRepo() EmployeeRepository {
@@ -24,4 +25,12 @@ func (tr *employeeRepo) PrintEmployee() []*models.Employee {
 		log.Print("Error in getting all records")
 	}
 	return employee
+}
+func (tr *employeeRepo) SaveEmployee(models.Employee) int64 {
+	var employee models.Employee
+	result := gormDB.Create(&employee)
+	if err := result.Error; err != nil {
+		log.Print("Error in save all records")
+	}
+	return int64(employee.EmployeeNumber)
 }
