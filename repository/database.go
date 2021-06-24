@@ -12,7 +12,7 @@ var gormDB *gorm.DB
 
 func DBInit() {
 	// refer https://github.com/go-sql-driver/mysql#dsn-data-source-name for details
-	dsn := "root:Alam@official@/classicmodels"
+	dsn := "root:8520@/classicmodels"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("Unable to connect to Gorm, exiting: %v", err)
