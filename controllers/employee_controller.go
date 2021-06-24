@@ -7,10 +7,11 @@ import (
 	"github.com/subodhqss/go-training/repository"
 	"github.com/subodhqss/go-training/services"
 )
-var employeService = service.NewEmployeService(repository.NewEmpRepo())
 
-func GetEmploye(rw http.ResponseWriter,r *http.Request){
-	data:=employeService.PrintEmploye()
+var employeeService = service.NewEmployeService(repository.NewEmpRepo())
+
+func GetEmployee(rw http.ResponseWriter, r *http.Request) {
+	data := employeeService.PrintEmploye()
 
 	jsonData, _ := json.Marshal(data)
 
