@@ -1,10 +1,16 @@
 package models
 
 type Employee struct {
-	Name            string `json:"employee_Name"`
-	Add             string `json:"address_Of_Employee"`
-	Designation     string `json:"designation_of_Employee"`
-	Company_name    string `json:"company_Name"`
-	Date_of_joining string `json:"joining_date"`
-	EmpCode         string `json:"employee_code"`
+	
+	EmployeeNumber int    `gorm:"column:employeeNumber"json:"employee_number"`
+	LastName       string `gorm:"column:lastName"json:"last_name"`
+	FirstName      string `gorm:"column:firstName"json:"first_name"`
+	Extension      string `gorm:"column:extension"`
+	Email          string `gorm:"column:email"`
+	OfficeCode     string `gorm:"column:officeCode"json:"office_code"`
+	ReportTo       int    `gorm:"column:reportTo"json:"report_to"`
+	JobTitle       string `gorm:"column:jobTitle"json:"job_title"`
+
+	
+
 }
