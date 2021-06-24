@@ -26,8 +26,8 @@ func (tr *employeeRepo) PrintEmployee() []*models.Employee {
 	}
 	return employee
 }
-func (tr *employeeRepo) SaveEmployee(models.Employee) int64 {
-	var employee models.Employee
+func (tr *employeeRepo) SaveEmployee(employee models.Employee) int64 {
+
 	result := gormDB.Create(&employee)
 	if err := result.Error; err != nil {
 		log.Print("Error in save all records")

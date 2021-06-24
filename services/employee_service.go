@@ -23,8 +23,8 @@ func (emp *empSrv) PrintEmp() []*models.Employee {
 	// test := &models.Test{ID: 1, Message: "Hi SUbodh"}
 	return employee
 }
-func (emp *empSrv) SaveEmp(models.Employee) int64 {
+func (emp *empSrv) SaveEmp(Employee models.Employee) int64 {
 	var empId int64 = 0
-	empId = emp.employeeRepo.SaveEmployee(models.Employee{})
+	empId = emp.employeeRepo.SaveEmployee(Employee)
 	return empId
 }
