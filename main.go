@@ -5,9 +5,11 @@ import (
 	"net/http"
 
 	"github.com/subodhqss/go-training/controllers"
+	"github.com/subodhqss/go-training/repository"
 )
 
 func main() {
+	repository.DBInit()
 	StartServer()
 	fmt.Println("Hello Trainee !")
 }

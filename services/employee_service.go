@@ -6,7 +6,7 @@ import (
 )
 
 type EmployeeService interface {
-	PrintEmp() *models.Employee
+	PrintEmp() []*models.Employee
 }
 
 type empSrv struct {
@@ -17,7 +17,7 @@ func NewEmployeeService(employeeRepo repository.EmployeeRepository) EmployeeServ
 	return &empSrv{employeeRepo: employeeRepo}
 }
 
-func (emp *empSrv) PrintEmp() *models.Employee {
+func (emp *empSrv) PrintEmp() []*models.Employee {
 	employee := emp.employeeRepo.PrintEmployee()
 	// test := &models.Test{ID: 1, Message: "Hi SUbodh"}
 	return employee

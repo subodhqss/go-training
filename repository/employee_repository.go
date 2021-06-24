@@ -1,11 +1,13 @@
 package repository
 
 import (
+	"log"
+
 	"github.com/subodhqss/go-training/models"
 )
 
 type EmployeeRepository interface {
-	PrintEmployee() *models.Employee
+	PrintEmployee() []*models.Employee
 }
 
 func NewEmpRepo() EmployeeRepository {
@@ -14,15 +16,12 @@ func NewEmpRepo() EmployeeRepository {
 
 type employeeRepo struct{}
 
-func (tr *employeeRepo) PrintEmployee() *models.Employee {
-	employee := &models.Employee{
-		Name:            "Rajnish",
-		Add:             "Noida",
-		Designation:     "Software Engg",
-		Company_name:    "Qss Org",
-		Date_of_Joining: "21/06/2021",
-		Emp_Code:        1002,
-	}
+func (tr *employeeRepo) PrintEmployee() []*models.Employee {
 
+	var employee []*models.Employee
+	result := gormDB.Limit(10).Find(&employee)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
 	return employee
 }
