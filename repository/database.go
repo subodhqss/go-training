@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/subodhqss/go-training/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -20,6 +19,4 @@ func DBInit() {
 	}
 	fmt.Println("DB connected")
 	gormDB = db
-
-	gormDB.AutoMigrate(&models.Employee{})
 }
