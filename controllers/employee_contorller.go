@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/subodhqss/go-training/models"
@@ -22,7 +23,8 @@ func GetEmployee(rw http.ResponseWriter, r *http.Request) {
 func CreateEmployee(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var Employee models.Employee
+	fmt.Println("Controller  :: ", Employee)
 	json.NewDecoder(r.Body).Decode(&Employee)
-	employeeService.SaveEmp(Employee)
+	employeeService.SaveEmployee(Employee)
 
 }

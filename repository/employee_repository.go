@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/subodhqss/go-training/models"
@@ -8,7 +9,7 @@ import (
 
 type EmployeeRepository interface {
 	PrintEmployee() []*models.Employee
-	SaveEmployee(models.Employee) int64
+	SaveEmployee(models.Employee) *models.Employee
 }
 
 func NewEmpRepo() EmployeeRepository {
@@ -26,11 +27,14 @@ func (tr *employeeRepo) PrintEmployee() []*models.Employee {
 	}
 	return employee
 }
-func (tr *employeeRepo) SaveEmployee(employee models.Employee) int64 {
+func (tr *employeeRepo) SaveEmployee(employee models.Employee) *models.Employee {
 
 	result := gormDB.Create(&employee)
 	if err := result.Error; err != nil {
-		log.Print("Error in save all records")
+		log.Print("Error in Save all records")
 	}
-	return int64(employee.EmployeeNumber)
+
+	fmt.Println(&employee)
+	return &employee
+
 }
