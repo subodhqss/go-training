@@ -11,6 +11,8 @@ import (
 func main() {
 	repository.DBInit()
 	StartServer()
+	
+
 }
 
 func StartServer() {
