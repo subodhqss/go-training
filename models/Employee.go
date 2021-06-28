@@ -8,7 +8,7 @@ type Employee struct {
 	Extension      string `gorm:"column:extension"`
 	Email          string `gorm:"column:email"`
 	OfficeCode     string `gorm:"column:officeCode"json:"office_code"`
-	ReportTo       int    `gorm:"column:reportTo"json:"report_to"`
+	ReportTo       int    `gorm:"column:reportsTo"json:"report_to"`
 	JobTitle       string `gorm:"column:jobTitle"json:"job_title"`
 
 	
