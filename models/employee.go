@@ -11,6 +11,4 @@ type Employee struct {
 	ReportTo       int    `gorm:"column:reportsTo"json:"report_to"`
 	JobTitle       string `gorm:"column:jobTitle"json:"job_title"`
 
-	
-
 }
