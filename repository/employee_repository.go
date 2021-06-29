@@ -11,6 +11,8 @@ type EmployeReposiotry interface {
 	PrintEmploye() []*models.Employee
 	SaveEmployee(models.Employee) *models.Employee
 	EditEmployee(models.Employee) *models.Employee
+	RemoveEmployee(models.Employee) *models.Employee
+
 }
 
 func NewEmpRepo() EmployeReposiotry {
@@ -43,14 +45,22 @@ func (tr *empRepo) SaveEmployee(employee models.Employee) *models.Employee {
 
 }
 
-func (tr *empRepo) EditEmployee(employee models.Employee) *models.Employee {
+func(tr *empRepo) EditEmployee(employee models.Employee) *models.Employee{
 
 	result := gormDB.Model(&employee).Where("employeeNumber", employee.EmployeeNumber).Updates(employee)
-	if err := result.Error; err != nil {
+    if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
-
 	fmt.Println(&employee)
 	return &employee
 
+}
+func(tr *empRepo) RemoveEmployee(employee models.Employee) *models.Employee{
+
+	result := gormDB.Model(&employee).Where("employeeNumber", 75).Delete(employee)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+	fmt.Println(&employee)
+	return &employee
 }

@@ -32,8 +32,13 @@ func UpdateEmployee(rw http.ResponseWriter, r *http.Request){
 	rw.Header().Set("Content-Type", "application/json")
 	var Employee models.Employee
 	json.NewDecoder(r.Body).Decode(&Employee)
-	employeService.EditEmployee(Employee)
-	
+	employeService.EditEmployee(Employee)	
+}
 
-	
+func DeleteEmployee(rw http.ResponseWriter, r *http.Request){
+	rw.Header().Set("Content-Type", "application/json")
+	var Employee models.Employee
+	json.NewDecoder(r.Body).Decode(&Employee)
+	employeService.RemoveEmployee(Employee)
+
 }
