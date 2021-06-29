@@ -25,7 +25,11 @@ func CreateStudent(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var Student models.Student
 	json.NewDecoder(r.Body).Decode(&Student)
-	studentService.Savestudent(Student)
+	data := studentService.Savestudent(Student)
+	jsonData, _ := json.Marshal(data)
+	rw.Header().Set("Content-Type", "application/json")
+	rw.WriteHeader(200)
+	rw.Write(jsonData)
 
 }
 
@@ -33,12 +37,20 @@ func UpdateStudent(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var Student models.Student
 	json.NewDecoder(r.Body).Decode(&Student)
-	studentService.Updatestudent(Student)
+	data := studentService.Updatestudent(Student)
+	jsonData, _ := json.Marshal(data)
+	rw.Header().Set("Content-Type", "application/json")
+	rw.WriteHeader(200)
+	rw.Write(jsonData)
 }
 
 func Deletestudent(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	vars := mux.Vars(r)["RollNo"]
 	i1, _ := strconv.ParseInt(vars, 10, 64)
-	studentService.Deletestudent(i1)
+	data := studentService.Deletestudent(i1)
+	jsonData, _ := json.Marshal(data)
+	rw.Header().Set("Content-Type", "application/json")
+	rw.WriteHeader(200)
+	rw.Write(jsonData)
 }
