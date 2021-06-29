@@ -9,7 +9,7 @@ type employeService interface {
 	PrintEmploye() []*models.Employee
 	SaveEmployee(models.Employee) *models.Employee
 	UpdateEmployee(models.Employee) *models.Employee
-	DeleteEmployee(models.Employee) *models.Employee
+	DeleteEmployee(models.Employee , string ) *models.Employee
 
 }
 
@@ -37,7 +37,8 @@ func (em *empServ) UpdateEmployee(Employee models.Employee) *models.Employee{
 	return empId
 }
 
-func (em *empServ) DeleteEmployee(Employee models.Employee ) *models.Employee{
-	empId := em.empRepo.DeleteEmployee(Employee)
+func (em *empServ) DeleteEmployee(Employee models.Employee, eid string) *models.Employee{
+	// int(eid)
+	empId := em.empRepo.DeleteEmployee(Employee , eid)
 	return empId
 }

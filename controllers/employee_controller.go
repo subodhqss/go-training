@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-
+	"github.com/gorilla/mux"
 	"github.com/subodhqss/go-training/models"
 	"github.com/subodhqss/go-training/repository"
 	"github.com/subodhqss/go-training/services"
@@ -37,6 +37,7 @@ func UpdateEmployee(rw http.ResponseWriter, r *http.Request) {
 func DeleteEmployee(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var Employee models.Employee
-	employeService.DeleteEmployee(Employee)
+	vars := mux.Vars(r)["eid"]
+	employeService.DeleteEmployee(Employee,vars)
 	
 }
