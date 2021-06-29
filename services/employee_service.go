@@ -38,7 +38,7 @@ func (em *empServ) UpdateEmployee(Employee models.Employee) *models.Employee{
 }
 
 func (em *empServ) DeleteEmployee(Employee models.Employee, eid string) *models.Employee{
-	// int(eid)
+	
 	empId := em.empRepo.DeleteEmployee(Employee , eid)
 	return empId
 }

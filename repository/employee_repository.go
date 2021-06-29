@@ -68,7 +68,7 @@ func (tr *empRepo) UpdateEmployee(employee models.Employee) *models.Employee {
 
 func (tr *empRepo) DeleteEmployee(employee models.Employee , eid string) *models.Employee{
 	
-	e_id, _ := strconv.ParseInt(eid,0,64)//type conversion
+	e_id, _:= strconv.ParseInt(eid,0,64)//type conversion
 	
 	result:= gormDB.Where("employeeNumber",e_id).Delete(&employee)
 	if err := result.Error; err != nil {
