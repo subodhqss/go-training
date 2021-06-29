@@ -35,7 +35,4 @@ func UpdateEmployee(rw http.ResponseWriter, r *http.Request) {
 	var Employee models.Employee
 	json.NewDecoder(r.Body).Decode(&Employee)
 	employeService.UpdateEmployee(Employee)
-	
-
-		
 }

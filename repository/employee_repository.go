@@ -42,23 +42,23 @@ func (tr *empRepo) SaveEmployee(employee models.Employee) *models.Employee {
 			log.Print("Error in getting all records")
 		}
 
-	fmt.Println(&employee)
+	fmt.Println("Created new entry succesfull !",employee)
 	return &employee
 	
 }
 
 func (tr *empRepo) UpdateEmployee(employee models.Employee) *models.Employee {
 	
-	// var employee *models.Employee
-	
-	result := gormDB.Model(&models.Employee{}).Where("employeeNumber ", 1002).Save(&employee)
 
-	// result:= gormDB.Save(&employee).Where("employeeNumber",75)
+	result := gormDB.Model(&employee).Where("employeeNumber", employee.EmployeeNumber).Updates(employee)
+
+	
+	
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
-	// db.Model(&User{}).Where("active = ?", true).Update("name", "hello")
 	
+	fmt.Println("Updated Succesfull !",employee)
 	return &employee
 	
 }
