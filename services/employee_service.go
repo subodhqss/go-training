@@ -8,6 +8,8 @@ import (
 type employeService interface {
 	PrintEmploye() []*models.Employee
 	SaveEmployee(models.Employee) *models.Employee
+	EditEmployee(models.Employee) *models.Employee
+
 }
 
 type empServ struct {
@@ -26,5 +28,9 @@ func (es *empServ) PrintEmploye() []*models.Employee {
 func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee{
 	// var empId int64 = 0
 	empId := emp.empRepo.SaveEmployee(Employee)
+	return empId
+}
+func (emp *empServ) EditEmployee(Employee models.Employee) *models.Employee{
+	empId := emp.empRepo.EditEmployee(Employee)
 	return empId
 }
