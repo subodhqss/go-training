@@ -3,6 +3,7 @@ package repository
 import (
 	"fmt"
 	"log"
+	"strconv"
 
 	"github.com/subodhqss/go-training/models"
 )
@@ -11,6 +12,7 @@ type EmployeReposiotry interface {
 	PrintEmploye() []*models.Employee
 	SaveEmployee(models.Employee) *models.Employee
 	EditEmployee(models.Employee) *models.Employee
+	DeleteEmployee(models.Employee, string) *models.Employee
 }
 
 func NewEmpRepo() EmployeReposiotry {
@@ -54,3 +56,15 @@ func (tr *empRepo) EditEmployee(employee models.Employee) *models.Employee {
 	return &employee
 }
 
+func (tr *empRepo) DeleteEmployee(employee models.Employee, eid string) *models.Employee {
+
+	e_id, _ := strconv.ParseInt(eid, 0, 64) //type conversion
+
+	result := gormDB.Where("employeeNumber", e_id).Delete(&employee)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+
+	fmt.Println( "Deleted  !")
+	return &employee
+}
