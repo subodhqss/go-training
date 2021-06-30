@@ -9,8 +9,8 @@ type employeService interface {
 	PrintEmploye() []*models.Employee
 	SaveEmployee(models.Employee) *models.Employee
 	UpdateEmployee(models.Employee) *models.Employee
-	DeleteEmployee(models.Employee , string ) *models.Employee
-
+	Update(models.Employee) *models.Employee
+	DeleteEmployee(models.Employee, string) *models.Employee
 }
 
 type empServ struct {
@@ -26,19 +26,24 @@ func (es *empServ) PrintEmploye() []*models.Employee {
 	return emp
 }
 
-func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee{
-	
+func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee {
+
 	empId := emp.empRepo.SaveEmployee(Employee)
 	return empId
 }
 
-func (em *empServ) UpdateEmployee(Employee models.Employee) *models.Employee{
+func (em *empServ) UpdateEmployee(Employee models.Employee) *models.Employee {
 	empId := em.empRepo.UpdateEmployee(Employee)
 	return empId
 }
 
-func (em *empServ) DeleteEmployee(Employee models.Employee, eid string) *models.Employee{
-	
-	empId := em.empRepo.DeleteEmployee(Employee , eid)
+func (em *empServ) Update(Employee models.Employee) *models.Employee {
+	empId := em.empRepo.Update(Employee)
+	return empId
+}
+
+func (em *empServ) DeleteEmployee(Employee models.Employee, eid string) *models.Employee {
+
+	empId := em.empRepo.DeleteEmployee(Employee, eid)
 	return empId
 }
