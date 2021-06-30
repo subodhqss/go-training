@@ -10,6 +10,7 @@ type employeService interface {
 	SaveEmployee(models.Employee) *models.Employee
 	EditEmployee(models.Employee) *models.Employee
 	RemoveEmployee(models.Employee,string) *models.Employee
+	PatchEmployee(models.Employee) *models.Employee
 
 }
 
@@ -38,6 +39,11 @@ func (emp *empServ) EditEmployee(Employee models.Employee) *models.Employee{
 
 func (emp *empServ) RemoveEmployee(Employee models.Employee , eid string) *models.Employee{
 	empId := emp.empRepo.RemoveEmployee(Employee,eid)
+	return empId
+}
+
+func (emp *empServ) PatchEmployee(Employee models.Employee) *models.Employee{
+	empId := emp.empRepo.PatchEmployee(Employee)
 	return empId
 }
 

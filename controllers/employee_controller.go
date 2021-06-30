@@ -45,3 +45,10 @@ func DeleteEmployee(rw http.ResponseWriter, r *http.Request){
 	json.NewEncoder(rw).Encode("Employee is deleted!")
 
 }
+
+func PatchEmployee(rw http.ResponseWriter, r *http.Request){
+	rw.Header().Set("Content-Type", "application/json")
+	var Employee models.Employee
+	json.NewDecoder(r.Body).Decode(&Employee)
+	employeService.PatchEmployee(Employee)
+}

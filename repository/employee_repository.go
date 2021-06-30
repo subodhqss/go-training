@@ -13,6 +13,8 @@ type EmployeReposiotry interface {
 	SaveEmployee(models.Employee) *models.Employee
 	EditEmployee(models.Employee) *models.Employee
 	RemoveEmployee(models.Employee,string) *models.Employee
+	PatchEmployee(models.Employee) *models.Employee
+
 
 }
 
@@ -59,6 +61,16 @@ func(tr *empRepo) EditEmployee(employee models.Employee) *models.Employee{
 func(tr *empRepo) RemoveEmployee(employee models.Employee, eid string) *models.Employee{
     e_id,_ := strconv.ParseInt(eid,0,64)
 	result := gormDB.Model(&employee).Where("employeeNumber", e_id).Delete(employee)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+	fmt.Println(&employee)
+	return &employee
+}
+
+func(tr *empRepo) PatchEmployee(employee models.Employee) *models.Employee{
+
+	result := gormDB.Model(&employee).Where("employeeNumber", employee.EmployeeNumber).Updates(employee)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}

@@ -8,6 +8,7 @@ func NewRouter() *mux.Router {
 	router.HandleFunc("/saveemployee", CreateEmployee).Methods("POST")
 	router.HandleFunc("/editemployee",UpdateEmployee).Methods("PUT")
 	router.HandleFunc("/removeemployee/{eid}",DeleteEmployee).Methods("DELETE")
+	router.HandleFunc("/patchemployee",PatchEmployee).Methods("PATCH")
 
 
 	return router
