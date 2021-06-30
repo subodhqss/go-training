@@ -9,8 +9,8 @@ type employeService interface {
 	PrintEmploye() []*models.Employee
 	SaveEmployee(models.Employee) *models.Employee
 	EditEmployee(models.Employee) *models.Employee
-	DeleteEmployee(models.Employee, string)*models.Employee
-
+	UpdatePatch(models.Employee) *models.Employee
+	DeleteEmployee(models.Employee, string) *models.Employee
 }
 
 type empServ struct {
@@ -26,19 +26,20 @@ func (es *empServ) PrintEmploye() []*models.Employee {
 	return emp
 }
 
-func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee{
-	// var empId int64 = 0
+func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee {
 	empId := emp.empRepo.SaveEmployee(Employee)
 	return empId
 }
-func (emp *empServ) EditEmployee(Employee models.Employee) *models.Employee{
+func (emp *empServ) EditEmployee(Employee models.Employee) *models.Employee {
 	empId := emp.empRepo.EditEmployee(Employee)
 	return empId
 }
 
-func(em *empServ) DeleteEmployee(Employee models.Employee, eid string) *models.Employee{
-
-	
+func (em *empServ) DeleteEmployee(Employee models.Employee, eid string) *models.Employee {
 	empId := em.empRepo.DeleteEmployee(Employee, eid)
+	return empId
+}
+func (emp *empServ) UpdatePatch(Employee models.Employee) *models.Employee {
+	empId := emp.empRepo.UpdatePatch(Employee)
 	return empId
 }

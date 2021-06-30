@@ -15,7 +15,8 @@ var employeService = service.NewEmployeService(repository.NewEmpRepo())
 func GetEmploye(rw http.ResponseWriter, r *http.Request) {
 	data := employeService.PrintEmploye()
 	jsonData, _ := json.Marshal(data)
-	rw.Header().Set("Content-Type", "application/json")
+	rw.Header().Set("Content-Type",
+		"application/json")
 	rw.WriteHeader(200)
 	rw.Write(jsonData)
 }
@@ -39,5 +40,13 @@ func DeleteEmployee(rw http.ResponseWriter, r *http.Request) {
 	var Employee models.Employee
 	vars := mux.Vars(r)["eid"]
 	employeService.DeleteEmployee(Employee, vars)
+
+}
+
+func UpdatePatch(rw http.ResponseWriter, r *http.Request) {
+	rw.Header().Set("Content-Type", "application/json")
+	var Employee models.Employee
+	json.NewDecoder(r.Body).Decode(&Employee)
+	employeService.UpdatePatch(Employee)
 
 }
