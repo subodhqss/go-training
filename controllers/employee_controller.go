@@ -19,6 +19,15 @@ func GetEmploye(rw http.ResponseWriter, r *http.Request) {
 	rw.WriteHeader(200)
 	rw.Write(jsonData)
 }
+func GetEmployeId(rw http.ResponseWriter, r *http.Request) {
+	
+	vars := mux.Vars(r)["eid"]
+	data := employeService.PrintEmployeId(vars)
+	jsonData, _ := json.Marshal(data)
+	rw.Header().Set("Content-Type", "application/json")
+	rw.WriteHeader(200)
+	rw.Write(jsonData)
+}
 
 func CreateEmployee(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
