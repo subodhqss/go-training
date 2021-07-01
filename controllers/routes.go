@@ -4,7 +4,8 @@ import "github.com/gorilla/mux"
 
 func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/Employee", GetEmploye)
+	router.HandleFunc("/Employee", GetEmploye).Methods("GET")
+	router.HandleFunc("/employee/{eid}", GetEmployeId).Methods("GET")
 	router.HandleFunc("/saveemployee", CreateEmployee).Methods("POST")
 	router.HandleFunc("/editemployee", UpdateEmployee).Methods("PUT")
 	router.HandleFunc("/delete/{eid}", DeleteEmployee).Methods("DELETE")

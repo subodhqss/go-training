@@ -10,6 +10,7 @@ import (
 
 type EmployeReposiotry interface {
 	PrintEmploye() []*models.Employee
+	PrintEmployeId(string) *models.Employee
 	SaveEmployee(models.Employee) *models.Employee
 	EditEmployee(models.Employee) *models.Employee
 	UpdatePatch(models.Employee) *models.Employee
@@ -33,6 +34,18 @@ func (er *empRepo) PrintEmploye() []*models.Employee {
 
 	return employee
 }
+
+func (er *empRepo) PrintEmployeId(eid string) *models.Employee {
+	var employee *models.Employee
+	e_id, _:= strconv.ParseInt(eid,0,64)
+	
+	result:= gormDB.Where("employeeNumber",e_id).Find(&employee)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+	return employee
+}
+
 
 func (tr *empRepo) SaveEmployee(employee models.Employee) *models.Employee {
 	b := gormDB.First(&employee)
@@ -66,7 +79,7 @@ func (tr *empRepo) DeleteEmployee(employee models.Employee, eid string) *models.
 		log.Print("Error in getting all records")
 	}
 
-	fmt.Println( "Deleted  !")
+	fmt.Println("Deleted  !")
 	return &employee
 }
 
