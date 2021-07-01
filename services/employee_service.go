@@ -7,6 +7,7 @@ import (
 
 type employeService interface {
 	PrintEmploye() []*models.Employee
+	PrintEmployeId(string) *models.Employee
 	SaveEmployee(models.Employee) *models.Employee
 	EditEmployee(models.Employee) *models.Employee
 	RemoveEmployee(models.Employee,string) *models.Employee
@@ -24,6 +25,10 @@ func NewEmployeService(empRepo repository.EmployeReposiotry) employeService {
 
 func (es *empServ) PrintEmploye() []*models.Employee {
 	emp := es.empRepo.PrintEmploye()
+	return emp
+}
+func (es *empServ) PrintEmployeId(eid string) *models.Employee {
+	emp := es.empRepo.PrintEmployeId(eid)
 	return emp
 }
 

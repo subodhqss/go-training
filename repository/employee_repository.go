@@ -10,6 +10,7 @@ import (
 
 type EmployeReposiotry interface {
 	PrintEmploye() []*models.Employee
+	PrintEmployeId(string) *models.Employee
 	SaveEmployee(models.Employee) *models.Employee
 	EditEmployee(models.Employee) *models.Employee
 	RemoveEmployee(models.Employee,string) *models.Employee
@@ -29,6 +30,17 @@ func (er *empRepo) PrintEmploye() []*models.Employee {
 
 	var employee []*models.Employee
 	result := gormDB.Limit(10).Find(&employee)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+
+	return employee
+}
+func (er *empRepo) PrintEmployeId(eid string) *models.Employee {
+
+	var employee *models.Employee
+	e_id,_ := strconv.ParseInt(eid,0,64)
+	result := gormDB.Model(&employee).Where("employeeNumber", e_id).Find(&employee)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
