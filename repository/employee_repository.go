@@ -15,6 +15,8 @@ type EmployeReposiotry interface {
 	UpdateEmployee(models.Employee) *models.Employee
 	Update(models.Employee) *models.Employee
 	DeleteEmployee(models.Employee, string) *models.Employee
+
+	PrintOfficeId(string) *models.Office
 }
 
 func NewEmpRepo() EmployeReposiotry {
@@ -24,6 +26,7 @@ func NewEmpRepo() EmployeReposiotry {
 
 type empRepo struct{}
 
+//Employee model functions 
 func (er *empRepo) PrintEmploye() []*models.Employee {
 	var employee []*models.Employee
 	result := gormDB.Limit(10).Find(&employee)
@@ -32,6 +35,7 @@ func (er *empRepo) PrintEmploye() []*models.Employee {
 	}
 	return employee
 }
+
 func (er *empRepo) PrintEmployeId(eid string) *models.Employee {
 	var employee *models.Employee
 	e_id, _ := strconv.ParseInt(eid, 0, 64) //type conversion
@@ -53,7 +57,6 @@ func (tr *empRepo) SaveEmployee(employee models.Employee) *models.Employee {
 
 	fmt.Println("Created new entry succesfull !", employee)
 	return &employee
-
 }
 
 func (tr *empRepo) UpdateEmployee(employee models.Employee) *models.Employee {
@@ -85,4 +88,17 @@ func (tr *empRepo) DeleteEmployee(employee models.Employee, eid string) *models.
 
 	fmt.Println("Employee number", e_id, "Deleted Succesfully !")
 	return &employee
+}
+
+//office model function
+func (er *empRepo) PrintOfficeId(code string) *models.Office {
+	var office *models.Office
+	// code_, _ := strconv.ParseInt(code, 0, 64) //type conversion
+
+	result := gormDB.Find(&office).Where("officeCode",code)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+	fmt.Println("there is no error in get method")
+	return office
 }

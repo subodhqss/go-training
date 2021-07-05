@@ -12,6 +12,8 @@ type employeService interface {
 	UpdateEmployee(models.Employee) *models.Employee
 	Update(models.Employee) *models.Employee
 	DeleteEmployee(models.Employee, string) *models.Employee
+
+	PrintOfficeId(string) *models.Office
 }
 
 type empServ struct {
@@ -22,10 +24,12 @@ func NewEmployeService(empRepo repository.EmployeReposiotry) employeService {
 	return &empServ{empRepo: empRepo}
 }
 
+//Employee model functions
 func (es *empServ) PrintEmploye() []*models.Employee {
 	emp := es.empRepo.PrintEmploye()
 	return emp
 }
+
 func (es *empServ) PrintEmployeId(eid string) *models.Employee {
 	emp := es.empRepo.PrintEmployeId(eid)
 	return emp
@@ -51,4 +55,10 @@ func (em *empServ) DeleteEmployee(Employee models.Employee, eid string) *models.
 
 	empId := em.empRepo.DeleteEmployee(Employee, eid)
 	return empId
+}
+
+//office model functions
+func (es *empServ) PrintOfficeId(code string) *models.Office {
+	emp := es.empRepo.PrintOfficeId(code)
+	return emp
 }
