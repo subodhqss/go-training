@@ -1,9 +1,9 @@
 package repository
 
 import (
-	"strconv"
 	"fmt"
 	"log"
+	"strconv"
 
 	"github.com/subodhqss/go-training/models"
 )
@@ -13,10 +13,8 @@ type EmployeReposiotry interface {
 	PrintEmployeId(string) *models.Employee
 	SaveEmployee(models.Employee) *models.Employee
 	EditEmployee(models.Employee) *models.Employee
-	RemoveEmployee(models.Employee,string) *models.Employee
+	RemoveEmployee(models.Employee, string) *models.Employee
 	PatchEmployee(models.Employee) *models.Employee
-
-
 }
 
 func NewEmpRepo() EmployeReposiotry {
@@ -39,8 +37,9 @@ func (er *empRepo) PrintEmploye() []*models.Employee {
 func (er *empRepo) PrintEmployeId(eid string) *models.Employee {
 
 	var employee *models.Employee
-	e_id,_ := strconv.ParseInt(eid,0,64)
-	result:=  gormDB.Preload("ReportTo").Where("employeeNumber",e_id).Find(&employee)
+	e_id, _ := strconv.ParseInt(eid, 0, 64)
+
+	result := gormDB.Preload("ReportsTo").Where("employeeNumber", e_id).Find(&employee)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
@@ -49,7 +48,7 @@ func (er *empRepo) PrintEmployeId(eid string) *models.Employee {
 }
 
 func (tr *empRepo) SaveEmployee(employee models.Employee) *models.Employee {
-	
+
 	result := gormDB.Create(&employee)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
@@ -60,18 +59,18 @@ func (tr *empRepo) SaveEmployee(employee models.Employee) *models.Employee {
 
 }
 
-func(tr *empRepo) EditEmployee(employee models.Employee) *models.Employee{
+func (tr *empRepo) EditEmployee(employee models.Employee) *models.Employee {
 
 	result := gormDB.Model(&employee).Where("employeeNumber", employee.EmployeeNumber).Updates(employee)
-    if err := result.Error; err != nil {
+	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
 	fmt.Println(&employee)
 	return &employee
 
 }
-func(tr *empRepo) RemoveEmployee(employee models.Employee, eid string) *models.Employee{
-    e_id,_ := strconv.ParseInt(eid,0,64)
+func (tr *empRepo) RemoveEmployee(employee models.Employee, eid string) *models.Employee {
+	e_id, _ := strconv.ParseInt(eid, 0, 64)
 	result := gormDB.Model(&employee).Where("employeeNumber", e_id).Delete(employee)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
@@ -80,7 +79,7 @@ func(tr *empRepo) RemoveEmployee(employee models.Employee, eid string) *models.E
 	return &employee
 }
 
-func(tr *empRepo) PatchEmployee(employee models.Employee) *models.Employee{
+func (tr *empRepo) PatchEmployee(employee models.Employee) *models.Employee {
 
 	result := gormDB.Model(&employee).Where("employeeNumber", employee.EmployeeNumber).Updates(employee)
 	if err := result.Error; err != nil {
