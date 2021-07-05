@@ -10,9 +10,10 @@ type employeService interface {
 	PrintEmployeId(string) *models.Employee
 	SaveEmployee(models.Employee) *models.Employee
 	EditEmployee(models.Employee) *models.Employee
-	RemoveEmployee(models.Employee,string) *models.Employee
+	RemoveEmployee(models.Employee, string) *models.Employee
 	PatchEmployee(models.Employee) *models.Employee
-
+	
+	PrintOfficeId(string) *models.Office
 }
 
 type empServ struct {
@@ -32,23 +33,30 @@ func (es *empServ) PrintEmployeId(eid string) *models.Employee {
 	return emp
 }
 
-func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee{
+func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee {
 	// var empId int64 = 0
 	empId := emp.empRepo.SaveEmployee(Employee)
 	return empId
 }
-func (emp *empServ) EditEmployee(Employee models.Employee) *models.Employee{
+func (emp *empServ) EditEmployee(Employee models.Employee) *models.Employee {
 	empId := emp.empRepo.EditEmployee(Employee)
 	return empId
 }
 
-func (emp *empServ) RemoveEmployee(Employee models.Employee , eid string) *models.Employee{
-	empId := emp.empRepo.RemoveEmployee(Employee,eid)
+func (emp *empServ) RemoveEmployee(Employee models.Employee, eid string) *models.Employee {
+	empId := emp.empRepo.RemoveEmployee(Employee, eid)
 	return empId
 }
 
-func (emp *empServ) PatchEmployee(Employee models.Employee) *models.Employee{
+func (emp *empServ) PatchEmployee(Employee models.Employee) *models.Employee {
 	empId := emp.empRepo.PatchEmployee(Employee)
 	return empId
 }
 
+
+
+
+func(es *empServ)PrintOfficeId(code string) *models.Office{
+	emp := es.empRepo.PrintOfficeId(code)
+	return emp
+}

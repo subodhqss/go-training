@@ -15,6 +15,8 @@ type EmployeReposiotry interface {
 	EditEmployee(models.Employee) *models.Employee
 	RemoveEmployee(models.Employee, string) *models.Employee
 	PatchEmployee(models.Employee) *models.Employee
+	
+	PrintOfficeId(string) *models.Office
 }
 
 func NewEmpRepo() EmployeReposiotry {
@@ -87,4 +89,14 @@ func (tr *empRepo) PatchEmployee(employee models.Employee) *models.Employee {
 	}
 	fmt.Println(&employee)
 	return &employee
+}
+func (tr *empRepo) PrintOfficeId(code string) *models.Office{
+	var office *models.Office
+
+	result := gormDB.Find(&office).Where("officeCode",code)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+	fmt.Println("There is no error in get method")
+	return office
 }
