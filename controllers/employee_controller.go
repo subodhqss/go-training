@@ -29,8 +29,6 @@ func GetEmployeId(rw http.ResponseWriter, r *http.Request) {
 	rw.Write(jsonData)
 }
 
-
-
 func CreateEmployee(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var Employee models.Employee
@@ -60,3 +58,6 @@ func UpdatePatch(rw http.ResponseWriter, r *http.Request) {
 	employeService.UpdatePatch(Employee)
 
 }
+
+
+

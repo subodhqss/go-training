@@ -24,3 +24,4 @@ func DBInit() {
 	gormDB = db
 	gormDB.AutoMigrate(&models.Employee{})
 }
+
