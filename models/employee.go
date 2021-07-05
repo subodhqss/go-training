@@ -11,9 +11,3 @@ type Employee struct {
 	ReportsToId    int       `gorm:"column:reportsTo" json:"reports_to_id"`
 	JobTitle       string    `gorm:"column:jobTitle" json:"job_title"`
 }
-
-// type Offices struct {
-// 	OfficeCode   string		`gorm:"column:officeCode" json:"office_code"`
-// 	Phone        string		`gorm:"column:phone" json:"phone_"`
-// 	Country      string		`gorm:"column:country" json:"country_"`
-// }
