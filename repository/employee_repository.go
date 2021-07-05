@@ -15,19 +15,16 @@ type EmployeReposiotry interface {
 	UpdateEmployee(models.Employee) *models.Employee
 	Update(models.Employee) *models.Employee
 	DeleteEmployee(models.Employee, string) *models.Employee
-
 }
 
 func NewEmpRepo() EmployeReposiotry {
 	return &empRepo{}
-	
+
 }
 
 type empRepo struct{}
 
-
-
-func (er *empRepo) PrintEmploye()[] *models.Employee {
+func (er *empRepo) PrintEmploye() []*models.Employee {
 	var employee []*models.Employee
 	result := gormDB.Limit(10).Find(&employee)
 	if err := result.Error; err != nil {
@@ -37,11 +34,9 @@ func (er *empRepo) PrintEmploye()[] *models.Employee {
 }
 func (er *empRepo) PrintEmployeId(eid string) *models.Employee {
 	var employee *models.Employee
-	e_id, _:= strconv.ParseInt(eid,0,64)//type conversion
-	
-	result:=  gormDB.Preload("ReportTo").Where("employeeNumber",e_id).Find(&employee)
-	// result:= gormDB.Where("employeeNumber",e_id).Find(&employee)
-	
+	e_id, _ := strconv.ParseInt(eid, 0, 64) //type conversion
+
+	result := gormDB.Preload("ReportsTo").Where("employeeNumber", e_id).Find(&employee)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
@@ -50,16 +45,15 @@ func (er *empRepo) PrintEmployeId(eid string) *models.Employee {
 }
 
 func (tr *empRepo) SaveEmployee(employee models.Employee) *models.Employee {
-	
 
-	result:= gormDB.Create(&employee)
+	result := gormDB.Create(&employee)
 	if err := result.Error; err != nil {
-			log.Print("Error in getting all records")
-		}
+		log.Print("Error in getting all records")
+	}
 
-	fmt.Println("Created new entry succesfull !",employee)
+	fmt.Println("Created new entry succesfull !", employee)
 	return &employee
-	
+
 }
 
 func (tr *empRepo) UpdateEmployee(employee models.Employee) *models.Employee {
@@ -67,7 +61,7 @@ func (tr *empRepo) UpdateEmployee(employee models.Employee) *models.Employee {
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
-	fmt.Println("Updated Succesfull !",employee)
+	fmt.Println("Updated Succesfull !", employee)
 	return &employee
 }
 
@@ -76,19 +70,19 @@ func (tr *empRepo) Update(employee models.Employee) *models.Employee {
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
-	fmt.Println("Updated Succesfull !",employee)
+	fmt.Println("Updated Succesfull !", employee)
 	return &employee
 }
 
-func (tr *empRepo) DeleteEmployee(employee models.Employee , eid string) *models.Employee{
-	
-	e_id, _:= strconv.ParseInt(eid,0,64)//type conversion
-	
-	result:= gormDB.Where("employeeNumber",e_id).Delete(&employee)
-	if err := result.Error; err != nil {
-			log.Print("Error in getting all records")
-		}
+func (tr *empRepo) DeleteEmployee(employee models.Employee, eid string) *models.Employee {
 
-	fmt.Println("Employee number",e_id,"Deleted Succesfully !")
+	e_id, _ := strconv.ParseInt(eid, 0, 64) //type conversion
+
+	result := gormDB.Where("employeeNumber", e_id).Delete(&employee)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+
+	fmt.Println("Employee number", e_id, "Deleted Succesfully !")
 	return &employee
 }
