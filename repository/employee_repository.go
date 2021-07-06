@@ -92,12 +92,11 @@ func (tr *empRepo) DeleteEmployee(employee models.Employee, eid string) *models.
 
 //office model function
 func (er *empRepo) PrintOfficeId(code string) *models.Office {
-	var office *models.Office
-	// result := gormDB.Find(&office).Where("officeCode",code)
-	result := gormDB.Preload("BelongsToOffice").Where("officeCode",code).Find(&office)
+	office:= &models.Office{}	// result := gormDB.Where("officeCode",code).Find(&office)
+	result := gormDB.Table("offices").Preload("Employees").Where("officeCode",code).Find(office)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
-	fmt.Println("there is no error in get method")
+	fmt.Println("there is no error in get method",result,code)
 	return office
 }
