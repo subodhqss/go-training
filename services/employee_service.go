@@ -9,10 +9,10 @@ type employeService interface {
 	PrintEmploye() []*models.Employee
 	PrintEmployeId(string) *models.Employee
 	SaveEmployee(models.Employee) *models.Employee
-	EditEmployee(models.Employee) *models.Employee
-	RemoveEmployee(models.Employee, string) *models.Employee
-	PatchEmployee(models.Employee) *models.Employee
-	
+	UpdateEmployee(models.Employee) *models.Employee
+	Update(models.Employee) *models.Employee
+	DeleteEmployee(models.Employee, string) *models.Employee
+
 	PrintOfficeId(string) *models.Office
 }
 
@@ -24,39 +24,41 @@ func NewEmployeService(empRepo repository.EmployeReposiotry) employeService {
 	return &empServ{empRepo: empRepo}
 }
 
+//Employee model functions
 func (es *empServ) PrintEmploye() []*models.Employee {
 	emp := es.empRepo.PrintEmploye()
 	return emp
 }
+
 func (es *empServ) PrintEmployeId(eid string) *models.Employee {
 	emp := es.empRepo.PrintEmployeId(eid)
 	return emp
 }
 
 func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee {
-	// var empId int64 = 0
+
 	empId := emp.empRepo.SaveEmployee(Employee)
 	return empId
 }
-func (emp *empServ) EditEmployee(Employee models.Employee) *models.Employee {
-	empId := emp.empRepo.EditEmployee(Employee)
+
+func (em *empServ) UpdateEmployee(Employee models.Employee) *models.Employee {
+	empId := em.empRepo.UpdateEmployee(Employee)
 	return empId
 }
 
-func (emp *empServ) RemoveEmployee(Employee models.Employee, eid string) *models.Employee {
-	empId := emp.empRepo.RemoveEmployee(Employee, eid)
+func (em *empServ) Update(Employee models.Employee) *models.Employee {
+	empId := em.empRepo.Update(Employee)
 	return empId
 }
 
-func (emp *empServ) PatchEmployee(Employee models.Employee) *models.Employee {
-	empId := emp.empRepo.PatchEmployee(Employee)
+func (em *empServ) DeleteEmployee(Employee models.Employee, eid string) *models.Employee {
+
+	empId := em.empRepo.DeleteEmployee(Employee, eid)
 	return empId
 }
 
-
-
-
-func(es *empServ)PrintOfficeId(code string) *models.Office{
+//office model functions
+func (es *empServ) PrintOfficeId(code string) *models.Office {
 	emp := es.empRepo.PrintOfficeId(code)
 	return emp
 }

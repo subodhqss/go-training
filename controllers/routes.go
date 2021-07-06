@@ -1,17 +1,22 @@
 package controllers
 
-import "github.com/gorilla/mux"
+import (
+	"github.com/gorilla/mux")
+
 
 func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/Employee", GetEmploye)
-	router.HandleFunc("git/{code}", GetOffice)
-	router.HandleFunc("/Employee/{eid}", GetEmployeId)
-	router.HandleFunc("/saveemployee", CreateEmployee).Methods("POST")
-	router.HandleFunc("/editemployee",UpdateEmployee).Methods("PUT")
-	router.HandleFunc("/removeemployee/{eid}",DeleteEmployee).Methods("DELETE")
-	router.HandleFunc("/patchemployee",PatchEmployee).Methods("PATCH")
 
+	//employee model methods
+	router.HandleFunc("/employees", GetEmploye).Methods("GET")
+	router.HandleFunc("/employee/{eid}", GetEmployeId).Methods("GET")
+	router.HandleFunc("/saveEmployee", CreateEmployee).Methods("POST")
+	router.HandleFunc("/updateEmployee", UpdateEmployee).Methods("PUT")
+	router.HandleFunc("/update", Update).Methods("PATCH")
+	router.HandleFunc("/delete/{eid}", DeleteEmployee).Methods("DELETE")
+
+	//office model methods
+	router.HandleFunc("/office/{code}",GetOffice).Methods("GET")
 
 	return router
 }

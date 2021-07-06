@@ -24,3 +24,4 @@ func StartServer() {
 	fmt.Println("Server is running at ", server.Addr)
 	server.ListenAndServe()
 }
+
