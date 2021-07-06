@@ -12,7 +12,7 @@ import (
 
 var (
 	DB_USER     = "root"
-	DB_PASSWORD = "admin"
+	DB_PASSWORD = "8520"
 	DB_NAME     = "classicmodels"
 	DB_DRIVER   = "mysql"
 )
