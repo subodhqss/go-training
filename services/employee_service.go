@@ -13,13 +13,11 @@ type employeService interface {
 	UpdatePatch(models.Employee) *models.Employee
 	DeleteEmployee(models.Employee, string) *models.Employee
 
-	PrintOfficeId(string) *models.Office
-
-
 }
 
 type empServ struct {
 	empRepo repository.EmployeReposiotry
+
 }
 
 func NewEmployeService(empRepo repository.EmployeReposiotry) employeService {
@@ -51,11 +49,4 @@ func (em *empServ) DeleteEmployee(Employee models.Employee, eid string) *models.
 func (emp *empServ) UpdatePatch(Employee models.Employee) *models.Employee {
 	empId := emp.empRepo.UpdatePatch(Employee)
 	return empId
-}
-
-func (es *empServ) PrintOfficeId(code string) *models.Office {
-	emp := es.empRepo.PrintOfficeId(code)
-	return emp
-
-
 }

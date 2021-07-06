@@ -19,6 +19,7 @@ func GetEmploye(rw http.ResponseWriter, r *http.Request) {
 	rw.WriteHeader(200)
 	rw.Write(jsonData)
 }
+
 func GetEmployeId(rw http.ResponseWriter, r *http.Request) {
 	
 	vars := mux.Vars(r)["eid"]
@@ -28,6 +29,8 @@ func GetEmployeId(rw http.ResponseWriter, r *http.Request) {
 	rw.WriteHeader(200)
 	rw.Write(jsonData)
 }
+
+
 
 func CreateEmployee(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
@@ -59,14 +62,4 @@ func UpdatePatch(rw http.ResponseWriter, r *http.Request) {
 
 }
 
-
-func GetOffice(rw http.ResponseWriter, r *http.Request) {
-	
-	vars := mux.Vars(r)["code"]
-	data := employeService.PrintOfficeId(vars)
-	jsonData, _ := json.Marshal(data)
-	rw.Header().Set("Content-Type", "application/json")
-	rw.WriteHeader(200)
-	rw.Write(jsonData)
-}
 

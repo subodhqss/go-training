@@ -16,7 +16,7 @@ type EmployeReposiotry interface {
 	UpdatePatch(models.Employee) *models.Employee
 	DeleteEmployee(models.Employee, string) *models.Employee
 
-	PrintOfficeId(string) *models.Office
+	
 }
 
 func NewEmpRepo() EmployeReposiotry {
@@ -94,14 +94,4 @@ func (tr *empRepo) UpdatePatch(employee models.Employee) *models.Employee {
 
 	fmt.Println(&employee)
 	return &employee
-}
-func (er *empRepo) PrintOfficeId(code string) *models.Office {
-	var office *models.Office
-
-	result := gormDB.Preload("Employees").Where("officeCode", code).Find(&office)
-	if err := result.Error; err != nil {
-		log.Print("Error in getting all records")
-	}
-	fmt.Println(&office)
-	return office
 }
