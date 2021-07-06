@@ -26,7 +26,7 @@ func NewEmpRepo() EmployeReposiotry {
 
 type empRepo struct{}
 
-//Employee model functions 
+//Employee model functions
 func (er *empRepo) PrintEmploye() []*models.Employee {
 	var employee []*models.Employee
 	result := gormDB.Limit(10).Find(&employee)
@@ -92,11 +92,11 @@ func (tr *empRepo) DeleteEmployee(employee models.Employee, eid string) *models.
 
 //office model function
 func (er *empRepo) PrintOfficeId(code string) *models.Office {
-	office:= &models.Office{}	// result := gormDB.Where("officeCode",code).Find(&office)
-	result := gormDB.Table("offices").Preload("Employees").Where("officeCode",code).Find(office)
+	office := &models.Office{} // result := gormDB.Where("officeCode",code).Find(&office)
+	result := gormDB.Preload("Employees").Where("officeCode", code).Find(office)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
-	fmt.Println("there is no error in get method",result,code)
+	fmt.Println("there is no error in get method", result, code)
 	return office
 }
