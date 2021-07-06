@@ -98,7 +98,7 @@ func (tr *empRepo) UpdatePatch(employee models.Employee) *models.Employee {
 func (er *empRepo) PrintOfficeId(code string) *models.Office {
 	var office *models.Office
 
-	result := gormDB.Find(&office).Where("officeCode", code)
+	result := gormDB.Preload("Employees").Where("officeCode", code).Find(&office)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}

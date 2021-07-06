@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	repository.DBInit()
+	repository.InitDBConnection()
 	StartServer()
 	
 

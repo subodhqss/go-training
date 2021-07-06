@@ -7,4 +7,6 @@ type Office struct {
 	Phone      string `gorm:"column:phone" json:"phon_e"`
 	State      string `gorm:"column:state" json:"stat_e"`
 	Country    string `gorm:"column:country" json:"countr_y"`
+
+	Employees  []Employee `gorm:"foreignKey:OfficeCode;references:OfficeCode" json:"employees"`
 }
