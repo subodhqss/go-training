@@ -13,7 +13,7 @@ type employeService interface {
 	Update(models.Employee) *models.Employee
 	DeleteEmployee(models.Employee, string) *models.Employee
 
-	PrintOfficeId(string) *models.Office
+	
 }
 
 type empServ struct {
@@ -58,7 +58,3 @@ func (em *empServ) DeleteEmployee(Employee models.Employee, eid string) *models.
 }
 
 //office model functions
-func (es *empServ) PrintOfficeId(code string) *models.Office {
-	emp := es.empRepo.PrintOfficeId(code)
-	return emp
-}
