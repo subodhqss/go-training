@@ -16,7 +16,7 @@ type EmployeReposiotry interface {
 	Update(models.Employee) *models.Employee
 	DeleteEmployee(models.Employee, string) *models.Employee
 
-	// PrintOfficeId(string) *models.Office
+
 }
 
 func NewEmpRepo() EmployeReposiotry {

@@ -21,5 +21,11 @@ func NewRouter() *mux.Router {
 	router.HandleFunc("/saveOffice", CreateOffice).Methods("POST")
 	router.HandleFunc("/updateOffice", UpdateOffice).Methods("PUT")
 
+	//customer model methods
+	router.HandleFunc("/customers", GetCustomers).Methods("GET")
+	router.HandleFunc("/customer/{code}",GetCustomer).Methods("GET")
+	router.HandleFunc("/saveCustomer", CreatCustomer).Methods("POST")
+	router.HandleFunc("/updateCustomer", UpdateCustomer).Methods("PUT")
+
 	return router
 }

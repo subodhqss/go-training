@@ -10,41 +10,41 @@ import (
 	"github.com/subodhqss/go-training/services"
 )
 
-var officeService = service.NewOfficeService(repository.NewOffRepo())
+var customerService = service.NewCustomerService(repository.NewCusRepo())
  
-func GetOffices(rw http.ResponseWriter, r *http.Request) {
-	data := officeService.PrintOffice()
+func GetCustomers(rw http.ResponseWriter, r *http.Request) {
+	data := customerService.PrintCustomer()
 	jsonData, _ := json.Marshal(data)
 	rw.Header().Set("Content-Type", "application/json")
 	rw.WriteHeader(200)
 	rw.Write(jsonData)
 }
-func GetOffice(rw http.ResponseWriter, r *http.Request) {
+func GetCustomer(rw http.ResponseWriter, r *http.Request) {
 	
 	vars := mux.Vars(r)["code"]
-	data := officeService.PrintOfficeId(vars)
+	data := customerService.PrintCustomerId(vars)
 	jsonData, _ := json.Marshal(data)
 	rw.Header().Set("Content-Type", "application/json")
 	rw.WriteHeader(200)
 	rw.Write(jsonData)
 }
 
-func CreateOffice(rw http.ResponseWriter, r *http.Request) {
+func CreatCustomer(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
-	var Office models.Office
-	json.NewDecoder(r.Body).Decode(&Office)
-	officeService.SaveOffice(Office)
+	var Customer models.Customer
+	json.NewDecoder(r.Body).Decode(&Customer)
+	customerService.SaveCustomer(Customer)
 	json.NewEncoder(rw).Encode("Created Succesfully !")
-	json.NewEncoder(rw).Encode(Office)
+	json.NewEncoder(rw).Encode(Customer)
 }
 
-func UpdateOffice(rw http.ResponseWriter, r *http.Request) {
+func UpdateCustomer(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
-	var Office models.Office
-	json.NewDecoder(r.Body).Decode(&Office)
-	officeService.UpdateOffice(Office)
+	var Customer models.Customer
+	json.NewDecoder(r.Body).Decode(&Customer)
+	customerService.UpdateCustomer(Customer)
 	json.NewEncoder(rw).Encode(" updated by PUT method !")
-	json.NewEncoder(rw).Encode(Office)
+	json.NewEncoder(rw).Encode(Customer)
 }
 
 
