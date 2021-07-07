@@ -57,8 +57,3 @@ func (em *empServ) DeleteEmployee(Employee models.Employee, eid string) *models.
 	return empId
 }
 
-//office model functions
-// func (es *empServ) PrintOfficeId(code string) *models.Office {
-// 	emp := es.empRepo.PrintOfficeId(code)
-// 	return emp
-// }
