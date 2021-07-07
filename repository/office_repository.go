@@ -3,7 +3,7 @@ package repository
 import (
 	"fmt"
 	"log"
-	
+
 	"github.com/subodhqss/go-training/models"
 )
 
@@ -35,7 +35,7 @@ func (er *ofcRepo) PrintOffice() []*models.Office {
 func (er *ofcRepo) PrintOfficeId(code string) *models.Office {
 	var office *models.Office
 
-	result := gormDB.Preload("Employees").Where("officeCode", code).Find(&office)
+	result := gormDB.Preload("Office").Where("officeCode", code).Find(&office)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
@@ -54,6 +54,7 @@ func (tr *ofcRepo) SaveOffice(office models.Office) *models.Office {
 	return &office
 
 }
+
 func (tr *ofcRepo) EditOffice(office models.Office) *models.Office {
 
 	result := gormDB.Model(&office).Where("officeCode", office.OfficeCode).Updates(office)

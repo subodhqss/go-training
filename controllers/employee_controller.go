@@ -46,6 +46,7 @@ func UpdateEmployee(rw http.ResponseWriter, r *http.Request) {
 	employeService.EditEmployee(Employee)
 
 }
+
 func DeleteEmployee(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var Employee models.Employee
@@ -61,5 +62,4 @@ func UpdatePatch(rw http.ResponseWriter, r *http.Request) {
 	employeService.UpdatePatch(Employee)
 
 }
-
 
