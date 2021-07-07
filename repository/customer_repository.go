@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/subodhqss/go-training/models"
@@ -8,6 +9,11 @@ import (
 
 type CustomerReposiotry interface {
 	PrintCustomer() []*models.Customer
+	//PrintCustomerId(string) *models.Customer
+	SaveCustomer(models.Customer) *models.Customer
+	UpdateCustomer(models.Customer) *models.Customer
+	UpdateC(models.Customer) *models.Customer
+
 }
 func NewCustRepo() CustomerReposiotry {
 	
@@ -26,4 +32,50 @@ func (cr *custRepo) PrintCustomer() []*models.Customer {
 	}
 	return customer
 }
+/*func (cr *custRepo) PrintCustomerNumber(number int) *models.Customer {
+	var customer *models.Customer
+	e_id, _ := strconv.ParseInt(eid, 0, 64) //type conversion
+
+	result := gormDB.Preload("ReportsTo").Where("employeeNumber", e_id).Find(&employee)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+	fmt.Println("there is no error in get method")
+	return customer
+}*/
+
+func (cr *custRepo) SaveCustomer(customer models.Customer) *models.Customer {
+
+	result := gormDB.Create(&customer)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+
+	fmt.Println("Created new entry succesfull !", customer)
+	return &customer
+}
+
+func (cr *custRepo) UpdateCustomer(customer models.Customer) *models.Customer {
+	result := gormDB.Model(&customer).Where("customerNumber", customer.CustomerNumber).Updates(customer)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+	fmt.Println("Updated Succesfull !", customer)
+	return &customer
+}
+
+func (cr *custRepo) UpdateC(customer models.Customer) *models.Customer {
+	result := gormDB.Model(&customer).Where("customerNumber", customer.CustomerNumber).Updates(customer)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+	fmt.Println("Updated Succesfull !", customer)
+	return &customer
+}
+
+
+
+
+
+
 

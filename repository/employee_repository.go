@@ -20,7 +20,6 @@ type EmployeReposiotry interface {
 }
 
 func NewEmpRepo() EmployeReposiotry {
-	
 	return &empRepo{}
 
 }
