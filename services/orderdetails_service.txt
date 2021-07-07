@@ -1,0 +1,43 @@
+package service
+
+import (
+	"github.com/subodhqss/go-training/models"
+	"github.com/subodhqss/go-training/repository"
+)
+
+type OrderDetailService interface {
+	PrintOrderDetail() []*models.OrderDetail
+	PrintOrderDetailId(string) *models.OrderDetail
+	SaveOrderDetail(models.OrderDetail) *models.OrderDetail
+	UpdateOrderDetail(models.OrderDetail) *models.OrderDetail
+}
+
+type orddServ struct {
+	cusRepo repository.OrderDetailReposiotry
+}
+
+func NewOrderDetailService(cusRepo repository.OrderDetailReposiotry) OrderDetailService {
+	return &orddServ{cusRepo: cusRepo}
+}
+
+
+func (cs *orddServ) PrintOrderDetail() []*models.OrderDetail {
+	cus := cs.cusRepo.PrintOrderDetail()
+	return cus
+}
+
+func (cs *orddServ) PrintOrderDetailId(code string) *models.OrderDetail {
+	cus := cs.cusRepo.PrintOrderDetailId(code)
+	return cus
+}
+
+func (cs *orddServ) SaveOrderDetail(OrderDetail models.OrderDetail) *models.OrderDetail {
+
+	cus := cs.cusRepo.SaveOrderDetail(OrderDetail)
+	return cus
+}
+
+func (cs *orddServ) UpdateOrderDetail(OrderDetail models.OrderDetail) *models.OrderDetail {
+	cus := cs.cusRepo.UpdateOrderDetail(OrderDetail)
+	return cus
+}

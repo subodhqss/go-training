@@ -35,9 +35,9 @@ func (er *cusRepo) PrintCustomer() []*models.Customer {
 
 func (er *cusRepo) PrintCustomerId(code string) *models.Customer {
 
-	c_id, _ := strconv.ParseInt(code, 0, 64) //type conversion
+	o_id, _ := strconv.ParseInt(code, 0, 64) //type conversion
 	Customer := &models.Customer{} 
-	result := gormDB.Where("CustomerNumber", c_id).Find(Customer)
+	result := gormDB.Where("orderNumber", o_id).Find(Customer)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
@@ -57,7 +57,7 @@ func (tr *cusRepo) SaveCustomer(Customer models.Customer) *models.Customer {
 }
 
 func (tr *cusRepo) UpdateCustomer(Customer models.Customer) *models.Customer {
-	result := gormDB.Model(&Customer).Where("CustomerNumber", Customer.CustomerNumber).Updates(Customer)
+	result := gormDB.Model(&Customer).Where("orderNumber", Customer.CustomerNumber).Updates(Customer)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
