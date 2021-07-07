@@ -12,6 +12,7 @@ import (
 
 var officeService = service.NewOfficeService(repository.NewOfcRepo())
 
+
 func GetOfficee(rw http.ResponseWriter, r *http.Request) {
 	data := officeService.PrintOffice()
 	jsonData, _ := json.Marshal(data)
@@ -29,6 +30,7 @@ func GetOffice(rw http.ResponseWriter, r *http.Request) {
 	rw.WriteHeader(200)
 	rw.Write(jsonData)
 }
+
 func CreateOffice(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var Office models.Office
@@ -36,6 +38,8 @@ func CreateOffice(rw http.ResponseWriter, r *http.Request) {
 	officeService.SaveOffice(Office)
 	json.NewEncoder(rw).Encode(Office)
 }
+
+
 func UpdateOffice(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var Office models.Office
