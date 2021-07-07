@@ -1,0 +1,8 @@
+package models
+
+type Orderdetails struct {
+	OrderNumber int       ` gorm:"column:orderNumber" json:"order_number" `
+
+	
+	
+}

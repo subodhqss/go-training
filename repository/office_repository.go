@@ -44,8 +44,8 @@ func (er *ofcRepo) PrintOfficeId(code string) *models.Office {
 }
 
 func (tr *ofcRepo) SaveOffice(office models.Office) *models.Office {
-	b := gormDB.First(&office)
-	result := gormDB.Save(&b)
+	// b := gormDB.First(&office)
+	result := gormDB.Create(&office)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}

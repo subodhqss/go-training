@@ -46,8 +46,8 @@ func (er *custmRepo) PrintCustomerId(cid string) *models.Customer {
 }
 
 func (tr *custmRepo) SaveCustomer(customer models.Customer) *models.Customer {
-	b := gormDB.First(&customer)
-	result := gormDB.Save(&b)
+	// b := gormDB.First(&customer)
+	result := gormDB.First(&customer)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
