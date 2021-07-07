@@ -31,7 +31,7 @@ func GetOrderDetail(rw http.ResponseWriter, r *http.Request) {
 
 func CreatOrderDetail(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
-	var OrderDetail models.OrderDetail
+	var OrderDetail models.Orderdetail
 	json.NewDecoder(r.Body).Decode(&OrderDetail)
 	OrderDetailService.SaveOrderDetail(OrderDetail)
 	json.NewEncoder(rw).Encode("Created Succesfully !")
@@ -40,7 +40,7 @@ func CreatOrderDetail(rw http.ResponseWriter, r *http.Request) {
 
 func UpdateOrderDetail(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
-	var OrderDetail models.OrderDetail
+	var OrderDetail models.Orderdetail
 	json.NewDecoder(r.Body).Decode(&OrderDetail)
 	OrderDetailService.UpdateOrderDetail(OrderDetail)
 	json.NewEncoder(rw).Encode(" updated by PUT method !")
