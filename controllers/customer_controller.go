@@ -13,7 +13,7 @@ import (
 var customerService = service.NewCustomerService(repository.NewCustmRepo())
 
 func GetCustomer(rw http.ResponseWriter, r *http.Request) {
-	data := officeService.PrintOffice()
+	data := customerService.PrintCustomer()
 	jsonData, _ := json.Marshal(data)
 	rw.Header().Set("Content-Type", "application/json")
 	rw.WriteHeader(200)
