@@ -33,9 +33,9 @@ func (er *payRepo) PrintPayment() []*models.Payment {
 
 func (er *payRepo) PrintPaymentId(code string) *models.Payment {
 
-	o_id, _ := strconv.ParseInt(code, 0, 64) 
+	o_id, _ := strconv.ParseInt(code, 0, 64)
 	Payment := &models.Payment{}
-	result := gormDB.Where("PaymentNumber", o_id).Find(Payment)
+	result := gormDB.Where("customerNumber", o_id).Find(Payment)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
@@ -55,7 +55,7 @@ func (tr *payRepo) SavePayment(Payment models.Payment) *models.Payment {
 }
 
 func (tr *payRepo) UpdatePayment(Payment models.Payment) *models.Payment {
-	result := gormDB.Model(&Payment).Where("customerNumber", Payment.CustomerNumber).Updates(Payment)
+	result := gormDB.Model(&Payment).Where("checkNumber", Payment.CheckNumber).Updates(Payment)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
