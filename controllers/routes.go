@@ -34,11 +34,20 @@ func NewRouter() *mux.Router {
 	router.HandleFunc("/editdetail", UpdateDetail).Methods("PUT")
 	router.HandleFunc("/updated", UpdateD).Methods("PATCH")
 	
-	//product model function
+	//product model functions
 	router.HandleFunc("/product", GetProduct).Methods("GET")
 	router.HandleFunc("/saveproduct", CreateProduct).Methods("POST")
 	router.HandleFunc("/editproduct", UpdateProduct).Methods("PUT")
 	router.HandleFunc("/updatep", UpdateP).Methods("PATCH")
+
+	//payment model functions
+	router.HandleFunc("/payment", GetPayment).Methods("GET")
+	router.HandleFunc("/savepayment", CreatePayment).Methods("POST")
+	router.HandleFunc("/editpayment", UpdatePayment).Methods("PUT")
+	router.HandleFunc("/updatepa", UpdatePa).Methods("PATCH")
+
+
+
 	
 
 
