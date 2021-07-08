@@ -6,7 +6,7 @@ import (
 
 	"github.com/subodhqss/go-training/models"
 	"github.com/subodhqss/go-training/repository"
-	service "github.com/subodhqss/go-training/services"
+	"github.com/subodhqss/go-training/services"
 )
 
 var customerService = service.CustomerService(repository.NewCustRepo())
