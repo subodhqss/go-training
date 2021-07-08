@@ -20,21 +20,21 @@ func NewProductService(proRepo repository.ProductReposiotry) productService {
 	return &proServ{proRepo: proRepo}
 }
 
-func (es *proServ) PrintProduct() []*models.Product {
-	cus := es.proRepo.PrintProduct()
-	return cus
+func (pro *proServ) PrintProduct() []*models.Product {
+	pr := pro.proRepo.PrintProduct()
+	return pr
 }
 
-func (es *proServ) PrintProductCode(eid string) *models.Product {
-	cus := es.proRepo.PrintProductCode(eid)
-	return cus
+func (pro *proServ) PrintProductCode(eid string) *models.Product {
+	pr := pro.proRepo.PrintProductCode(eid)
+	return pr
 }
 
-func (cus *proServ) SaveProduct(Product models.Product) *models.Product {
-	cusId := cus.proRepo.SaveProduct(Product)
-	return cusId
+func (pro *proServ) SaveProduct(Product models.Product) *models.Product {
+	pcd := pro.proRepo.SaveProduct(Product)
+	return pcd
 }
-func (cus *proServ) EditProduct(Product models.Product) *models.Product {
-	cusId := cus.proRepo.EditProduct(Product)
-	return cusId
+func (pro *proServ) EditProduct(Product models.Product) *models.Product {
+	pcd := pro.proRepo.EditProduct(Product)
+	return pcd
 }

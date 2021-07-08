@@ -22,7 +22,7 @@ func NewProRepo() ProductReposiotry {
 
 type proRepo struct{}
 
-func (er *proRepo) PrintProduct() []*models.Product {
+func (pr *proRepo) PrintProduct() []*models.Product {
 
 	var product []*models.Product
 	result := gormDB.Limit(10).Find(&product)
@@ -33,7 +33,7 @@ func (er *proRepo) PrintProduct() []*models.Product {
 	return product
 }
 
-func (er *proRepo) PrintProductCode(code string) *models.Product {
+func (pr *proRepo) PrintProductCode(code string) *models.Product {
 	var product *models.Product
 	c_id, _ := strconv.ParseInt(code, 0, 64)
 
@@ -45,7 +45,7 @@ func (er *proRepo) PrintProductCode(code string) *models.Product {
 	return product
 }
 
-func (tr *proRepo) SaveProduct(product models.Product) *models.Product {
+func (pr *proRepo) SaveProduct(product models.Product) *models.Product {
 	// b := gormDB.First(&customer)
 	result := gormDB.First(&product)
 	if err := result.Error; err != nil {
@@ -57,7 +57,7 @@ func (tr *proRepo) SaveProduct(product models.Product) *models.Product {
 
 }
 
-func (tr *proRepo) EditProduct(product models.Product) *models.Product {
+func (pr *proRepo) EditProduct(product models.Product) *models.Product {
 
 	result := gormDB.Model(&product).Where("productNumber", product.ProductCode).Updates(product)
 	if err := result.Error; err != nil {
