@@ -31,10 +31,10 @@ func NewRouter() *mux.Router {
 	router.HandleFunc("/updateOrderDetails", UpdateOrderDetail).Methods("PUT")
 
 	//products
-	//router.HandleFunc("/productdetails", GetProductDetails).Methods("GET")
-	//router.HandleFunc("/productDetail/{code}", GetProductDetail).Methods("GET")
-	//router.HandleFunc("/saveproductDetails", CreatproductDetail).Methods("POST")
-	//router.HandleFunc("/updateproductDetails", UpdateproductDetail).Methods("PUT")
+	router.HandleFunc("/productdetails", GetProducts).Methods("GET")
+	router.HandleFunc("/productDetail/{code}", GetProduct).Methods("GET")
+	router.HandleFunc("/saveproduct", CreateProduct).Methods("POST")
+	router.HandleFunc("/updateproduct", UpdateProduct).Methods("PUT")
 
 
 	return router
