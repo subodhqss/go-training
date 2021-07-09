@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"github.com/gorilla/mux")
-
+	"github.com/gorilla/mux"
+)
 
 func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
@@ -33,7 +33,7 @@ func NewRouter() *mux.Router {
 	router.HandleFunc("/savedetail", CreateDetail).Methods("POST")
 	router.HandleFunc("/editdetail", UpdateDetail).Methods("PUT")
 	router.HandleFunc("/updated", UpdateD).Methods("PATCH")
-	
+
 	//product model functions
 	router.HandleFunc("/product", GetProduct).Methods("GET")
 	router.HandleFunc("/saveproduct", CreateProduct).Methods("POST")
@@ -46,20 +46,11 @@ func NewRouter() *mux.Router {
 	router.HandleFunc("/editpayment", UpdatePayment).Methods("PUT")
 	router.HandleFunc("/updatepa", UpdatePa).Methods("PATCH")
 
+	//order model functions
+	router.HandleFunc("/order", GetOrder).Methods("GET")
+	router.HandleFunc("/saveorder", CreateOrder).Methods("POST")
+	router.HandleFunc("/editorder", UpdateOrder).Methods("PUT")
+	router.HandleFunc("/updateo", UpdateO).Methods("PATCH")
 
-
-	
-
-
-
-
-
-
-
-
-
-
-
-	
 	return router
 }
