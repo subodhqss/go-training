@@ -10,52 +10,52 @@ func NewRouter() *mux.Router {
 	//employee model methods
 	router.HandleFunc("/employees", GetEmploye).Methods("GET")
 	router.HandleFunc("/employee/{eid}", GetEmployeId).Methods("GET")
-	router.HandleFunc("/saveEmployee", CreateEmployee).Methods("POST")
-	router.HandleFunc("/updateEmployee", UpdateEmployee).Methods("PUT")
+	router.HandleFunc("/save/Employee", CreateEmployee).Methods("POST")
+	router.HandleFunc("/update/Employee", UpdateEmployee).Methods("PUT")
 	router.HandleFunc("/update", Update).Methods("PATCH")
 	router.HandleFunc("/delete/{eid}", DeleteEmployee).Methods("DELETE")
 
 	//office model methods
 	router.HandleFunc("/offices", GetOffices).Methods("GET")
 	router.HandleFunc("/office/{code}",GetOffice).Methods("GET")
-	router.HandleFunc("/saveOffice", CreateOffice).Methods("POST")
-	router.HandleFunc("/updateOffice", UpdateOffice).Methods("PUT")
+	router.HandleFunc("/save/Office", CreateOffice).Methods("POST")
+	router.HandleFunc("/update/Office", UpdateOffice).Methods("PUT")
 
 	//customer model methods
 	router.HandleFunc("/customers", GetCustomers).Methods("GET")
 	router.HandleFunc("/customer/{code}",GetCustomer).Methods("GET")
-	router.HandleFunc("/saveCustomer", CreatCustomer).Methods("POST")
-	router.HandleFunc("/updateCustomer", UpdateCustomer).Methods("PUT")
+	router.HandleFunc("/save/Customer", CreatCustomer).Methods("POST")
+	router.HandleFunc("/update/Customer", UpdateCustomer).Methods("PUT")
 
 	//orderDetails model methods
 	router.HandleFunc("/orderDetails", GetOrderDetails).Methods("GET")
 	router.HandleFunc("/orderDetail/{code}",GetOrderDetail).Methods("GET")
-	router.HandleFunc("/saveOrderDetails", CreatOrderDetail).Methods("POST")
-	router.HandleFunc("/updateOrderDetails", UpdateOrderDetail).Methods("PUT")
+	router.HandleFunc("/save/OrderDetails", CreatOrderDetail).Methods("POST")
+	router.HandleFunc("/update/OrderDetails", UpdateOrderDetail).Methods("PUT")
 	
 	//products model methods
 	router.HandleFunc("/products", GetProducts).Methods("GET")
 	router.HandleFunc("/product/{code}",GetProduct).Methods("GET")
-	router.HandleFunc("/saveProduct", CreateProduct).Methods("POST")
-	router.HandleFunc("/updateProduct", UpdateProduct).Methods("PUT")
+	router.HandleFunc("/save/Product", CreateProduct).Methods("POST")
+	router.HandleFunc("/update/Product", UpdateProduct).Methods("PUT")
 	
 	//payment model methods
 	router.HandleFunc("/payments", GetPayments).Methods("GET")
 	router.HandleFunc("/payment/{code}",GetPayment).Methods("GET")
-	router.HandleFunc("/savePayment", CreatePayment).Methods("POST")
-	router.HandleFunc("/updatePayment", UpdatePayment).Methods("PUT")
+	router.HandleFunc("/save/Payment", CreatePayment).Methods("POST")
+	router.HandleFunc("/update/Payment", UpdatePayment).Methods("PUT")
 
 	//order model methods
 	router.HandleFunc("/orders", GetOrders).Methods("GET")
 	router.HandleFunc("/order/{code}",GetOrder).Methods("GET")
-	router.HandleFunc("/saveOrder", CreateOrder).Methods("POST")
-	router.HandleFunc("/updateOrder", UpdateOrder).Methods("PUT")
+	router.HandleFunc("/save/Order", CreateOrder).Methods("POST")
+	router.HandleFunc("/update/Order", UpdateOrder).Methods("PUT")
 
 	//Productlines model methods
 	router.HandleFunc("/productline", GetProductlines).Methods("GET")
 	router.HandleFunc("/productline/{code}",GetProductline).Methods("GET")
-	router.HandleFunc("/saveProductline", CreateProductline).Methods("POST")
-	router.HandleFunc("/updateProductline", UpdateProductline).Methods("PUT")
+	router.HandleFunc("/save/Productline", CreateProductline).Methods("POST")
+	router.HandleFunc("/update/Productline", UpdateProductline).Methods("PUT")
 
 	return router
 }
