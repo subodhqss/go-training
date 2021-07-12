@@ -12,7 +12,7 @@ func NewRouter() *mux.Router {
 	router.HandleFunc("/employee/{eid}", GetEmployeId).Methods("GET")
 	router.HandleFunc("/save/Employee", CreateEmployee).Methods("POST")
 	router.HandleFunc("/update/Employee", UpdateEmployee).Methods("PUT")
-	router.HandleFunc("/update", Update).Methods("PATCH")
+	router.HandleFunc("/update/Employee", Update).Methods("PATCH")
 	router.HandleFunc("/delete/{eid}", DeleteEmployee).Methods("DELETE")
 
 	//office model methods

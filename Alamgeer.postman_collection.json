@@ -1,0 +1,784 @@
+{
+	"info": {
+		"_postman_id": "56e2ea2d-f054-414d-99c7-5b454f0ece1d",
+		"name": "Alamgeer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All Customers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8520/customers",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"customers"
+					]
+				},
+				"description": "get all  productsline detail"
+			},
+			"response": []
+		},
+		{
+			"name": "customer by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8520/customer/103",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"customer",
+						"103"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create  customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customer_Number\": 8520,\r\n    \"customer_Name\": \"Atelier graphique\",\r\n    \"contact_LastName\": \"Schmitt\",\r\n    \"contact_FirstName\": \"Carine \",\r\n    \"phone\": \"40.32.2555\",\r\n    \"address_Line1\": \"54, rue Royale\",\r\n    \"city \": \"Nantes\",\r\n    \"country\": \"France\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8520/save/Customer",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"save",
+						"Customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update customer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customer_Number\": 8520,\r\n    \"customer_Name\": \"alamgeer \",\r\n    \"contact_LastName\": \"siddiqui\",\r\n    \"contact_FirstName\": \"Alamgeer \",\r\n    \"phone\": \"7310739163\",\r\n    \"address_Line1\": \"Meerut\",\r\n    \"city \": \"Meerut city\",\r\n    \"country\": \"India\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8520/update/Customer",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"update",
+						"Customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all payments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8520/payments",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payments by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8520/payment/99",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"payment",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update PAYMENTS",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customer_Number\": 99,\r\n    \"check_Number\": \"HQ336336\",\r\n    \"payment_Date\": \"2021-06-08\",\r\n    \"amount\": 11248\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8520/update/Payment",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"update",
+						"Payment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create payments",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"customer_Number\": 100,\r\n        \"check_Number\": \"HQQSS8520\",\r\n        \"payment_Date\": \"2021-07-08\",\r\n        \"amount\": 11248\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8520/save/Payment",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"save",
+						"Payment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8520/products",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"products"
+					]
+				},
+				"description": "get all  productsline detail"
+			},
+			"response": []
+		},
+		{
+			"name": "products by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8520/product/S10_1678",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"product",
+						"S10_1678"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product_Code\": \"test\",\r\n    \"product_Name\": \"1969 Harley Davidson Ultimate Chopper\",\r\n    \"product_Line\": \"Motorcycles\",\r\n    \"product_Scale\": \"1:10\",\r\n    \"product_Vendor\": \"Min Lin Diecast\",\r\n    \"product_Description\": \"This replica features working kickstand, front suspension, gear-shift lever, footbrake lever, drive chain, wheels and steering. All parts are particularly delicate due to their precise scale and require special care and attention.\",\r\n    \"quantity_In_Stock\": 7933,\r\n    \"buy_Price\": 48.81,\r\n    \"MSRP\": 95.7\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8520/save/Product",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"save",
+						"Product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update products",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product_Code\": \"test\",\r\n    \"product_Name\": \"test_name\",\r\n    \"product_Line\": \"Motorcycles\",\r\n    \"product_Scale\": \"1:10\",\r\n    \"product_Vendor\": \"Min Lin Diecast\",\r\n    \"product_Description\": \"test desc\",\r\n    \"quantity_In_Stock\": 7933,\r\n    \"buy_Price\": 48.81,\r\n    \"MSRP\": 95.7\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8520/update/Product",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"update",
+						"Product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all productlines",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8520/productline",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"productline"
+					]
+				},
+				"description": "get all  productsline detail"
+			},
+			"response": []
+		},
+		{
+			"name": "productline by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8520/productline/Classic Cars",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"productline",
+						"Classic Cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create productline",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Product_Line\": \"testing\",\r\n    \"Text_Description\": \"testing description\",\r\n    \"Html_Description\": \"\",\r\n    \"image\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8520/save/Productline",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"save",
+						"Productline"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update productline",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Product_Line\": \"testing\",\r\n    \"Text_Description\": \"testing put method\",\r\n    \"Html_Description\": \"\",\r\n    \"image\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8520/update/Productline",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"update",
+						"Productline"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8520/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "orders by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8520/order/10102",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"order",
+						"10102"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create orders",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"order_Number\": 999,\r\n    \"order_Date\": \"2003-02-24\",\r\n    \"required_Date\": \"2003-03-03\",\r\n    \"shipped_Date\": \"2003-02-26\",\r\n    \"status\": \"Shipped\",\r\n    \"comments\": \"Difficult to negotiate with customer. We need more marketing materials\",\r\n    \"customer_Number\": 111\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8520/save/Order",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"save",
+						"Order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update orders",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"order_Number\": 999,\r\n    \"order_Date\": \"2003-02-24\",\r\n    \"required_Date\": \"2003-03-03\",\r\n    \"shipped_Date\": \"2003-02-26\",\r\n    \"status\": \"Shipped\",\r\n    \"comments\": \"updating test data\",\r\n    \"customer_Number\": 111\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8520/update/Order",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"update",
+						"Order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All orderDeatils",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8520/orderDetails",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"orderDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "orderDetail by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8520/orderDetail/10100",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"orderDetail",
+						"10100"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create ordersDetail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"OrderNumber\": 99,\r\n    \"product_code\": \"s8530\",\r\n    \"quantityOrdered\": 33,\r\n    \"priceEach\": 133,\r\n    \"orderLine_Number\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8520/save/OrderDetails",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"save",
+						"OrderDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update ordersDetail",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"OrderNumber\": 99,\r\n    \"product_code\": \"s8530\",\r\n    \"quantityOrdered\": 99,\r\n    \"priceEach\": 999,\r\n    \"orderLine_Number\": 9\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8520/update/OrderDetails",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"update",
+						"OrderDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Employees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8520/employees",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Employee by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8520/employee/1076",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"employee",
+						"1076"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create employee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"employee_number\": 109,\r\n    \"last_name\": \"Murphy\",\r\n    \"first_name\": \"Diane\",\r\n    \"Extension\": \"x5800\",\r\n    \"Email\": \"dmurphy@classicmodelcars.com\",\r\n    \"office_code\": \"1\",\r\n    \"reports_to\": null,\r\n    \"reports_to_id\": 106,\r\n    \"job_title\": \"President\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8520/save/Employee",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"save",
+						"Employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update employee",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"employee_number\": 109,\r\n    \"last_name\": \"test\",\r\n    \"first_name\": \"Data\",\r\n    \"Extension\": \"x5800\",\r\n    \"Email\": \"test@classicmodelcars.com\",\r\n    \"office_code\": \"1\",\r\n    \"reports_to\": null,\r\n    \"reports_to_id\": 106,\r\n    \"job_title\": \"President\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8520/update/Employee",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"update",
+						"Employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All offices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8520/offices",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"offices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "office by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8520/office/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"office",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create office",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"OrderNumber\": 99,\r\n    \"product_code\": \"s8530\",\r\n    \"quantityOrdered\": 33,\r\n    \"priceEach\": 133,\r\n    \"orderLine_Number\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8520/save/OrderDetails",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"save",
+						"OrderDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update office",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"office_code\": \"11\",\r\n        \"city\": \"test_city\",\r\n        \"phone\": \"00000000000\",\r\n        \"addressLine1\": \"100 test Street\",\r\n        \"state\": \"TST\",\r\n        \"contry\": \"TEST\",\r\n        \"postalCode\": \"94080\",\r\n        \"territory\": \"NA\",\r\n        \"employees\": null\r\n    },",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8520/update/Office",
+					"host": [
+						"localhost"
+					],
+					"port": "8520",
+					"path": [
+						"update",
+						"Office"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
