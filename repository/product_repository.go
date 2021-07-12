@@ -32,7 +32,7 @@ func (er *proRepo) PrintProduct() []*models.Product {
 
 func (er *proRepo) PrintProductId(code string) *models.Product {
 	Product := &models.Product{} 
-	result := gormDB.Where("ProductCode", code).Find(Product)
+	result := gormDB.Preload("ProductlineDetails").Where("ProductCode", code).Find(Product)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
