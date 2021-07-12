@@ -37,7 +37,7 @@ func (er *cusRepo) PrintCustomerId(code string) *models.Customer {
 
 	c_id, _ := strconv.ParseInt(code, 0, 64) //type conversion
 	Customer := &models.Customer{} 
-	result := gormDB.Where("CustomerNumber", c_id).Find(Customer)
+	result := gormDB.Preload("PaymentDetails").Where("CustomerNumber", c_id).Find(Customer)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}

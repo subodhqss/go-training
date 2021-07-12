@@ -8,8 +8,7 @@ type Customer struct {
 	Phone                  string  `gorm:"column:phone" json:"phone"`
 	AddressLine1           string  `gorm:"column:addressLine1" json:"address_Line1"`
 	City                   string  `gorm:"column:city" json:"city "`
-	// PostalCode             string  `gorm:"column:postalCode " json:"postal_Code"`
 	Country                string  `gorm:"column:country" json:"country"`
-	// SalesRepEmployeeNumber int     `gorm:"column:salesRepEmployeeNumberr" json:"salesRepEmployeeNumber"`
-	// CreditLimit            float32 `gorm:"column:creditLimit " json:"creditLimit"`
+	PaymentDetails 		[]Payment `gorm:"foreignKey:CustomerNumber;references:CustomerNumber" json:"Payment_details"`
 }
+	
