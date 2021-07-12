@@ -29,7 +29,7 @@ func GetOrderDetail(rw http.ResponseWriter, r *http.Request) {
 	rw.Write(jsonData)
 }
 
-func CreatOrderDetail(rw http.ResponseWriter, r *http.Request) {
+func CreateOrderDetail(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var OrderDetail models.Orderdetail
 	json.NewDecoder(r.Body).Decode(&OrderDetail)

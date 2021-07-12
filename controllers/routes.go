@@ -27,7 +27,7 @@ func NewRouter() *mux.Router {
 	//orderDetails
 	router.HandleFunc("/orderdetails", GetOrderDetails).Methods("GET")
 	router.HandleFunc("/orderDetail/{code}", GetOrderDetail).Methods("GET")
-	router.HandleFunc("/saveOrderDetails", CreatOrderDetail).Methods("POST")
+	router.HandleFunc("/saveOrderDetails", CreateOrderDetail).Methods("POST")
 	router.HandleFunc("/updateOrderDetails", UpdateOrderDetail).Methods("PUT")
 
 	//products
@@ -42,5 +42,19 @@ func NewRouter() *mux.Router {
 	router.HandleFunc("/savepayment", CreatePayment).Methods("POST")
 	router.HandleFunc("/updatepayment", UpdatePayment).Methods("PUT")
 
+	//orders
+	router.HandleFunc("/orders", GetOrders).Methods("GET")
+	router.HandleFunc("/order/{code}", GetOrder).Methods("GET")
+	router.HandleFunc("/saveorder", CreateOrder).Methods("POST")
+	router.HandleFunc("/updateorder", UpdateOrder).Methods("PUT")
+
+	//productlines
+	router.HandleFunc("/productline", GetProductlines).Methods("GET")
+	router.HandleFunc("/productline/{code}", GetProductline).Methods("GET")
+	router.HandleFunc("/saveproductline", CreateProductline).Methods("POST")
+	router.HandleFunc("/updateproductline", UpdateProductline).Methods("PUT")
+
 	return router
+
+	
 }
