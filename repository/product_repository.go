@@ -3,16 +3,15 @@ package repository
 import (
 	"fmt"
 	"log"
-	"strconv"
-
 	"github.com/subodhqss/go-training/models"
 )
 
 type ProductReposiotry interface {
 	PrintProduct() []*models.Product
-	PrintProductCode(string) *models.Product
+	PrintProductId(string) *models.Product
 	SaveProduct(models.Product) *models.Product
-	EditProduct(models.Product) *models.Product
+	UpdateProduct(models.Product) *models.Product
+
 }
 
 func NewProRepo() ProductReposiotry {
@@ -22,48 +21,41 @@ func NewProRepo() ProductReposiotry {
 
 type proRepo struct{}
 
-func (pr *proRepo) PrintProduct() []*models.Product {
-
-	var product []*models.Product
-	result := gormDB.Limit(10).Find(&product)
+func (er *proRepo) PrintProduct() []*models.Product {
+	var Product []*models.Product
+	result := gormDB.Limit(10).Find(&Product)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
-
-	return product
+	return Product
 }
 
-func (pr *proRepo) PrintProductCode(code string) *models.Product {
-	var product *models.Product
-	c_id, _ := strconv.ParseInt(code, 0, 64)
-
-	result := gormDB.Preload("Product").Where("productNumber", c_id).Find(&product)
+func (er *proRepo) PrintProductId(code string) *models.Product {
+	Product := &models.Product{} 
+	result := gormDB.Preload("ProductlineDetails").Where("ProductCode", code).Find(Product)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
-	fmt.Println(&product)
-	return product
+	fmt.Println("there is no error ...", result, code)
+	return Product
 }
 
-func (pr *proRepo) SaveProduct(product models.Product) *models.Product {
-	// b := gormDB.First(&customer)
-	result := gormDB.First(&product)
+func (tr *proRepo) SaveProduct(Product models.Product) *models.Product {
+
+	result := gormDB.Create(&Product)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
 
-	fmt.Println(&product)
-	return &product
-
+	fmt.Println("Created >>>>!", Product)
+	return &Product
 }
 
-func (pr *proRepo) EditProduct(product models.Product) *models.Product {
-
-	result := gormDB.Model(&product).Where("productNumber", product.ProductCode).Updates(product)
+func (tr *proRepo) UpdateProduct(Product models.Product) *models.Product {
+	result := gormDB.Model(&Product).Where("ProductCode", Product.ProductCode).Updates(Product)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
-
-	fmt.Println(&product)
-	return &product
+	fmt.Println("Updated>>>>>>>>!", Product)
+	return &Product
 }

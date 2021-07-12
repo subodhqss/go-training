@@ -34,11 +34,15 @@ func CreateCustomer(rw http.ResponseWriter, r *http.Request) {
 	var Customer models.Customer
 	json.NewDecoder(r.Body).Decode(&Customer)
 	customerService.SaveCustomer(Customer)
+	json.NewEncoder(rw).Encode("Created....")
+	json.NewEncoder(rw).Encode(Customer)
 }
 func UpdateCustomer(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var Customer models.Customer
 	json.NewDecoder(r.Body).Decode(&Customer)
 	customerService.EditCustomer(Customer)
+	json.NewEncoder(rw).Encode("Updated....")
+	json.NewEncoder(rw).Encode(Customer)
 
 }

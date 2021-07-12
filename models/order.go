@@ -7,6 +7,6 @@ type Order struct {
 	ShippedDate    string `gorm:"column:shippedDate" json:"shipped_date"`
 	Status         string `gorm:"column:status " json:"status"`
 	CustomerNumber int    `gorm:"column:customerNumber" json:"customer_Number"`
-	
 
+	OrderDetails []Orderdetail `gorm:"foreignKey:OrderNumber;references:OrderNumber" json:"Payment_details"`
 }

@@ -37,6 +37,8 @@ func CreateEmployee(rw http.ResponseWriter, r *http.Request) {
 	var Employee models.Employee
 	json.NewDecoder(r.Body).Decode(&Employee)
 	employeService.SaveEmployee(Employee)
+	json.NewEncoder(rw).Encode("Created....")
+	json.NewEncoder(rw).Encode(Employee)
 }
 
 func UpdateEmployee(rw http.ResponseWriter, r *http.Request) {
@@ -44,7 +46,8 @@ func UpdateEmployee(rw http.ResponseWriter, r *http.Request) {
 	var Employee models.Employee
 	json.NewDecoder(r.Body).Decode(&Employee)
 	employeService.EditEmployee(Employee)
-
+	json.NewEncoder(rw).Encode("Created....")
+	json.NewEncoder(rw).Encode(Employee)
 }
 
 func DeleteEmployee(rw http.ResponseWriter, r *http.Request) {

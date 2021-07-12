@@ -50,7 +50,7 @@ func (tr *ofcRepo) SaveOffice(office models.Office) *models.Office {
 		log.Print("Error in getting all records")
 	}
 
-	fmt.Println(&office)
+	fmt.Println("created",office)
 	return &office
 
 }
@@ -62,6 +62,6 @@ func (tr *ofcRepo) EditOffice(office models.Office) *models.Office {
 		log.Print("Error in getting all records")
 	}
 
-	fmt.Println(&office)
+	fmt.Println("updated",office)
 	return &office
 }

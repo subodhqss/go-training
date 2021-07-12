@@ -56,7 +56,7 @@ func (tr *empRepo) SaveEmployee(employee models.Employee) *models.Employee {
 		log.Print("Error in getting all records")
 	}
 
-	fmt.Println(&employee)
+	fmt.Println("created",employee)
 	return &employee
 
 }
@@ -68,7 +68,7 @@ func (tr *empRepo) EditEmployee(employee models.Employee) *models.Employee {
 		log.Print("Error in getting all records")
 	}
 
-	fmt.Println(&employee)
+	fmt.Println("updated>>>>",employee)
 	return &employee
 }
 
@@ -92,6 +92,6 @@ func (tr *empRepo) UpdatePatch(employee models.Employee) *models.Employee {
 		log.Print("Error in getting all records")
 	}
 
-	fmt.Println(&employee)
+	fmt.Println("update Patch",employee)
 	return &employee
 }

@@ -37,6 +37,8 @@ func CreateOffice(rw http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&Office)
 	officeService.SaveOffice(Office)
 	json.NewEncoder(rw).Encode(Office)
+	json.NewEncoder(rw).Encode("Created....")
+	json.NewEncoder(rw).Encode(Office)
 }
 
 
@@ -45,5 +47,7 @@ func UpdateOffice(rw http.ResponseWriter, r *http.Request) {
 	var Office models.Office
 	json.NewDecoder(r.Body).Decode(&Office)
 	officeService.EditOffice(Office)
+	json.NewEncoder(rw).Encode("UPDATED....")
+	json.NewEncoder(rw).Encode(Office)
 
 }

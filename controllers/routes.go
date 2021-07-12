@@ -31,10 +31,12 @@ func NewRouter() *mux.Router {
 	router.HandleFunc("/updateOrderDetails", UpdateOrderDetail).Methods("PUT")
 
 	//products
+	
 	router.HandleFunc("/products", GetProducts).Methods("GET")
-	router.HandleFunc("/product/{code}", GetProduct).Methods("GET")
+	router.HandleFunc("/product/{code}",GetProduct).Methods("GET")
 	router.HandleFunc("/saveproduct", CreateProduct).Methods("POST")
 	router.HandleFunc("/updateproduct", UpdateProduct).Methods("PUT")
+
 
 	//payments
 	router.HandleFunc("/payments", GetPayments).Methods("GET")
@@ -56,5 +58,5 @@ func NewRouter() *mux.Router {
 
 	return router
 
-	
+
 }

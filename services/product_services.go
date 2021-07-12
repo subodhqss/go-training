@@ -1,3 +1,4 @@
+
 package service
 
 import (
@@ -5,36 +6,42 @@ import (
 	"github.com/subodhqss/go-training/repository"
 )
 
-type productService interface {
+type ProductService interface {
 	PrintProduct() []*models.Product
-	PrintProductCode(string) *models.Product
+	PrintProductId(string) *models.Product
 	SaveProduct(models.Product) *models.Product
-	EditProduct(models.Product) *models.Product
+	UpdateProduct(models.Product) *models.Product
+	
+
+	
 }
 
 type proServ struct {
 	proRepo repository.ProductReposiotry
 }
 
-func NewProductService(proRepo repository.ProductReposiotry) productService {
+func NewProductService(proRepo repository.ProductReposiotry) ProductService {
 	return &proServ{proRepo: proRepo}
 }
 
-func (pro *proServ) PrintProduct() []*models.Product {
-	pr := pro.proRepo.PrintProduct()
-	return pr
+
+func (ps *proServ) PrintProduct() []*models.Product {
+	pro := ps.proRepo.PrintProduct()
+	return pro
 }
 
-func (pro *proServ) PrintProductCode(eid string) *models.Product {
-	pr := pro.proRepo.PrintProductCode(eid)
-	return pr
+func (ps *proServ) PrintProductId(code string) *models.Product {
+	pro := ps.proRepo.PrintProductId(code)
+	return pro
 }
 
-func (pro *proServ) SaveProduct(Product models.Product) *models.Product {
-	pcd := pro.proRepo.SaveProduct(Product)
-	return pcd
+func (ps *proServ) SaveProduct(Product models.Product) *models.Product {
+
+	pro := ps.proRepo.SaveProduct(Product)
+	return pro
 }
-func (pro *proServ) EditProduct(Product models.Product) *models.Product {
-	pcd := pro.proRepo.EditProduct(Product)
-	return pcd
+
+func (ps *proServ) UpdateProduct(Product models.Product) *models.Product {
+	pro := ps.proRepo.UpdateProduct(Product)
+	return pro
 }
