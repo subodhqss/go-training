@@ -3,6 +3,7 @@ package repository
 import (
 	"fmt"
 	"log"
+	"strconv"
 
 	"github.com/subodhqss/go-training/models"
 )
@@ -13,10 +14,10 @@ type CustomerReposiotry interface {
 	SaveCustomer(models.Customer) *models.Customer
 	UpdateCustomer(models.Customer) *models.Customer
 	UpdateC(models.Customer) *models.Customer
-
 }
+
 func NewCustRepo() CustomerReposiotry {
-	
+
 	return &custRepo{}
 
 }
@@ -32,17 +33,18 @@ func (cr *custRepo) PrintCustomer() []*models.Customer {
 	}
 	return customer
 }
-/*func (cr *custRepo) PrintCustomerNumber(number int) *models.Customer {
+func (cr *custRepo) PrintCustomerNumber(code string) *models.Customer {
 	var customer *models.Customer
-	e_id, _ := strconv.ParseInt(eid, 0, 64) //type conversion
 
-	result := gormDB.Preload("ReportsTo").Where("employeeNumber", e_id).Find(&employee)
+	c_id, _ := strconv.ParseInt(code, 0, 64) //type conversion
+
+	result := gormDB.Preload("PaymentDetails").Where("CustomerNumber", c_id).Find(Customer)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
 	fmt.Println("there is no error in get method")
 	return customer
-}*/
+}
 
 func (cr *custRepo) SaveCustomer(customer models.Customer) *models.Customer {
 
@@ -72,10 +74,3 @@ func (cr *custRepo) UpdateC(customer models.Customer) *models.Customer {
 	fmt.Println("Updated Succesfull !", customer)
 	return &customer
 }
-
-
-
-
-
-
-
