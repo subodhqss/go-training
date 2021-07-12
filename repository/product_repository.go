@@ -9,16 +9,15 @@ import (
 
 type ProductReposiotry interface {
 	PrintProduct() []*models.Product
+	PrintProductId(string) *models.Product
 	SaveProduct(models.Product) *models.Product
 	UpdateProduct(models.Product) *models.Product
 	UpdateP(models.Product) *models.Product
-
 }
+
 func NewProdRepo() ProductReposiotry {
-	
+
 	return &prodRepo{}
-
-
 }
 
 type prodRepo struct{}
@@ -31,6 +30,17 @@ func (pr *prodRepo) PrintProduct() []*models.Product {
 		log.Print("Error in getting all records")
 	}
 	return product
+}
+
+func (pr *prodRepo) PrintProductId(code string) *models.Product {
+	var Product *models.Product
+
+	result := gormDB.Preload("ProductlineDetails").Where("ProductCode", code).Find(&Product)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+	fmt.Println("there is no error in get method")
+	return Product
 }
 
 func (pr *prodRepo) SaveProduct(product models.Product) *models.Product {
@@ -61,10 +71,3 @@ func (pr *prodRepo) UpdateP(product models.Product) *models.Product {
 	fmt.Println("Updated Succesfull !", product)
 	return &product
 }
-
-
-
-
-
-
-

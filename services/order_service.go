@@ -7,6 +7,7 @@ import (
 
 type OrderService interface {
 	PrintOrder() []*models.Order
+	//PrintOrderId(string) []*models.Order
 	SaveOrder(models.Order) *models.Order
 	UpdateOrder(models.Order) *models.Order
 	UpdateO(models.Order) *models.Order
@@ -16,7 +17,7 @@ type ordServ struct {
 	ordRepo repository.OrderReposiotry
 }
 
-func NewOrderService(ordRepo repository.OrderReposiotry) OrderService {
+func NewOrderService(ordRepo repository.OrderReposiotry) OrderService{
 	return &ordServ{ordRepo: ordRepo}
 }
 
@@ -25,6 +26,13 @@ func (ov *ordServ) PrintOrder() []*models.Order {
 	ord := ov.ordRepo.PrintOrder()
 	return ord
 }
+/*func (ov *orderServ) PrintOrderId(oid string) *models.Office {
+	order := ov.ordRepo.PrintOrderId(oid)
+	return order
+}*/
+
+
+
 
 func (ord *ordServ) SaveOrder(Order models.Order) *models.Order {
 

@@ -9,6 +9,7 @@ import (
 
 type ProductService interface {
 	PrintProduct() []*models.Product
+	PrintProductId(string) *models.Product
 	SaveProduct(models.Product) *models.Product
 	UpdateProduct(models.Product) *models.Product
 	UpdateP(models.Product) *models.Product
@@ -27,6 +28,12 @@ func (ps *prodServ) PrintProduct() []*models.Product {
 	prod := ps.prodRepo.PrintProduct()
 	return prod
 }
+func (ps *prodServ) PrintProductId(code string) *models.Product {
+	prod := ps.prodRepo.PrintProductId(code)
+	return prod
+}
+
+
 
 func (prod *prodServ) SaveProduct(Product models.Product) *models.Product {
 

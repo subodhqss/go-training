@@ -3,12 +3,14 @@ package repository
 import (
 	"fmt"
 	"log"
+	"strconv"
 
 	"github.com/subodhqss/go-training/models"
 )
 
 type OrderReposiotry interface {
 	PrintOrder() []*models.Order
+	PrintOrderId(string) *models.Order
 	SaveOrder(models.Order) *models.Order
 	UpdateOrder(models.Order) *models.Order
 	UpdateO(models.Order) *models.Order
@@ -17,7 +19,6 @@ type OrderReposiotry interface {
 func NewOrdRepo() OrderReposiotry {
 
 	return &ordRepo{}
-
 
 }
 
@@ -31,6 +32,18 @@ func (oe *ordRepo) PrintOrder() []*models.Order {
 		log.Print("Error in getting all records")
 	}
 	return order
+}
+func (oe *ordRepo) PrintOrderId(code string) *models.Order {
+	o_id, _ := strconv.ParseInt(code, 0, 64) //type conversion
+	var order *models.Order
+
+	result := gormDB.Preload("OrderDetails").Where("orderNumber", o_id).Find(&order)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+	fmt.Println("No error")
+	return order
+
 }
 
 func (oe *ordRepo) SaveOrder(order models.Order) *models.Order {

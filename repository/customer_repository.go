@@ -10,7 +10,7 @@ import (
 
 type CustomerReposiotry interface {
 	PrintCustomer() []*models.Customer
-	//PrintCustomerId(string) *models.Customer
+	PrintCustomerId(string) *models.Customer
 	SaveCustomer(models.Customer) *models.Customer
 	UpdateCustomer(models.Customer) *models.Customer
 	UpdateC(models.Customer) *models.Customer
@@ -24,7 +24,7 @@ func NewCustRepo() CustomerReposiotry {
 
 type custRepo struct{}
 
-//Employee model functions
+//Customer model functions
 func (cr *custRepo) PrintCustomer() []*models.Customer {
 	var customer []*models.Customer
 	result := gormDB.Limit(10).Find(&customer)
@@ -33,12 +33,12 @@ func (cr *custRepo) PrintCustomer() []*models.Customer {
 	}
 	return customer
 }
-func (cr *custRepo) PrintCustomerNumber(code string) *models.Customer {
+func (cr *custRepo) PrintCustomerId(code string) *models.Customer {
 	var customer *models.Customer
 
 	c_id, _ := strconv.ParseInt(code, 0, 64) //type conversion
 
-	result := gormDB.Preload("PaymentDetails").Where("CustomerNumber", c_id).Find(Customer)
+	result := gormDB.Preload("PaymentDetails").Where("CustomerNumber", c_id).Find(customer)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}

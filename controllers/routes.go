@@ -36,6 +36,7 @@ func NewRouter() *mux.Router {
 
 	//product model functions
 	router.HandleFunc("/product", GetProduct).Methods("GET")
+	router.HandleFunc("/product/{code}", GetProduct).Methods("GET")
 	router.HandleFunc("/saveproduct", CreateProduct).Methods("POST")
 	router.HandleFunc("/editproduct", UpdateProduct).Methods("PUT")
 	router.HandleFunc("/updatep", UpdateP).Methods("PATCH")
@@ -48,18 +49,15 @@ func NewRouter() *mux.Router {
 
 	//order model functions
 	router.HandleFunc("/order", GetOrder).Methods("GET")
+	router.HandleFunc("/order/{oid}", GetOrder).Methods("GET")
 	router.HandleFunc("/saveorder", CreateOrder).Methods("POST")
 	router.HandleFunc("/editorder", UpdateOrder).Methods("PUT")
 	router.HandleFunc("/updateo", UpdateO).Methods("PATCH")
 	
-	//order model functions
+	//productline model functions
 	router.HandleFunc("/productline", GetProductline).Methods("GET")
 	router.HandleFunc("/saveproductline", CreateProductline).Methods("POST")
 	router.HandleFunc("/editproductline", UpdateProductline).Methods("PUT")
 	router.HandleFunc("/updatepl", UpdatePl).Methods("PATCH")
-
-
-
-
 	return router
 }
