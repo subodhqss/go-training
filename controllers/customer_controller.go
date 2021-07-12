@@ -19,8 +19,8 @@ func GetCustomer(rw http.ResponseWriter, r *http.Request) {
 	rw.Write(jsonData)
 }
 
-/*
-func GetCustomerNumber(rw http.ResponseWriter, r *http.Request) {
+
+/*func GetCustomerNumber(rw http.ResponseWriter, r *http.Request) {
 
 	vars := mux.Vars(r)["cno"]
 	data := customerService.PrintCustomerNumber(vars)
@@ -28,8 +28,7 @@ func GetCustomerNumber(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	rw.WriteHeader(200)
 	rw.Write(jsonData)
-}
-*/
+}*/
 func CreateCustomer(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var Customer models.Customer

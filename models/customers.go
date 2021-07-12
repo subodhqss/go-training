@@ -9,5 +9,5 @@ type Customer struct {
 	State          string    `gorm:"column:state"`
 	PostalCode     string    `gorm:"column:postalCode" json:"postal_code"`
 	Country        string    `gorm:"column:country"`
-	PaymentDetails []Payment `gorm:"foreignkey:CustomerNumber" json:"Payment_details"`
+	PaymentDetails []Payment `gorm:"foreignkey:CustomerNumber;references:CustomerNumber" json:"Payment_details"`
 }

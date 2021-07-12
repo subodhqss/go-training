@@ -26,7 +26,7 @@ func (ov *ordServ) PrintOrder() []*models.Order {
 	ord := ov.ordRepo.PrintOrder()
 	return ord
 }
-/*func (ov *orderServ) PrintOrderId(oid string) *models.Office {
+/*func (ov *orderServ) PrintOrderId(oid string) *models.Order {
 	order := ov.ordRepo.PrintOrderId(oid)
 	return order
 }*/
