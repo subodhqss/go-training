@@ -37,7 +37,7 @@ func (er *orddRepo) PrintOrderDetailId(code string) *models.Orderdetail {
 
 	o_id, _ := strconv.ParseInt(code, 0, 64) //type conversion
 	OrderDetail := &models.Orderdetail{} 
-	result := gormDB.Where("OrderNumber", o_id).Find(OrderDetail)
+	result := gormDB.Preload("ProductDetails").Where("OrderNumber", o_id).Find(OrderDetail)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
