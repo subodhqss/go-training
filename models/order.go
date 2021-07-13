@@ -8,5 +8,6 @@ type Order struct {
 	Status         string        `gorm:"column:status" json:"status"`
 	Comments       string        `gorm:"column:comments" json:"comments"`
 	CustomerNumber int           `gorm:"column:customerNumber" json:"customer_Number"`
+	CustomerDetail []Customer    `gorm:"foreignKey:CustomerNumber;references:CustomerNumber" json:"Customer_details"`
 	OrderDetails   []Orderdetail `gorm:"foreignKey:OrderNumber;references:OrderNumber" json:"Payment_details"`
 }
