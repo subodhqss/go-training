@@ -7,6 +7,7 @@ type Orderdetail struct {
 	QuantityOrdered int     `gorm:"column:quantityOrdered" json:"quantity_Ordered"`
 	PriceEach       float64 `gorm:"column:priceEach" json:"price_Each"`
 	OrderLineNumber int     `gorm:"column:orderLineNumber" json:"orderLine_Number"`
+	ProductDetails 	[]Product `gorm:"foreignKey:ProductCode;references:ProductCode" json:"Product_details"`
 	
 	
 }

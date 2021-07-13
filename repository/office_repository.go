@@ -35,7 +35,7 @@ func (er *ofcRepo) PrintOffice() []*models.Office {
 func (er *ofcRepo) PrintOfficeId(code string) *models.Office {
 	var office *models.Office
 
-	result := gormDB.Preload("Office").Where("officeCode", code).Find(&office)
+	result := gormDB.Preload("Employees").Where("officeCode", code).Find(&office)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}

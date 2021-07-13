@@ -41,7 +41,7 @@ func (er *empRepo) PrintEmployeId(eid string) *models.Employee {
 	var employee *models.Employee
 	e_id, _ := strconv.ParseInt(eid, 0, 64)
 
-	result := gormDB.Preload("ReportsTo").Where("employeeNumber", e_id).Find(&employee)
+	result := gormDB.Preload("OfficeDetail").Preload("ReportsTo").Where("employeeNumber", e_id).Find(&employee)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}

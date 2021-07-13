@@ -10,4 +10,5 @@ type Employee struct {
 	ReportsTo      *Employee `gorm:"foreignKey:ReportsToId;references:EmployeeNumber" json:"reports_to"`
 	ReportsToId    int       `gorm:"column:reportsTo" json:"reports_to_id"`
 	JobTitle       string    `gorm:"column:jobTitle" json:"job_title"`
+	OfficeDetail   Office    `gorm:"foreignKey:OfficeCode;references:OfficeCode" json:"office_detail"`
 }
