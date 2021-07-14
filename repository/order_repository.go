@@ -23,7 +23,7 @@ type ordRepo struct{}
 
 func (er *ordRepo) PrintOrder() []*models.Order {
 	var Order []*models.Order
-	result := gormDB.Limit(10).Find(&Order)
+	result := gormDB.Preload("CustomerDetail").Preload("OrderDetails").Limit(10).Find(&Order)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
