@@ -25,7 +25,7 @@ type prodRepo struct{}
 //Product model functions
 func (pr *prodRepo) PrintProduct() []*models.Product {
 	var product []*models.Product
-	result := gormDB.Limit(10).Find(&product)
+	result := gormDB.Preload("ProductlineDetails").Limit(10).Find(&product)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
