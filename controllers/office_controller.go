@@ -7,7 +7,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/subodhqss/go-training/models"
 	"github.com/subodhqss/go-training/repository"
-	 "github.com/subodhqss/go-training/services"
+	service "github.com/subodhqss/go-training/services"
 )
 
 var officeService = service.NewOfficeService(repository.NewOfficeRepo())

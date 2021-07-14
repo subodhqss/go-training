@@ -59,5 +59,12 @@ func NewRouter() *mux.Router {
 	router.HandleFunc("/saveproductline", CreateProductline).Methods("POST")
 	router.HandleFunc("/editproductline", UpdateProductline).Methods("PUT")
 	router.HandleFunc("/updatepl", UpdatePl).Methods("PATCH")
+
+	//Authentication and Authorization using jwt
+	router.HandleFunc("/login", Login)
+	router.HandleFunc("/home", Home)
+
+
+	
 	return router
 }
