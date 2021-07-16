@@ -23,7 +23,7 @@ type proRepo struct{}
 
 func (er *proRepo) PrintProduct() []*models.Product {
 	var Product []*models.Product
-	result := gormDB.Limit(10).Find(&Product)
+	result := gormDB.Preload("ProductlineDetails").Limit(10).Find(&Product)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}

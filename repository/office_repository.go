@@ -25,7 +25,7 @@ type offRepo struct{}
 
 func (er *offRepo) PrintOffice() []*models.Office {
 	var office []*models.Office
-	result := gormDB.Limit(10).Find(&office)
+	result := gormDB.Preload("Employees").Limit(10).Find(&office)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
