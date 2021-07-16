@@ -10,19 +10,18 @@ import (
 )
 
 var jwtKey = []byte("secret_key")
-var users = map[string]string{
-	"userA": "passworda",
-	"userB": "passwordb",
+var employee = map[string]string{
+	"gbondur@classicmodelcars.com": "PSWD9",
+	"dmurphy@classicmodelcars.com":"PSWD4",
 }
-type Credentials struct{
-	Username string `json:"username"`
-	Password string `json:"password"` 
 
+type Credentials struct {
+	Email string `json:"email"`
+	Password string `json:"password"`
 }
 type Claims struct {
-	Username string `json:"username"`
+	Email string `json:"email"`
 	jwt.StandardClaims
-	
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
@@ -32,14 +31,14 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	expectedPassword, ok := users[credentials.Username]
+	expectedPassword, ok := employee[credentials.Email]
 	if !ok || expectedPassword != credentials.Password {
 		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
 	expirationTime := time.Now().Add(time.Minute * 5)
 	claims := &Claims{
-		Username: credentials.Username,
+		Email: credentials.Email,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 		},
@@ -71,13 +70,12 @@ func Home(w http.ResponseWriter, r *http.Request) {
 			func(t *jwt.Token) (interface{}, error) {
 				return jwtKey, nil
 			})
-
 		if err != nil {
 			if err == jwt.ErrSignatureInvalid {
 				w.WriteHeader(http.StatusUnauthorized)
 				return
 			}
-			w.WriteHeader(http.StatusBadRequest)
+		 	w.WriteHeader(http.StatusBadRequest)
 			return
 
 		}
@@ -85,7 +83,8 @@ func Home(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusUnauthorized)
 			return
 		}
-		w.Write([]byte(fmt.Sprintf("Hello, %s", claims.Username)))
+		w.Write([]byte(fmt.Sprintf("Hello, %s", claims.Email)))
+		
 	}
 
 }
