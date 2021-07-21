@@ -21,7 +21,6 @@ func NewCustRepo() CustomerReposiotry {
 	return &custRepo{}
 
 }
-
 type custRepo struct{}
 
 //Customer model functions

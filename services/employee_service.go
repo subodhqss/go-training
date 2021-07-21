@@ -40,7 +40,6 @@ func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee {
 	empId := emp.empRepo.SaveEmployee(Employee)
 	return empId
 }
-
 func (em *empServ) UpdateEmployee(Employee models.Employee) *models.Employee {
 	empId := em.empRepo.UpdateEmployee(Employee)
 	return empId
@@ -56,5 +55,3 @@ func (em *empServ) DeleteEmployee(Employee models.Employee, eid string) *models.
 	empId := em.empRepo.DeleteEmployee(Employee, eid)
 	return empId
 }
-
-//office model functions

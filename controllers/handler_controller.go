@@ -5,24 +5,14 @@ import (
 	"fmt"
 	"net/http"
 	"time"
-
 	"github.com/dgrijalva/jwt-go"
 )
 
-var jwtKey = []byte("secret_key")
-var employee = map[string]string{
+//var jwtKey = []byte("secret_key")
+/*var employee = map[string]string{
 	"gbondur@classicmodelcars.com": "PSWD9",
 	"dmurphy@classicmodelcars.com":"PSWD4",
-}
-
-type Credentials struct {
-	Email string `json:"email"`
-	Password string `json:"password"`
-}
-type Claims struct {
-	Email string `json:"email"`
-	jwt.StandardClaims
-}
+}*/
 
 func Login(w http.ResponseWriter, r *http.Request) {
 	var credentials Credentials
@@ -31,17 +21,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	expectedPassword, ok := employee[credentials.Email]
-	if !ok || expectedPassword != credentials.Password {
-		w.WriteHeader(http.StatusUnauthorized)
-		return
-	}
-	expirationTime := time.Now().Add(time.Minute * 5)
-	claims := &Claims{
-		Email: credentials.Email,
-		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: expirationTime.Unix(),
-		},
+	
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	tokenString, err := token.SignedString(jwtKey)
@@ -52,13 +32,13 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w,
 		&http.Cookie{
 			Name:    "token",
-			Value:   tokenString,
-			Expires: expirationTime,
+			Value:   "tokenString",
+			Expires: "expirationTime",
 		})
 
 }
 func Home(w http.ResponseWriter, r *http.Request) {
-	cookie, err := r.Cookie("token")
+	cookie, err := r.Cookie("token"
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusBadRequest)
@@ -69,6 +49,19 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		tkn, err := jwt.ParseWithClaims(tokenStr, claims,
 			func(t *jwt.Token) (interface{}, error) {
 				return jwtKey, nil
+				expectedPassword, ok := employee[credentials.Email]
+	if !ok || expectedPassword != credentials.Password {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+	expirationTime := time.Now().Add(time.Minute * 5)
+	claims := &Claims{
+		Email: credentials.Email,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: expirationTime.Unix(),
+		},
+}
+
 			})
 		if err != nil {
 			if err == jwt.ErrSignatureInvalid {
@@ -76,7 +69,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 		 	w.WriteHeader(http.StatusBadRequest)
-			return
+			return    
 
 		}
 		if !tkn.Valid {
