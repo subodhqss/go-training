@@ -13,3 +13,4 @@ type Employee struct {
 	OfficeDetail   Office    `gorm:"foreignKey:OfficeCode;references:OfficeCode" json:"office_detail"`
 	Password       string    `gorm:"column:password" json:"password"`
 }
+//

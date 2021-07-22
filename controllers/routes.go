@@ -58,7 +58,7 @@ func NewRouter() *mux.Router {
 	router.HandleFunc("/saveproductline", CreateProductline).Methods("POST")
 	router.HandleFunc("/updateproductline", UpdateProductline).Methods("PUT")
 
-	//login
+	//login-api
 	
 	
 	router.HandleFunc("/login", Login).Methods("GET")

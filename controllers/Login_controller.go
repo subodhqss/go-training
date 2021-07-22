@@ -119,9 +119,10 @@ var users = map[string]string{
 
 	//"user1": "password1",
 	//"user2": "password2",
-	"abcxyz@gmail.com_update":      "pass2",
-	"shubi@gmail.com_update":       "pass1",
-	"dmurphy@classicmodelcars.com": "pass3",
+	"abcxyz@gmail.com_update":        "pass2",
+	"shubi@gmail.com_update":         "pass1",
+	"dmurphy@classicmodelcars.com":   "pass3",
+	"mpatterso@classicmodelcars.com": "pass4",
 }
 
 type Credentials struct {
