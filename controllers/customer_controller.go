@@ -46,3 +46,5 @@ func UpdateCustomer(rw http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(rw).Encode(Customer)
 
 }
+
+

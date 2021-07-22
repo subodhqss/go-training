@@ -46,3 +46,6 @@ func UpdatePayment(rw http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(rw).Encode(" updated !")
 	json.NewEncoder(rw).Encode(Payment)
 }
+
+
+

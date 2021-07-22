@@ -36,7 +36,25 @@ func (es *empServ) PrintEmployeId(eid string) *models.Employee {
 func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee {
 	empId := emp.empRepo.SaveEmployee(Employee)
 	return empId
+
 }
+// 	expectedPassword, ok := employee[credentials.Email]
+
+// 	if !ok || expectedPassword != credentials.Password {
+// 		w.WriteHeader(http.StatusUnauthorized)
+// 		return
+// 	}
+// }
+// 	expirationTime := time.Now().Add(time.Minute * 5)
+// 	claims := &Claims{
+// 		Email: credentials.Email,
+// 		StandardClaims: jwt.StandardClaims{
+// 			ExpiresAt: expirationTime.Unix(),
+// 		},
+// 	}
+
+
+
 func (emp *empServ) EditEmployee(Employee models.Employee) *models.Employee {
 	empId := emp.empRepo.EditEmployee(Employee)
 	return empId

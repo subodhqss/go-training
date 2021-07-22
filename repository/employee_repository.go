@@ -6,6 +6,8 @@ import (
 	"strconv"
 
 	"github.com/subodhqss/go-training/models"
+
+	
 )
 
 type EmployeReposiotry interface {
@@ -16,7 +18,6 @@ type EmployeReposiotry interface {
 	UpdatePatch(models.Employee) *models.Employee
 	DeleteEmployee(models.Employee, string) *models.Employee
 
-	
 }
 
 func NewEmpRepo() EmployeReposiotry {
@@ -55,7 +56,6 @@ func (tr *empRepo) SaveEmployee(employee models.Employee) *models.Employee {
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
-
 	fmt.Println("created",employee)
 	return &employee
 
