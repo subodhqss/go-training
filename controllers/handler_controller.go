@@ -15,7 +15,7 @@ import (
 var jwtKey = []byte("secret_key")
 
 var users = map[string]string{
-	"user2": "password2",
+	"abcxyz@gmail.com_update": "pswd1",
 
 }
 
