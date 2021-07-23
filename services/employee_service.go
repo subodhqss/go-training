@@ -8,16 +8,15 @@ import (
 type employeService interface {
 	PrintEmploye() []*models.Employee
 	PrintEmployeId(string) *models.Employee
+	PrintEmployeEmail(string) *models.Employee
 	SaveEmployee(models.Employee) *models.Employee
 	EditEmployee(models.Employee) *models.Employee
 	UpdatePatch(models.Employee) *models.Employee
 	DeleteEmployee(models.Employee, string) *models.Employee
-
 }
 
 type empServ struct {
 	empRepo repository.EmployeReposiotry
-
 }
 
 func NewEmployeService(empRepo repository.EmployeReposiotry) employeService {
@@ -28,8 +27,16 @@ func (es *empServ) PrintEmploye() []*models.Employee {
 	emp := es.empRepo.PrintEmploye()
 	return emp
 }
+
+
 func (es *empServ) PrintEmployeId(eid string) *models.Employee {
 	emp := es.empRepo.PrintEmployeId(eid)
+	return emp
+}
+
+
+func (es *empServ) PrintEmployeEmail(eid string) *models.Employee {
+	emp := es.empRepo.PrintEmployeEmail(eid)
 	return emp
 }
 
@@ -38,6 +45,7 @@ func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee {
 	return empId
 
 }
+
 // 	expectedPassword, ok := employee[credentials.Email]
 
 // 	if !ok || expectedPassword != credentials.Password {
@@ -52,8 +60,6 @@ func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee {
 // 			ExpiresAt: expirationTime.Unix(),
 // 		},
 // 	}
-
-
 
 func (emp *empServ) EditEmployee(Employee models.Employee) *models.Employee {
 	empId := emp.empRepo.EditEmployee(Employee)

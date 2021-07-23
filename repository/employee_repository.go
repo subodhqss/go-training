@@ -6,18 +6,18 @@ import (
 	"strconv"
 
 	"github.com/subodhqss/go-training/models"
-
-	
 )
 
 type EmployeReposiotry interface {
 	PrintEmploye() []*models.Employee
 	PrintEmployeId(string) *models.Employee
+
+	PrintEmployeEmail(string) *models.Employee
+
 	SaveEmployee(models.Employee) *models.Employee
 	EditEmployee(models.Employee) *models.Employee
 	UpdatePatch(models.Employee) *models.Employee
 	DeleteEmployee(models.Employee, string) *models.Employee
-
 }
 
 func NewEmpRepo() EmployeReposiotry {
@@ -41,12 +41,21 @@ func (er *empRepo) PrintEmploye() []*models.Employee {
 func (er *empRepo) PrintEmployeId(eid string) *models.Employee {
 	var employee *models.Employee
 	e_id, _ := strconv.ParseInt(eid, 0, 64)
-
 	result := gormDB.Preload("OfficeDetail").Preload("ReportsTo").Where("employeeNumber", e_id).Find(&employee)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
+	fmt.Println("there is no error in get method")
+	return employee
+}
+func (er *empRepo) PrintEmployeEmail(eid string) *models.Employee {
+	var employee *models.Employee
+	e_id, _ := strconv.ParseInt(eid, 0, 64)
 
+	result := gormDB.Where("email", e_id).Find(&employee)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
 	return employee
 }
 
@@ -56,7 +65,7 @@ func (tr *empRepo) SaveEmployee(employee models.Employee) *models.Employee {
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
-	fmt.Println("created",employee)
+	fmt.Println("created", employee)
 	return &employee
 
 }
@@ -68,7 +77,7 @@ func (tr *empRepo) EditEmployee(employee models.Employee) *models.Employee {
 		log.Print("Error in getting all records")
 	}
 
-	fmt.Println("updated>>>>",employee)
+	fmt.Println("updated>>>>", employee)
 	return &employee
 }
 
@@ -92,6 +101,6 @@ func (tr *empRepo) UpdatePatch(employee models.Employee) *models.Employee {
 		log.Print("Error in getting all records")
 	}
 
-	fmt.Println("update Patch",employee)
+	fmt.Println("update Patch", employee)
 	return &employee
 }

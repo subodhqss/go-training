@@ -105,7 +105,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -128,10 +127,13 @@ var users = map[string]string{
 type Credentials struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
+	//Firstname string `json:"firstname"`
 }
 
 type Claims struct {
 	Email string `json:"email"`
+	//Firstname string `json:"firstname"`
+
 	jwt.StandardClaims
 }
 
@@ -200,6 +202,7 @@ func Welcome(w http.ResponseWriter, r *http.Request) {
 		}
 		w.WriteHeader(http.StatusBadRequest)
 		return
+
 	}
 	tokenStr := cookie.Value
 
@@ -208,7 +211,6 @@ func Welcome(w http.ResponseWriter, r *http.Request) {
 	tkn, err := jwt.ParseWithClaims(tokenStr, claims,
 		func(t *jwt.Token) (interface{}, error) {
 			return jwtKey, nil
-
 		})
 	if err != nil {
 		if err == jwt.ErrSignatureInvalid {
@@ -218,11 +220,10 @@ func Welcome(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-
 	if !tkn.Valid {
 		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
-	w.Write([]byte(fmt.Sprintf("Hello, %s", claims.Email)))
+	//w.Write([]byte(fmt.Sprintf("Hello, %s", claims.Email)))
 
 }
