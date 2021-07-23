@@ -50,9 +50,9 @@ func (er *empRepo) PrintEmployeId(eid string) *models.Employee {
 }
 func (er *empRepo) PrintEmployeEmail(eid string) *models.Employee {
 	var employee *models.Employee
-	e_id, _ := strconv.ParseInt(eid, 0, 64)
+	//e_id, _ := strconv.ParseInt(eid, 0, 64)
 
-	result := gormDB.Where("email", e_id).Find(&employee)
+	result := gormDB.Where("email", eid).Find(&employee)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
