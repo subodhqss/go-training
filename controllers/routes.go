@@ -10,6 +10,7 @@ func NewRouter() *mux.Router {
 	//employee model methods
 	router.HandleFunc("/employees", GetEmploye).Methods("GET")
 	router.HandleFunc("/employee/{eid}", GetEmployeId).Methods("GET")
+	router.HandleFunc("/employeeEmail/{email}", GetEmployeEmail).Methods("GET")
 	router.HandleFunc("/saveEmployee", CreateEmployee).Methods("POST")
 	router.HandleFunc("/updateEmployee", UpdateEmployee).Methods("PUT")
 	router.HandleFunc("/update", Update).Methods("PATCH")
@@ -62,7 +63,7 @@ func NewRouter() *mux.Router {
 
 	//Authentication and Authorization using jwt
 	router.HandleFunc("/login", Login).Methods("GET")
-    router.HandleFunc("/home", Home).Methods("POST")
+	router.HandleFunc("/home", Home).Methods("POST")
 
 	return router
 }

@@ -36,6 +36,8 @@ type ResponseData struct {
 
 func Login(w http.ResponseWriter, r *http.Request) {
 
+	
+
 	var credentials Credentials
 	err := json.NewDecoder(r.Body).Decode(&credentials)
 	if err != nil {
@@ -120,4 +122,3 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(fmt.Sprintf("Hello, %s", claims.Email)))
 
 }
-

@@ -8,6 +8,7 @@ import (
 type employeService interface {
 	PrintEmploye() []*models.Employee
 	PrintEmployeId(string) *models.Employee
+	PrintEmployeEmail(string) *models.Employee
 	SaveEmployee(models.Employee) *models.Employee
 	UpdateEmployee(models.Employee) *models.Employee
 	Update(models.Employee) *models.Employee
@@ -32,6 +33,11 @@ func (es *empServ) PrintEmploye() []*models.Employee {
 
 func (es *empServ) PrintEmployeId(eid string) *models.Employee {
 	emp := es.empRepo.PrintEmployeId(eid)
+	return emp
+}
+
+func (es *empServ) PrintEmployeEmail(email string) *models.Employee {
+	emp := es.empRepo.PrintEmployeEmail(email)
 	return emp
 }
 

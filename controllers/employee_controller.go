@@ -29,6 +29,16 @@ func GetEmployeId(rw http.ResponseWriter, r *http.Request) {
 	rw.Write(jsonData)
 }
 
+func GetEmployeEmail(rw http.ResponseWriter, r *http.Request) {
+	
+	vars := mux.Vars(r)["email"]
+	data := employeService.PrintEmployeEmail(vars)
+	jsonData, _ := json.Marshal(data)
+	rw.Header().Set("Content-Type", "application/json")
+	rw.WriteHeader(200)
+	rw.Write(jsonData)
+}
+
 func CreateEmployee(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var Employee models.Employee
@@ -63,13 +73,3 @@ func DeleteEmployee(rw http.ResponseWriter, r *http.Request) {
 	employeService.DeleteEmployee(Employee,vars)
 	json.NewEncoder(rw).Encode("Employee number: "+vars+" Deleted Succesfully !")
 }
-//office model functions 
-/*func GetOffice(rw http.ResponseWriter, r *http.Request) {
-	
-	vars := mux.Vars(r)["code"]
-	data := employeService.PrintOfficeId(vars)
-	jsonData, _ := json.Marshal(data)
-	rw.Header().Set("Content-Type", "application/json")
-	rw.WriteHeader(200)
-	rw.Write(jsonData)*/
-// }
