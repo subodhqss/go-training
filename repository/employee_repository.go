@@ -11,7 +11,7 @@ import (
 type EmployeReposiotry interface {
 	PrintEmploye() []*models.Employee
 	PrintEmployeId(string) *models.Employee
-	PrintEmployeEmail(string) *models.Employee
+	//PrintEmployeEmail(string) *models.Employee
 	SaveEmployee(models.Employee) *models.Employee
 	UpdateEmployee(models.Employee) *models.Employee
 	Update(models.Employee) *models.Employee
@@ -46,30 +46,6 @@ func (er *empRepo) PrintEmployeId(eid string) *models.Employee {
 	fmt.Println("there is no error in get method(id)")
 	return employee
 }
-
-func (er *empRepo) PrintEmployeEmail(email string) *models.Employee {
-	var employee *models.Employee
-
-	fmt.Println(email) 
-
-	result := gormDB.Preload("OfficeDetail").Preload("ReportsTo").Where("email", email).Find(&employee)
-	if err := result.Error; err != nil {
-		log.Print("Error in getting all records")
-	}
-	fmt.Println("there is no error in get method")
-	
-	if email==employee.Email{
-		fmt.Println("valid")
-
-	}else
-	{
-		fmt.Println("not valid")
-	}
-	
-	return employee
-
-}
-
 func (tr *empRepo) SaveEmployee(employee models.Employee) *models.Employee {
 
 	result := gormDB.Create(&employee)
