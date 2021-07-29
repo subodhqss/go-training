@@ -13,7 +13,7 @@ type Product struct {
 	MSRP               float32 `gorm:"column:MSRP" json:"MSRP"`
 	ProductlineDetails []Productline `gorm:"foreignKey:ProductLine;references:ProductLine" json:"Payment_details"`
 
-}
+} 
 
 
 

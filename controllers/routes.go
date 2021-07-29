@@ -10,7 +10,7 @@ func NewRouter() *mux.Router {
 	router.HandleFunc("/Employee", GetEmploye).Methods("GET")
 	router.HandleFunc("/employee/{eid}", GetEmployeId).Methods("GET")
 
-	router.HandleFunc("/employee/{eid}", GetEmployeEmail).Methods("GET")
+	//router.HandleFunc("/employee/{eid}", GetEmployeEmail).Methods("GET")
 	
 	router.HandleFunc("/saveemployee", CreateEmployee).Methods("POST")
 	router.HandleFunc("/editemployee", UpdateEmployee).Methods("PUT")
@@ -64,7 +64,13 @@ func NewRouter() *mux.Router {
 	//login-api
 
 	router.HandleFunc("/login", Login).Methods("GET")
-	router.HandleFunc("/welcome", Welcome).Methods("POST")
+	router.HandleFunc("/login", Register).Methods("POST")
+	// router.HandleFunc("/welcome", Welcome).Methods("POST")
+
+
+	// router.HandleFunc("/login", Sigin).Methods("GET")
+	// router.HandleFunc("/login", Signup).Methods("POST")
+	
 
 	return router
 

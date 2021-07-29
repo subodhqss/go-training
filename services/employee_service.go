@@ -8,7 +8,7 @@ import (
 type employeService interface {
 	PrintEmploye() []*models.Employee
 	PrintEmployeId(string) *models.Employee
-	PrintEmployeEmail(string) *models.Employee
+	//PrintEmployeEmail(string) *models.Employee
 	SaveEmployee(models.Employee) *models.Employee
 	EditEmployee(models.Employee) *models.Employee
 	UpdatePatch(models.Employee) *models.Employee
@@ -28,27 +28,19 @@ func (es *empServ) PrintEmploye() []*models.Employee {
 	return emp
 }
 
-
 func (es *empServ) PrintEmployeId(eid string) *models.Employee {
 	emp := es.empRepo.PrintEmployeId(eid)
 	return emp
 }
 
+// func (es *empServ) PrintEmployeEmail(eid string) *models.Employee {
+// 	emp := es.empRepo.PrintEmployeEmail(eid)
+// 	return emp
+// }
 
-func (es *empServ) PrintEmployeEmail(eid string) *models.Employee {
-	emp := es.empRepo.PrintEmployeEmail(eid)
-	return emp
-}
+// 	expectedPassword, ok := employee[models.Email]
 
-func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee {
-	empId := emp.empRepo.SaveEmployee(Employee)
-	return empId
-
-}
-
-// 	expectedPassword, ok := employee[credentials.Email]
-
-// 	if !ok || expectedPassword != credentials.Password {
+// 	if !ok || expectedPassword != models.Password {
 // 		w.WriteHeader(http.StatusUnauthorized)
 // 		return
 // 	}
@@ -60,6 +52,12 @@ func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee {
 // 			ExpiresAt: expirationTime.Unix(),
 // 		},
 // 	}
+
+func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee {
+	empId := emp.empRepo.SaveEmployee(Employee)
+	return empId
+
+}
 
 func (emp *empServ) EditEmployee(Employee models.Employee) *models.Employee {
 	empId := emp.empRepo.EditEmployee(Employee)

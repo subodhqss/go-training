@@ -29,6 +29,7 @@ func GetOrder(rw http.ResponseWriter, r *http.Request) {
 	rw.Write(jsonData)
 }
 
+
 func CreateOrder(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var Order models.Order
@@ -37,6 +38,7 @@ func CreateOrder(rw http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(rw).Encode("Created...")
 	json.NewEncoder(rw).Encode(Order)
 }
+
 
 func UpdateOrder(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")

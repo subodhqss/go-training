@@ -1,0 +1,468 @@
+//package controllers
+
+// import (
+// 	"encoding/json"
+// 	"fmt"
+// 	"net/http"
+// 	"time"
+
+// 	"github.com/dgrijalva/jwt-go"
+// )
+
+// var jwtKey = []byte("secret_key")
+
+// var employee = map[string]string{
+// 	"dmurphy@classicmodelcars.com": "pass3",
+// 	//"user2": "password2",
+
+// }
+
+// type Credentials struct {
+// 	Email    string `json:"email"`
+// 	Password string `json:"password"`
+// }
+
+// type Claims struct {
+// 	Email string `json:"email"`
+// 	jwt.StandardClaims
+// }
+
+// func Login(w http.ResponseWriter, r *http.Request) {
+
+// 	var credentials Credentials
+// 	err := json.NewDecoder(r.Body).Decode(&credentials)
+// 	if err != nil {
+// 		w.WriteHeader(http.StatusBadRequest)
+// 		return
+// 	}
+
+// 	expectedPassword, ok := employee[credentials.Email]
+
+// 	if !ok || expectedPassword != credentials.Password {
+// 		w.WriteHeader(http.StatusUnauthorized)
+// 		return
+// 	}
+
+// 	expirationTime := time.Now().Add(time.Minute * 5)
+// 	claims := &Claims{
+// 		Email: credentials.Email,
+// 		StandardClaims: jwt.StandardClaims{
+// 			ExpiresAt: expirationTime.Unix(),
+// 		},
+// 	}
+// 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+// 	tokenString, err := token.SignedString(jwtKey)
+
+// 	if err != nil {
+// 		w.WriteHeader(http.StatusInternalServerError)
+// 		return
+// 	}
+
+// 	http.SetCookie(w, &http.Cookie{
+// 		Name:    "token",
+// 		Value:   tokenString,
+// 		Expires: expirationTime,
+// 	})
+
+// }
+
+// func Welcome(w http.ResponseWriter, r *http.Request) {
+// 	cookie, err := r.Cookie("token")
+// 	if err != nil {
+// 		if err == http.ErrNoCookie {
+// 			w.WriteHeader(http.StatusUnauthorized)
+// 			return
+// 		}
+// 		w.WriteHeader(http.StatusBadRequest)
+// 		return
+// 	}
+// 	tokenStr := cookie.Value
+
+// 	claims := &Claims{}
+
+// 	tkn, err := jwt.ParseWithClaims(tokenStr, claims,
+// 		func(t *jwt.Token) (interface{}, error) {
+// 			return jwtKey, nil
+
+// 		})
+// 	if err != nil {
+// 		if err == jwt.ErrSignatureInvalid {
+// 			w.WriteHeader(http.StatusUnauthorized)
+// 			return
+// 		}
+// 		w.WriteHeader(http.StatusBadRequest)
+// 		return
+// 	}
+// 	if !tkn.Valid {
+// 		w.WriteHeader(http.StatusUnauthorized)
+// 		return
+// 	}
+// 	w.Write([]byte(fmt.Sprintf("Hello, %s", claims.Email)))
+
+// }
+
+// package controllers
+
+// import (
+// 	"encoding/json"
+// 	"log"
+// 	"net/http"
+// 	"time"
+
+// 	"github.com/dgrijalva/jwt-go"
+// )
+
+// var jwtKey = []byte("secret_key")
+
+// var users = map[string]string{
+
+// 	//"user1": "password1",
+// 	//"user2": "password2",
+// 	// "abcxyz@gmail.com_update":        "pass2",
+// 	"shubi@gmail.com_update":         "pass1",
+// 	"dmurphy@classicmodelcars.com":   "pass3",
+// 	"mpatterso@classicmodelcars.com": "pass4",
+// }
+
+// type Credentials struct {
+// 	Email    string `json:"email"`
+// 	Password string `json:"password"`
+// 	//Firstname string `json:"firstname"`
+// }
+
+// // type Claims struct {
+// // 	Email string `json:"email"`
+// // 	//Firstname string `json:"firstname"`
+// // 	jwt.StandardClaims
+// //}
+
+// type Employee struct {
+// 	Email string `json:"email"`
+// 	jwt.StandardClaims
+// }
+// type ResponseData struct {
+// 	Expires time.Time `json:"expire"`
+// 	Token   string    `json:"token"`
+// }
+
+// func Login(w http.ResponseWriter, r *http.Request) {
+
+// 	var credentials Credentials
+// 	err := json.NewDecoder(r.Body).Decode(&credentials)
+// 	if err != nil {
+// 		log.Print("Err1 : ", err)
+// 		w.WriteHeader(http.StatusBadRequest)
+// 		return
+// 	}
+// 	expectedPassword, ok := users[credentials.Email]
+
+// 	if !ok || expectedPassword != credentials.Password {
+// 		w.WriteHeader(http.StatusUnauthorized)
+// 		log.Print("Err2 : ", err)
+// 		return
+// 	}
+
+// 	expirationTime := time.Now().Add(time.Minute * 5)
+// 	employee := &Employee{
+// 		Email: credentials.Email,
+// 		StandardClaims: jwt.StandardClaims{
+// 			ExpiresAt: expirationTime.Unix(),
+// 		},
+// 	}
+
+// 	// claims := &Claims{
+// 	// 	Email: credentials.Email,
+// 	// 	StandardClaims: jwt.StandardClaims{
+// 	// 		ExpiresAt: expirationTime.Unix(),
+// 	//	},
+// 	//}
+
+// 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, employee)
+// 	tokenString, err := token.SignedString(jwtKey)
+
+// 	if err != nil {
+// 		w.WriteHeader(http.StatusInternalServerError)
+// 		log.Print("Err3 : ", err)
+// 		return
+// 	}
+
+// 	http.SetCookie(w, &http.Cookie{
+// 		Name:    "token",
+// 		Value:   tokenString,
+// 		Expires: expirationTime,
+// 	})
+
+// 	// res := &ResponseData{
+// 	// 	Token:   tokenString,
+// 	// 	Expires: expirationTime,
+// 	// }
+
+// 	jsonData, _ := json.Marshal(employee)
+// 	w.Header().Set("Content-Type", "application/json")
+// 	w.WriteHeader(200)
+// 	w.Write(jsonData)
+
+// }
+
+// func Welcome(w http.ResponseWriter, r *http.Request) {
+// 	cookie, err := r.Cookie("token")
+// 	if err != nil {
+// 		if err == http.ErrNoCookie {
+// 			w.WriteHeader(http.StatusUnauthorized)
+// 			return
+// 		}
+// 		w.WriteHeader(http.StatusBadRequest)
+// 		return
+
+// 	}
+// 	tokenStr := cookie.Value
+
+// 	employee := &Employee{}
+
+// 	tkn, err := jwt.ParseWithClaims(tokenStr, employee,
+// 		func(t *jwt.Token) (interface{}, error) {
+// 			return jwtKey, nil
+// 		})
+// 	if err != nil {
+// 		if err == jwt.ErrSignatureInvalid {
+// 			w.WriteHeader(http.StatusUnauthorized)
+// 			return
+// 		}
+// 		w.WriteHeader(http.StatusBadRequest)
+// 		return
+// 	}
+// 	if !tkn.Valid {
+// 		w.WriteHeader(http.StatusUnauthorized)
+// 		return
+// 	}
+// 	//w.Write([]byte(fmt.Sprintf("Hello, %s", claims.Email)))
+
+// }
+
+// var employeService = service.NewEmployeService(repository.NewEmpRepo())
+
+// func GetEmployeEmail(rw http.ResponseWriter, r *http.Request) {
+
+// 	vars := mux.Vars(r)["eid"]
+// 	data := employeService.PrintEmployeEmail(vars)
+// 	jsonData, _ := json.Marshal(data)
+// 	rw.Header().Set("Content-Type", "application/json")
+// 	rw.WriteHeader(200)
+// 	rw.Write(jsonData)
+
+// }
+
+// type EmployeReposiotry interface {
+// 	PrintEmployeEmail(string) *models.Employee
+// }
+
+// func NewEmpRepo() EmployeReposiotry {
+// 	return &empRepo{}
+// }
+
+// type empRepo struct{}
+
+// func (er *empRepo) PrintEmployeEmail(eid, string) *models.Employee {
+// 	var employee *models.Employee
+// 	//e_id, _ := strconv.ParseInt(eid, 0, 64)
+
+// 	result := gormDB.Where("email", eid).Find(&employee)
+// 	if err := result.Error; err != nil {
+// 		log.Print("Error in getting all records")
+// 	}
+// 	return employee
+// }
+
+// type employeService interface {
+// 	PrintEmployeEmail(string) *models.Employee
+// }
+
+// type empServ struct {
+// 	empRepo repository.EmployeReposiotry
+// }
+
+// func NewEmployeService(empRepo repository.EmployeReposiotry) employeService {
+// 	return &empServ{empRepo: empRepo}
+// }
+// func (es *empServ) PrintEmployeEmail(eid string) *models.Employee {
+// 		emp := es.empRepo.PrintEmployeEmail(eid)
+// 		return emp
+// 	}
+
+package controllers
+
+import (
+	"encoding/json"
+	"log"
+	"net/http"
+	"time"
+
+	"github.com/dgrijalva/jwt-go"
+	"gorm.io/gorm"
+	//	"github.com/subodhqss/go-training/models"
+	//	"github.com/subodhqss/go-training/repository"
+	//	service "github.com/subodhqss/go-training/services"
+)
+
+var jwtKey = []byte("secret_key")
+
+//var users = map[string]string{
+
+//"user1": "password1",
+//"user2": "password2",
+// "abcxyz@gmail.com_update":        "pass2",
+// 	"shubi@gmail.com_update":         "pass1",
+// 	"dmurphy@classicmodelcars.com":   "pass3",
+// 	"mpatterso@classicmodelcars.com": "pass4",
+// }
+
+type Credentials struct {
+	gorm.Model
+	Email    string `json:"email"`
+	Password string `json:"password"`
+	//Firstname string `json:"firstname"`
+}
+
+// type Claims struct {
+// 	Email string `json:"email"`
+// 	//Firstname string `json:"firstname"`
+// 	jwt.StandardClaims
+//}
+
+type Employee struct {
+	Email string `json:"email"`
+	jwt.StandardClaims
+}
+
+type ResponseData struct {
+	Expires time.Time `json:"expire"`
+	Token   string    `json:"token"`
+}
+
+
+func Signup(w http.ResponseWriter, r *http.Request) {
+	//connection := GetDatabase()
+	//defer Closedatabase(connection)
+
+	// var user Employee
+	// err := json.NewDecoder(r.Body).Decode(&user)
+	// if err != nil {
+	// 	var err Error
+	// 	err = SetError(err, "Error")
+	// 	w.Header().Set("Content-Type", "application/json")
+	// 	json.NewEncoder(w).Encode(err)
+	// 	return
+	// }
+	
+	
+	
+	//var data map[string]string
+
+	//if err := rw.BodyParser(&data); err != nil {
+	//return err
+	//}
+	//password, _ := bcrypt.GenerateFromPassword([]byte(data["password"]), cost:15)
+	//user := models.Employee{}
+
+	//database.DB.Create(&user)
+	//return rw.jSON(data)
+
+}
+
+func CheckPasswordHash(password,hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash),[]byte(password])
+	return err == nil
+}
+
+func Sigin(w http.ResponseWriter, r *http.Request) {
+	var credentials Credentials
+	err := json.NewDecoder(r.Body).Decode(&credentials)
+	if err != nil {
+		log.Print("Err1 : ", err)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	} 
+
+	expectedPassword, ok := user[credentials.Email]
+
+	if !ok || expectedPassword != credentials.Password {
+		w.WriteHeader(http.StatusUnauthorized)
+		log.Print("Err2 : ", err)
+		return
+	}
+
+	expirationTime := time.Now().Add(time.Minute * 5)
+	employee := &Employee{
+		Email: credentials.Email,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: expirationTime.Unix(),
+		},
+	}
+
+	// claims := &Claims{
+	// 	Email: credentials.Email,
+	// 	StandardClaims: jwt.StandardClaims{
+	// 		ExpiresAt: expirationTime.Unix(),
+	//	},
+	//}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, employee)
+	tokenString, err := token.SignedString(jwtKey)
+
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		log.Print("Err3 : ", err)
+		return
+	}
+
+	http.SetCookie(w, &http.Cookie{
+		Name:    "token",
+		Value:   tokenString,
+		Expires: expirationTime,
+	})
+
+	// res := &ResponseData{
+	// 	Token:   tokenString,
+	// 	Expires: expirationTime,
+	// }
+
+	jsonData, _ := json.Marshal(employee)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+	w.Write(jsonData)
+}
+
+func Welcome(w http.ResponseWriter, r *http.Request) {
+	cookie, err := r.Cookie("token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	tokenStr := cookie.Value
+
+	employee := &Employee{}
+
+	tkn, err := jwt.ParseWithClaims(tokenStr, employee,
+		func(t *jwt.Token) (interface{}, error) {
+			return jwtKey, nil
+		})
+	if err != nil {
+		if err == jwt.ErrSignatureInvalid {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	if !tkn.Valid {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+
+	//w.Write([]byte(fmt.Sprintf("Hello, %s", claims.Email)))
+
+}

@@ -12,8 +12,7 @@ type EmployeReposiotry interface {
 	PrintEmploye() []*models.Employee
 	PrintEmployeId(string) *models.Employee
 
-	PrintEmployeEmail(string) *models.Employee
-
+//	PrintEmployeEmail(string) *models.Employee
 	SaveEmployee(models.Employee) *models.Employee
 	EditEmployee(models.Employee) *models.Employee
 	UpdatePatch(models.Employee) *models.Employee
@@ -26,6 +25,7 @@ func NewEmpRepo() EmployeReposiotry {
 }
 
 type empRepo struct{}
+
 
 func (er *empRepo) PrintEmploye() []*models.Employee {
 
@@ -48,16 +48,16 @@ func (er *empRepo) PrintEmployeId(eid string) *models.Employee {
 	fmt.Println("there is no error in get method")
 	return employee
 }
-func (er *empRepo) PrintEmployeEmail(eid string) *models.Employee {
-	var employee *models.Employee
-	//e_id, _ := strconv.ParseInt(eid, 0, 64)
+// func (er *empRepo) PrintEmployeEmail(eid string) *models.Employee {
+// 	var employee *models.Employee
+// 	//e_id, _ := strconv.ParseInt(eid, 0, 64)
 
-	result := gormDB.Where("email", eid).Find(&employee)
-	if err := result.Error; err != nil {
-		log.Print("Error in getting all records")
-	}
-	return employee
-}
+// 	result := gormDB.Where("email", eid).Find(&employee)
+// 	if err := result.Error; err != nil {
+// 		log.Print("Error in getting all records")
+// 	}
+// 	return employee
+// }
 
 func (tr *empRepo) SaveEmployee(employee models.Employee) *models.Employee {
 	b := gormDB.First(&employee)
