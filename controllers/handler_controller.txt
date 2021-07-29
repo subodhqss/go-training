@@ -1,26 +1,30 @@
- package controllers
-
-
+package controllers
 
 import (
+	/*"repository"
+	repository.GetValue()*/
 	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"time"
 
+	//"github.com/subodhqss/go-training/models"
 	"github.com/dgrijalva/jwt-go"
+	// "github.com/subodhqss/go-training/services"
+	"github.com/subodhqss/go-training/repository"
 )
+
+// var employeeService = service.NewEmployeService(repository.NewEmpRepo())//test
 
 var jwtKey = []byte("secret_key")
 
 var users = map[string]string{
 	"abcxyz@gmail.com_update": "pswd1",
-
 }
 
 type Credentials struct {
-	Email string `json:"email"`
+	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 
@@ -34,11 +38,25 @@ type ResponseData struct {
 	Token   string    `json:"token"`
 }
 
+func NewEmpRepo() repository.EmployeReposiotry{
+	return &empRepo{}
+
+}
+
+type empRepo struct{}
+
 func Login(w http.ResponseWriter, r *http.Request) {
-
-	
-
 	var credentials Credentials
+	// func (es *empServ) PrintEmployeEmail(email string) *models.Employee {
+	// 	emp := es.empRepo.PrintEmployeEmail(email)
+	// 	return emp
+	// }
+	emailid = credentials.Email
+	emmm =repository.EmployeReposiotry.PrintEmployeEmail(*empRepo,credentials.Email)
+
+
+	fmt.Println(emm)
+
 	err := json.NewDecoder(r.Body).Decode(&credentials)
 	if err != nil {
 		log.Print("Err1 : ", err)

@@ -29,7 +29,7 @@ func GetEmployeId(rw http.ResponseWriter, r *http.Request) {
 	rw.Write(jsonData)
 }
 
-func GetEmployeEmail(rw http.ResponseWriter, r *http.Request) {
+/*func GetEmployeEmail(rw http.ResponseWriter, r *http.Request) {
 	
 	vars := mux.Vars(r)["email"]
 	data := employeService.PrintEmployeEmail(vars)
@@ -37,8 +37,7 @@ func GetEmployeEmail(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	rw.WriteHeader(200)
 	rw.Write(jsonData)
-}
-
+}*/
 func CreateEmployee(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var Employee models.Employee

@@ -50,7 +50,7 @@ func (er *empRepo) PrintEmployeId(eid string) *models.Employee {
 func (er *empRepo) PrintEmployeEmail(email string) *models.Employee {
 	var employee *models.Employee
 
-	fmt.Println(email)
+	fmt.Println(email) 
 
 	result := gormDB.Preload("OfficeDetail").Preload("ReportsTo").Where("email", email).Find(&employee)
 	if err := result.Error; err != nil {
@@ -63,7 +63,7 @@ func (er *empRepo) PrintEmployeEmail(email string) *models.Employee {
 
 	}else
 	{
-		fmt.Println(" not valid")
+		fmt.Println("not valid")
 	}
 	
 	return employee
