@@ -42,13 +42,12 @@ func CreateEmployee(rw http.ResponseWriter, r *http.Request) {
 	hasPass, err := bcrypt.GenerateFromPassword([]byte(Employee.Password), 5)
 	log.Print("hased Pass :", string(hasPass), Employee.Password)
 	if err != nil {
-		log.Fatalln("Error")
+		return
 	}
-	log.Print("hased Pass :", string(hasPass), Employee.Password)
+	Employee.Password = string(hasPass)
+	data := employeService.SaveEmployee(Employee)
+	json.NewEncoder(rw).Encode(data)
 
-	employeService.SaveEmployee(Employee)
-	json.NewEncoder(rw).Encode("Employee is Created Succesfully !")
-	json.NewEncoder(rw).Encode(Employee)
 }
 
 // func CreateEmployee(rw http.ResponseWriter, r *http.Request) {
