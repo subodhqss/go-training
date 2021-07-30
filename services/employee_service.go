@@ -49,14 +49,12 @@ func (es *empServ) PrintEmployeId(eid string) *models.Employee {
 // 	claims := &Claims{
 // 		Email: credentials.Email,
 // 		StandardClaims: jwt.StandardClaims{
-// 			ExpiresAt: expirationTime.Unix(),
-// 		},
-// 	}
+// 			ExpiresAt: expirationTime.
 
 func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee {
+
 	empId := emp.empRepo.SaveEmployee(Employee)
 	return empId
-
 }
 
 func (emp *empServ) EditEmployee(Employee models.Employee) *models.Employee {

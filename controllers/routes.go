@@ -11,7 +11,7 @@ func NewRouter() *mux.Router {
 	router.HandleFunc("/employee/{eid}", GetEmployeId).Methods("GET")
 
 	//router.HandleFunc("/employee/{eid}", GetEmployeEmail).Methods("GET")
-	
+
 	router.HandleFunc("/saveemployee", CreateEmployee).Methods("POST")
 	router.HandleFunc("/editemployee", UpdateEmployee).Methods("PUT")
 	router.HandleFunc("/delete/{eid}", DeleteEmployee).Methods("DELETE")
@@ -62,15 +62,12 @@ func NewRouter() *mux.Router {
 	router.HandleFunc("/updateproductline", UpdateProductline).Methods("PUT")
 
 	//login-api
-
+	//Authentication and Authorization using jwt
 	router.HandleFunc("/login", Login).Methods("GET")
-	router.HandleFunc("/login", Register).Methods("POST")
-	// router.HandleFunc("/welcome", Welcome).Methods("POST")
-
+	router.HandleFunc("/loginemployee", LoginEmployee).Methods("POST")
 
 	// router.HandleFunc("/login", Sigin).Methods("GET")
 	// router.HandleFunc("/login", Signup).Methods("POST")
-	
 
 	return router
 

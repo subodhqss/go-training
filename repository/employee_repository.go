@@ -48,26 +48,27 @@ func (er *empRepo) PrintEmployeId(eid string) *models.Employee {
 	fmt.Println("there is no error in get method")
 	return employee
 }
-// func (er *empRepo) PrintEmployeEmail(eid string) *models.Employee {
-// 	var employee *models.Employee
-// 	//e_id, _ := strconv.ParseInt(eid, 0, 64)
 
-// 	result := gormDB.Where("email", eid).Find(&employee)
+
+// func (tr *empRepo) SaveEmployee(employee models.Employee) *models.Employee {
+// 	b := gormDB.First(&employee)
+// 	result := gormDB.Save(&b)
 // 	if err := result.Error; err != nil {
 // 		log.Print("Error in getting all records")
 // 	}
-// 	return employee
-// }
+// 	fmt.Println("created", employee)
+// 	return &employee
 
+// }
 func (tr *empRepo) SaveEmployee(employee models.Employee) *models.Employee {
-	b := gormDB.First(&employee)
-	result := gormDB.Save(&b)
+
+	result := gormDB.Create(&employee)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
 	}
-	fmt.Println("created", employee)
-	return &employee
 
+	fmt.Println("Created new entry succesfull !", employee)
+	return &employee
 }
 
 func (tr *empRepo) EditEmployee(employee models.Employee) *models.Employee {
