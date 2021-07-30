@@ -19,6 +19,7 @@ type employeService interface {
 
 type empServ struct {
 	empRepo repository.EmployeReposiotry
+	
 }
 
 func NewEmployeService(empRepo repository.EmployeReposiotry) employeService {

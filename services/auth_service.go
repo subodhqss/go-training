@@ -39,6 +39,7 @@ func (ls *logServ) LoginEmployee(login *models.Login) *models.Login {
 	loginData := &models.Login{
 		Email:     emp.Email,
 		FirstName: emp.FirstName,
+		LastName:  emp.LastName,
 	}
 	return loginData
 }
