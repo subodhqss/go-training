@@ -1,28 +1,30 @@
 package main
 
-import ("net/http"
-        "time"
-        "fmt"
-        "encoding/json"
-		"github.com/dgrijalva/jwt-go"
+import (
+	"encoding/json"
+	"fmt"
+	"net/http"
+	"time"
 
+	"github.com/dgrijalva/jwt-go"
 )
+
 var jwtKey = []byte("secret_key")
-var users = map[string]string {
+var users = map[string]string{
 	"user1": "password1",
 	"user2": "password2",
 }
-type Credentials struct{
+
+type Credentials struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
-
 }
-type Claims struct{
+type Claims struct {
 	Username string `json:"username"`
 	jwt.StandardClaims
-
 }
-func Login(w http.ResponseWriter, r *http.Request){
+
+func Loginc(w http.ResponseWriter, r *http.Request) {
 	var credentials Credentials
 	err := json.NewDecoder(r.Body).Decode(&credentials)
 	if err != nil {
@@ -30,11 +32,11 @@ func Login(w http.ResponseWriter, r *http.Request){
 		return
 	}
 	expectedPassword, ok := users[credentials.Username]
-	if ! ok || expectedPassword != credentials.Password {
+	if !ok || expectedPassword != credentials.Password {
 		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
-	expirationTime := time.Now().Add(time.Minute *5)
+	expirationTime := time.Now().Add(time.Minute * 5)
 	claims := &Claims{
 		Username: credentials.Username,
 		StandardClaims: jwt.StandardClaims{
@@ -42,7 +44,7 @@ func Login(w http.ResponseWriter, r *http.Request){
 		},
 	}
 
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256,claims)
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	tokenString, err := token.SignedString(jwtKey)
 
 	if err != nil {
@@ -50,11 +52,11 @@ func Login(w http.ResponseWriter, r *http.Request){
 		return
 	}
 	http.SetCookie(w,
-	 &http.Cookie{
-		 Name: "token",
-		 Value: tokenString,
-		 Expires: expirationTime,
-	 })
+		&http.Cookie{
+			Name:    "token",
+			Value:   tokenString,
+			Expires: expirationTime,
+		})
 
 }
 func Home(w http.ResponseWriter, r *http.Request) {
@@ -71,24 +73,24 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	claims := &Claims{}
 
 	tkn, err := jwt.ParseWithClaims(tokenStr, claims,
-	 func(t *jwt.Token) (interface{}, error) {
-		 return jwtKey, nil
+		func(t *jwt.Token) (interface{}, error) {
+			return jwtKey, nil
 
-	 })
+		})
 
-	 if err != nil {
-		 if err == jwt.ErrSignatureInvalid {
-			 w.WriteHeader(http.StatusUnauthorized)
-			 return
-		 }
-		 w.WriteHeader(http.StatusBadRequest)
-		 return
-	 }
-	 if tkn.Valid{
-		 w.WriteHeader(http.StatusUnauthorized)
-		 return
+	if err != nil {
+		if err == jwt.ErrSignatureInvalid {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	if tkn.Valid {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
 
-	 }
-	 w.Write([]byte(fmt.Sprintf("Hello, %s", claims.Username)))
+	}
+	w.Write([]byte(fmt.Sprintf("Hello, %s", claims.Username)))
 
 }
