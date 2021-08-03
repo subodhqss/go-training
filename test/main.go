@@ -1,33 +1,51 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
+	"net/http"
+	"strings"
 
-	"github.com/subodhqss/go-training/models"
-	"golang.org/x/crypto/bcrypt"
+	"github.com/dgrijalva/jwt-go"
 )
 
-func main() {
+func middleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		authHeader := strings.Split(r.Header.Get("Authorization"), "Bearer ")
+		if len(authHeader) != 2 {
+			fmt.Println("Malformed token")
+			w.WriteHeader(http.StatusUnauthorized)
+			w.Write([]byte("Malformed Token"))
+		} else {
+			jwtToken := authHeader[1]
+			token, err := jwt.Parse(jwtToken, func(token *jwt.Token) (interface{}, error) {
+				if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+					return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
+				}
+				return []byte(SECRETKEY), nil
+			})
 
-	emp := getEmployeeByEmailData("sk@gmail.com")
-
-	loginPass := "pass@12"
-
-	err := bcrypt.CompareHashAndPassword([]byte(emp.Password), []byte(loginPass))
-	if err != nil {
-		log.Printf("Error: comparing pass %s and %s", emp.Password, loginPass)
-	} else {
-		fmt.Println("Pass match")
-	}
-
+			if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+				ctx := context.WithValue(r.Context(), "props", claims)
+				// Access context values in handlers like this
+				// props, _ := r.Context().Value("props").(jwt.MapClaims)
+				next.ServeHTTP(w, r.WithContext(ctx))
+			} else {
+				fmt.Println(err)
+				w.WriteHeader(http.StatusUnauthorized)
+				w.Write([]byte("Unauthorized"))
+			}
+		}
+	})
 }
 
-func getEmployeeByEmailData(email string) *models.Employee {
-	pass := "$2a$05$lcjlRvKB5XsDt3Alkkpbd.m2YD4ZeIs.n7BfB1xTC8r.KjvtYYf9e"
-	emp := &models.Employee{
-		Password: pass,
-	}
-	return emp
+func pong(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("pong"))
+}
 
+func main() {
+	http.Handle("/ping", middleware(http.HandlerFunc(pong)))
+	log.Fatal(http.ListenAndServe(":8500", nil))
 }
