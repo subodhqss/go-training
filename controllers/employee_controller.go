@@ -8,7 +8,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/subodhqss/go-training/models"
 	"github.com/subodhqss/go-training/repository"
-	service "github.com/subodhqss/go-training/services"
+	"github.com/subodhqss/go-training/services"
 	"golang.org/x/crypto/bcrypt"
 )
 
