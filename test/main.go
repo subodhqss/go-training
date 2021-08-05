@@ -1,32 +1,61 @@
-package main 
+
+package main
+
 import (
-	"fmt"
+	"encoding/json"
 	"net/http"
 
 	"github.com/auth0/go-jwt-middleware"
 	"github.com/form3tech-oss/jwt-go"
+	"github.com/gorilla/mux"
+	"github.com/urfave/negroni"
+	
 )
 
-var myHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-	user := r.Context().Value("user")
-	fmt.Fprintf(w, "This is an authenticated request")
-	fmt.Fprintf(w, "Claim content:\n")
-	for k, v := range user.(*jwt.Token).Claims.(jwt.MapClaims) {
-		fmt.Fprintf(w, "%s :\t%#v\n", k, v)
-	}
-})
-
 func main() {
+	StartServer()
+}
+
+func StartServer() {
+	r := mux.NewRouter()
+
 	jwtMiddleware := jwtmiddleware.New(jwtmiddleware.Options{
 		ValidationKeyGetter: func(token *jwt.Token) (interface{}, error) {
 			return []byte("My Secret"), nil
 		},
-		// When set, the middleware verifies that tokens are signed with the specific signing algorithm
-		// If the signing method is not constant the ValidationKeyGetter callback can be used to implement additional checks
-		// Important to avoid security issues described here: https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/
 		SigningMethod: jwt.SigningMethodHS256,
 	})
 
-	app := jwtMiddleware.Handler(myHandler)
-	http.ListenAndServe("0.0.0.0:3000", app)
+	r.HandleFunc("/ping", PingHandler)
+	r.Handle("/secured/ping", negroni.New(
+		negroni.HandlerFunc(jwtMiddleware.HandlerWithNext),
+		negroni.Wrap(http.HandlerFunc(SecuredPingHandler)),
+	))
+	http.Handle("/", r)
+	http.ListenAndServe(":8500", nil)
+}
+
+type Response struct {
+	Text string `json:"text"`
+}
+
+func respondJSON(text string, w http.ResponseWriter) {
+	response := Response{text}
+
+	jsonResponse, err := json.Marshal(response)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(jsonResponse)
+}
+
+func PingHandler(w http.ResponseWriter, r *http.Request) {
+	respondJSON("All good. You don't need to be authenticated to call this", w)
+}
+
+func SecuredPingHandler(w http.ResponseWriter, r *http.Request) {
+	respondJSON("All good. You only get this message if you're authenticated", w)
 }
