@@ -16,7 +16,7 @@ type EmployeReposiotry interface {
 	Update(models.Employee) *models.Employee
 	DeleteEmployee(models.Employee, string) *models.Employee
 
-
+	SaveEmployee1(models.Employee) *models.Employee
 }
 
 func NewEmpRepo() EmployeReposiotry {
@@ -39,7 +39,6 @@ func (er *empRepo) PrintEmploye() []*models.Employee {
 func (er *empRepo) PrintEmployeId(eid string) *models.Employee {
 	var employee *models.Employee
 	e_id, _ := strconv.ParseInt(eid, 0, 64) //type conversion
-
 
 	result := gormDB.Preload("OfficeDetail").Preload("ReportsTo").Where("employeeNumber", e_id).Find(&employee)
 
@@ -90,4 +89,21 @@ func (tr *empRepo) DeleteEmployee(employee models.Employee, eid string) *models.
 
 	fmt.Println("Employee number", e_id, "Deleted Succesfully !")
 	return &employee
+}
+
+func (tr *empRepo) SaveEmployee1(employee models.Employee) *models.Employee {
+
+	result := models.Employee{
+		EmployeeNumber: 112,
+		LastName:       "aasda",
+		FirstName:      "dada",
+		Extension:      "adsdaassd",
+		Email:          "faf@sd.com",
+		// OfficeCode   : 113 ,
+		// OfficeDetail: "fgdg",
+		// // ReportsTo  : "dfgd",
+		ReportsToId: 113,
+		JobTitle:    "hfhfhf",
+	}
+	return &result
 }
