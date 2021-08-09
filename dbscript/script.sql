@@ -1,0 +1,2 @@
+ALTER TABLE employees
+ADD password VARCHAR(255) NOT NULL;

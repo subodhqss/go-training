@@ -6,7 +6,7 @@ import (
 
 	"github.com/subodhqss/go-training/models"
 	"github.com/subodhqss/go-training/repository"
-	"github.com/subodhqss/go-training/services"
+	service "github.com/subodhqss/go-training/services"
 )
 
 var customerService = service.CustomerService(repository.NewCustRepo())
@@ -18,7 +18,6 @@ func GetCustomer(rw http.ResponseWriter, r *http.Request) {
 	rw.WriteHeader(200)
 	rw.Write(jsonData)
 }
-
 
 /*func GetCustomerNumber(rw http.ResponseWriter, r *http.Request) {
 
