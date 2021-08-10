@@ -68,6 +68,7 @@ func (tr *empRepo) UpdateEmployee(employee models.Employee) *models.Employee {
 	result := gormDB.Model(&employee).Where("employeeNumber", employee.EmployeeNumber).Updates(employee)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
+		return nil
 	}
 	fmt.Println("Updated Succesfull !", employee)
 	return &employee
