@@ -21,7 +21,7 @@ type EmployeReposiotry interface {
 
 func NewEmpRepo() EmployeReposiotry {
 	return &empRepo{}
-
+	
 }
 
 type empRepo struct{}
@@ -90,11 +90,14 @@ func (tr *empRepo) DeleteEmployee(employee models.Employee, eid string) *models.
 }
 func (tr *empRepo) SaveEmployee1(employee models.Employee) *models.Employee {
 
-	result := gormDB.Create(&employee)
-	if err := result.Error; err != nil {
-		log.Print("Error in getting all records")
+	result := &models.Employee{
+		EmployeeNumber: 109,
+		LastName:      "kaur"
+		FirstName:     "Neet"
+		Extension:     "abcc"
+		Email:         "neet@gmail.com"
+		ReportsToId:   112,
+		JobTitle:      "trainee"
 	}
-
-	fmt.Println("Created new entry succesfull !", employee)
-	return &employee
+	
 }
