@@ -53,7 +53,8 @@ func (tr *empRepo) SaveEmployee(employee models.Employee) *models.Employee {
 
 	result := gormDB.Create(&employee)
 	if err := result.Error; err != nil {
-		log.Print("Error in getting all records")
+		log.Print("Error in creating records")
+		return nil
 	}
 
 	fmt.Println("Created new entry succesfull !", employee)

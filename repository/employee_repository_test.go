@@ -11,7 +11,7 @@ import (
 func TestSaveEmployee1(t *testing.T){
 	repo := NewEmpRepo()
 	employeeDummy := &models.Employee{
-		EmployeeNumber: 111,
+		
 		LastName:       "Diane",
 		FirstName:      "Murphy",
 		Extension:      "x5800",
@@ -23,9 +23,15 @@ func TestSaveEmployee1(t *testing.T){
 
 
 	res := repo.SaveEmployee(*employeeDummy)
-	assert.Equal(t,res,employeeDummy)
+	employeeDummy.EmployeeNumber = res.EmployeeNumber
+	assert.Equal(t,employeeDummy,res)
 
-	errCheck := repo.SaveEmployee(models.Employee{})
-	assert.NotNil(t,errCheck)
+	employeeDummy1:=models.Employee{
+		EmployeeNumber: 999,
+	}
+
+	errCheck := repo.SaveEmployee(employeeDummy1)
+	assert.Nil(t,errCheck)
+
 
 }
