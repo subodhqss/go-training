@@ -58,7 +58,7 @@ func TestGetEmployeeId(t *testing.T) {
 	assert.Equal(t, dummyEmployee, res)
 
 	errCheck := repo.PrintEmployeId("jsdasj") //its not working
-	assert.Nil(t, errCheck)
+	assert.NotNil(t, errCheck)
 
 }
 
@@ -90,6 +90,18 @@ func TestUpdateEmployee(t *testing.T) {
 	}
 
 	errCheck := repo.UpdateEmployee(errModel)
-	assert.Nil(t,errCheck)//not working
+	assert.NotNil(t,errCheck)//not working
 
 }
+
+func TestDelete(t *testing.T){
+	repo := NewEmpRepo()
+
+	dummyData:=models.Employee{}
+
+	res:=repo.DeleteEmployee(dummyData,"836674")
+	// expResult := gormDB.Where("employeeNumber",836674).Delete(&dummyData)
+	assert.Equal(t,res,&dummyData)
+}
+
+
