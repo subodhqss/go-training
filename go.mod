@@ -1,6 +1,5 @@
 
 go 1.16
-
 require (
 	github.com/auth0/go-jwt-middleware v1.0.1 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible

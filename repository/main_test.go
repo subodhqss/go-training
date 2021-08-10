@@ -13,7 +13,7 @@ import (
 )
 
 func TestMain(t *testing.M) {
-	sqldb, err := sql.Open("mysql", fmt.Sprintf("%s:%s@/%s", "username", "password", "database_name"))
+	sqldb, err := sql.Open("mysql", fmt.Sprintf("%s:%s@/%s", "root", "Gurika4ever_v", "classicmodels"))
 	if err != nil {
 		log.Fatalf("Unable to connect to test database, exiting: %v", err)
 	}
@@ -28,8 +28,4 @@ func TestMain(t *testing.M) {
 	}
 	gormDB = gormDatabase
 	os.Exit(t.Run())
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 0efcaa096d1f19ab9d8fdf4e9777c2f59e7bdc78
