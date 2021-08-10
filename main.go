@@ -11,8 +11,6 @@ import (
 func main() {
 	repository.InitDBConnection()
 	StartServer()
-	
-
 }
 
 func StartServer() {

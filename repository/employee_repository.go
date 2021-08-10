@@ -32,7 +32,9 @@ func (er *empRepo) PrintEmploye() []*models.Employee {
 	result := gormDB.Preload("OfficeDetail").Preload("ReportsTo").Limit(10).Find(&employee)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
+		return nil
 	}
+	fmt.Println(employee)
 	return employee
 }
 

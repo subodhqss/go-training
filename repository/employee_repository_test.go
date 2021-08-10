@@ -1,12 +1,14 @@
 package repository
 
 import (
-	// "log"
+	"log"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/subodhqss/go-training/models"
 )
+
+
 
 func TestSaveEmployee1(t *testing.T){
 	repo := NewEmpRepo()
@@ -21,7 +23,6 @@ func TestSaveEmployee1(t *testing.T){
 		JobTitle:    "President",
 	}
 
-
 	res := repo.SaveEmployee(*employeeDummy)
 	employeeDummy.EmployeeNumber = res.EmployeeNumber
 	assert.Equal(t,employeeDummy,res)
@@ -29,9 +30,19 @@ func TestSaveEmployee1(t *testing.T){
 	employeeDummy1:=models.Employee{
 		EmployeeNumber: 999,
 	}
-
 	errCheck := repo.SaveEmployee(employeeDummy1)
 	assert.Nil(t,errCheck)
+}
 
+func TestGetEmployee(t *testing.T){
+	repo := NewEmpRepo()
+
+	var dummyEmployee []*models.Employee
+	result:= gormDB.Preload("OfficeDetail").Preload("ReportsTo").Limit(10).Find(&dummyEmployee)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+	res:= repo.PrintEmploye()
+	assert.Equal(t,dummyEmployee,res)
 
 }
