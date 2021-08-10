@@ -28,4 +28,8 @@ func TestMain(t *testing.M) {
 	}
 	gormDB = gormDatabase
 	os.Exit(t.Run())
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 0efcaa096d1f19ab9d8fdf4e9777c2f59e7bdc78
