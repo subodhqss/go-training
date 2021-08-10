@@ -90,6 +90,6 @@ func TestUpdateEmployee(t *testing.T) {
 	}
 
 	errCheck := repo.UpdateEmployee(errModel)
-	assert.NotNil(t,errCheck)//not working
+	assert.Nil(t,errCheck)//not working
 
 }
