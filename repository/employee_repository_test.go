@@ -46,3 +46,20 @@ func TestGetEmployee(t *testing.T){
 	assert.Equal(t,dummyEmployee,res)
 
 }
+
+func TestGetEmployeeId(t *testing.T){
+	repo :=NewEmpRepo()
+
+	var dummyEmployee *models.Employee
+	result := gormDB.Preload("OfficeDetail").Preload("ReportsTo").Where("employeeNumber", 99).Find(&dummyEmployee)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+
+	res:=repo.PrintEmployeId("99")
+	assert.Equal(t,dummyEmployee,res)
+
+	errCheck := repo.PrintEmployeId("jsdasj")//its not working
+	assert.Nil(t,errCheck)
+
+}

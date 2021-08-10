@@ -46,6 +46,7 @@ func (er *empRepo) PrintEmployeId(eid string) *models.Employee {
 
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
+		return nil
 	}
 	fmt.Println("there is no error in get method")
 	return employee
