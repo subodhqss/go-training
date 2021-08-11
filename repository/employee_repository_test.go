@@ -5,15 +5,15 @@ import (
 	"github.com/subodhqss/go-training/models"
 )
 func TestSaveEmployee1(t *testing.T){
-	repo := NewEmpRepo()
+	repo := NewEmpRepo();
 	employeeDummy := &models.Employee{
 		EmployeeNumber: 109,
-		LastName:      "kaur"
-		FirstName:     "Neet"
-		Extension:     "abcc"
-		Email:         "neet@gmail.com"
-		ReportsToId:   1002,
-		JobTitle:      "trainee"
+		LastName:  "kaur"
+		FirstName:  "Neet"
+		Extension:   "abcc"
+		Email:       "neet@gmail.com"
+		ReportsToId:  1002,
+		JobTitle:     "Trainee"
 	}
 	res := repo.SaveEmployee(*employeeDummy)
 	employeeDummy.EmployeeNumber = res.EmployeeNumber
@@ -25,7 +25,6 @@ func TestSaveEmployee1(t *testing.T){
 
 	errCheck := repo.SaveEmployee(employeeDummy1)
 	assert.Nil(t,errCheck)
-
 
 }
 
@@ -63,7 +62,7 @@ func TestUpdateEmployee(t *testing.T) {
 	repo := NewEmpRepo()
 	employeeDummy := &models.Employee{
 		EmployeeNumber: 99,
-		LastName:       "Alam",
+		LastName:       "Gurneet",
 		FirstName:      "Murphy",
 		Extension:      "x5800",
 		Email:          "dmurphy@classicmodelcars.com",
@@ -74,16 +73,15 @@ func TestUpdateEmployee(t *testing.T) {
 
 	res := repo.UpdateEmployee(*employeeDummy)
 	assert.Equal(t, employeeDummy, res)
-
 	errModel := models.Employee{
-		EmployeeNumber: 000,
-		LastName:       "Alam",
-		FirstName:      "Murphy",
-		Extension:      "x5800",
-		Email:          "dmurphy@classicmodelcars.com",
-		OfficeCode:     "1",
-		ReportsToId:    1002,
-		JobTitle:       "President",
+		EmployeeNumber: 003,
+		LastName:      "Gurneet",
+		FirstName:     "Murphyy",
+		Extension:     "x5800",
+		Email:         "dmurphy@classicmodelcars.com",
+		OfficeCode:    "1",
+		ReportsToId:   1002,
+		JobTitle:      "President",
 	}
 
 	errCheck := repo.UpdateEmployee(errModel)
