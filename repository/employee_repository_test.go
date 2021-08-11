@@ -1,5 +1,6 @@
 package repository
 import (
+	"log"
 	"testing"
 	"github.com/stretchr/testify/assert"
 	"github.com/subodhqss/go-training/models"
@@ -8,12 +9,12 @@ func TestSaveEmployee1(t *testing.T){
 	repo := NewEmpRepo();
 	employeeDummy := &models.Employee{
 		EmployeeNumber: 109,
-		LastName:  "kaur"
-		FirstName:  "Neet"
-		Extension:   "abcc"
-		Email:       "neet@gmail.com"
+		LastName:  "kaur",
+		FirstName:  "Neet",
+		Extension:   "abcc",
+		Email:       "neet@gmail.com",
 		ReportsToId:  1002,
-		JobTitle:     "Trainee"
+		JobTitle:     "Trainee",
 	}
 	res := repo.SaveEmployee(*employeeDummy)
 	employeeDummy.EmployeeNumber = res.EmployeeNumber

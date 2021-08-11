@@ -16,7 +16,6 @@ type EmployeReposiotry interface {
 	UpdateEmployee(models.Employee) *models.Employee
 	Update(models.Employee) *models.Employee
 	DeleteEmployee(models.Employee, string) *models.Employee
-	SaveEmployee1(models.Employee, string) *models.Employee
 }
 
 func NewEmpRepo() EmployeReposiotry {
@@ -88,16 +87,5 @@ func (tr *empRepo) DeleteEmployee(employee models.Employee, eid string) *models.
 	fmt.Println("Employee number", e_id, "Deleted Succesfully !")
 	return &employee
 }
-func (tr *empRepo) SaveEmployee1(employee models.Employee) *models.Employee {
 
-	result := &models.Employee{
-		EmployeeNumber: 109,
-		LastName:      "kaur"
-		FirstName:     "Neet"
-		Extension:     "abcc"
-		Email:         "neet@gmail.com"
-		ReportsToId:   112,
-		JobTitle:      "trainee"
-	}
-	
-}
+
