@@ -34,7 +34,6 @@ func TestSaveEmployee1(t *testing.T) {
 
 func TestGetEmployee(t *testing.T) {
 	repo := NewEmpRepo()
-
 	var dummyEmployee []*models.Employee
 	result := gormDB.Preload("OfficeDetail").Preload("ReportsTo").Limit(10).Find(&dummyEmployee)
 	if err := result.Error; err != nil {
@@ -90,18 +89,16 @@ func TestUpdateEmployee(t *testing.T) {
 	}
 
 	errCheck := repo.UpdateEmployee(errModel)
-	assert.NotNil(t,errCheck)//not working
+	assert.NotNil(t, errCheck) //not working
 
 }
 
-func TestDelete(t *testing.T){
+func TestDelete(t *testing.T) {
 	repo := NewEmpRepo()
 
-	dummyData:=models.Employee{}
+	dummyData := models.Employee{}
 
-	res:=repo.DeleteEmployee(dummyData,"836674")
+	res := repo.DeleteEmployee(dummyData, "836674")
 	// expResult := gormDB.Where("employeeNumber",836674).Delete(&dummyData)
-	assert.Equal(t,res,&dummyData)
+	assert.Equal(t, res, &dummyData)
 }
-
-
