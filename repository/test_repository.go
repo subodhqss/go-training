@@ -15,7 +15,7 @@ func NewTestRepo() TestRepository {
 type testRepo struct{}
 
 func (tr *testRepo) PrintTest() *models.Test {
-	test := &models.Test{ID: 1, Message: "Hello trainee!"}
+	test := &models.Test{ID: 1, Message: "Hello Sarthak"}
 
 	return test
 }
