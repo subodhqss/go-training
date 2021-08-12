@@ -56,7 +56,6 @@ func TestGetEmployeeId(t *testing.T) {
 
 	errCheck := repo.PrintEmployeId("jsdasj") //its not working
 	assert.NotNil(t, errCheck)
-
 }
 
 func TestUpdateEmployee(t *testing.T) {

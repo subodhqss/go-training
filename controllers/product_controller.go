@@ -36,8 +36,7 @@ func UpdateProduct(rw http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(rw).Encode(Product)
 }
 
-func UpdateP(rw http.ResponseWriter, r *http.Request)
- {
+func UpdateP(rw http.ResponseWriter, r *http.Request){
 	rw.Header().Set("Content-Type", "application/json")
 	var Product models.Product
 	json.NewDecoder(r.Body).Decode(&Product)
