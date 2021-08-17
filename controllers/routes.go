@@ -7,6 +7,9 @@ import (
 func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 
+	//Image upload
+	router.HandleFunc("/upload",uploadFile).Methods("POST")
+
 	//employee model methods
 	router.HandleFunc("/employees", GetEmploye).Methods("GET")
 	router.HandleFunc("/employee/{eid}", GetEmployeId).Methods("GET")
