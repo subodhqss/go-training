@@ -12,4 +12,5 @@ type Employee struct {
 	ReportsToId    int       `gorm:"column:reportsTo" json:"reports_to_id"`
 	JobTitle       string    `gorm:"column:jobTitle" json:"job_title"`
 	Password       string    `gorm:"column:password" json:"password"`
+	Image          string    `gorm:"column:image" json:"image"`
 }
