@@ -8,11 +8,26 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/subodhqss/go-training/models"
 	"github.com/subodhqss/go-training/repository"
-	"github.com/subodhqss/go-training/services"
+	service "github.com/subodhqss/go-training/services"
 	"golang.org/x/crypto/bcrypt"
 )
 
 var employeService = service.NewEmployeService(repository.NewEmpRepo())
+
+//image upload
+
+func EmployeeImage(rw http.ResponseWriter, r *http.Request) {
+	rw.Header().Set("Content-Type", "application/json")
+	eId := mux.Vars(r)["eid"]
+	r.ParseMultipartForm(10 << 20)
+
+	file, header, _ := r.FormFile("myFile")
+	defer file.Close()
+
+	employeService.UpdateImage(eId, file, header, r.Host)
+	json.NewEncoder(rw).Encode("Employee number: " + eId + " Image updated Succesfully !")
+
+}
 
 //Employee model functions
 func GetEmploye(rw http.ResponseWriter, r *http.Request) {

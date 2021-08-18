@@ -3,8 +3,9 @@ package service
 import (
 	"github.com/subodhqss/go-training/models"
 	"github.com/subodhqss/go-training/repository"
-)
+	"github.com/subodhqss/go-training/util"
 
+)
 type employeService interface {
 	PrintEmploye() []*models.Employee
 	PrintEmployeId(string) *models.Employee
@@ -13,7 +14,7 @@ type employeService interface {
 	UpdateEmployee(models.Employee) *models.Employee
 	Update(models.Employee) *models.Employee
 	DeleteEmployee(models.Employee, string) *models.Employee
-
+	UpdateImage(string, multipart.File, *multipart.FileHeader,string) 
 	
 }
 
@@ -61,4 +62,10 @@ func (em *empServ) DeleteEmployee(Employee models.Employee, eid string) *models.
 
 	empId := em.empRepo.DeleteEmployee(Employee, eid)
 	return empId
+}
+func (em *empServ) UpdateImage(eid string, file multipart.File, header  *multipart.FileHeader,host string) {
+	imagePath := util.UploadFile(file,header,eid)
+
+	em.empRepo.UpdateImage(host,imagePath,eid)
+	
 }

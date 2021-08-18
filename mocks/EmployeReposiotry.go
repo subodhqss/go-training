@@ -107,3 +107,19 @@ func (_m *EmployeReposiotry) UpdateEmployee(_a0 models.Employee) *models.Employe
 
 	return r0
 }
+
+// UpdateImage provides a mock function with given fields: _a0, _a1, _a2
+func (_m *EmployeReposiotry) UpdateImage(_a0 string, _a1 string, _a2 string) *models.Employee {
+	ret := _m.Called(_a0, _a1, _a2)
+
+	var r0 *models.Employee
+	if rf, ok := ret.Get(0).(func(string, string, string) *models.Employee); ok {
+		r0 = rf(_a0, _a1, _a2)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*models.Employee)
+		}
+	}
+
+	return r0
+}
