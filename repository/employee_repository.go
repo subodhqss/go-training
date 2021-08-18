@@ -15,6 +15,7 @@ type EmployeReposiotry interface {
 	UpdateEmployee(models.Employee) *models.Employee
 	Update(models.Employee) *models.Employee
 	DeleteEmployee(models.Employee, string) *models.Employee
+	UpdateImage(string,string,string) *models.Employee
 }
 
 func NewEmpRepo() EmployeReposiotry {
@@ -90,8 +91,16 @@ func (tr *empRepo) DeleteEmployee(employee models.Employee, eid string) *models.
 		log.Print("Error in getting all records")
 	}
 
-	fmt.Println("Employee number", e_id, "Deleted Succesfully !",result,&employee)
+	fmt.Println("Employee number", e_id, "Deleted Succesfully !", result, &employee)
 	return &employee
 }
-
-
+func (tr *empRepo) UpdateImage(host string,imagePath string,eid string) *models.Employee {
+	var employee *models.Employee
+	e_id, _ := strconv.ParseInt(eid, 0, 64) //type conversion
+	result := gormDB.Model(&employee).Where("employeeNumber", e_id).Update("profileImage",host+imagePath)
+	fmt.Println(result)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+	return employee
+}

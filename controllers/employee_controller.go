@@ -7,11 +7,12 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/subodhqss/go-training/models"
 	"github.com/subodhqss/go-training/repository"
-	"github.com/subodhqss/go-training/services"
+	service "github.com/subodhqss/go-training/services"
 )
 
 var employeService = service.NewEmployeService(repository.NewEmpRepo())
-//Employee model functions 
+
+//Employee model functions
 func GetEmploye(rw http.ResponseWriter, r *http.Request) {
 	data := employeService.PrintEmploye()
 	jsonData, _ := json.Marshal(data)
@@ -20,7 +21,7 @@ func GetEmploye(rw http.ResponseWriter, r *http.Request) {
 	rw.Write(jsonData)
 }
 func GetEmployeId(rw http.ResponseWriter, r *http.Request) {
-	
+
 	vars := mux.Vars(r)["eid"]
 	data := employeService.PrintEmployeId(vars)
 	jsonData, _ := json.Marshal(data)
@@ -60,6 +61,19 @@ func DeleteEmployee(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var Employee models.Employee
 	vars := mux.Vars(r)["eid"]
-	employeService.DeleteEmployee(Employee,vars)
-	json.NewEncoder(rw).Encode("Employee number: "+vars+" Deleted Succesfully !")
+	employeService.DeleteEmployee(Employee, vars)
+	json.NewEncoder(rw).Encode("Employee number: " + vars + " Deleted Succesfully !")
+}
+
+func EmployeeImage(rw http.ResponseWriter, r *http.Request) {
+	rw.Header().Set("Content-Type", "application/json")
+	eId := mux.Vars(r)["eid"]
+	r.ParseMultipartForm(10 << 20)
+
+	file, header, _ := r.FormFile("myFile")
+	defer file.Close()
+
+	employeService.UpdateImage(eId,file,header,r.Host)
+	json.NewEncoder(rw).Encode("Employee number: "+eId+ " Image updated Succesfully !")
+
 }

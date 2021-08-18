@@ -20,6 +20,7 @@ type Employee struct {
 	ReportsTo      *Employee `gorm:"foreignKey:ReportsToId;references:EmployeeNumber" json:"reports_to"`
 	ReportsToId    int       `gorm:"column:reportsTo" json:"reports_to_id"`
 	JobTitle       string    `gorm:"column:jobTitle" json:"job_title"`
+	ProfileImage   string	 `gorm:"column:profileImage"`
 }
 
 func (e *Employee) BeforeCreate(tx *gorm.DB) (err error) {
