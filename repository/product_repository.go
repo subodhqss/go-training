@@ -3,6 +3,8 @@ package repository
 import (
 	"fmt"
 	"log"
+	// "strconv"
+
 	"github.com/subodhqss/go-training/models"
 )
 
@@ -11,7 +13,7 @@ type ProductReposiotry interface {
 	PrintProductId(string) *models.Product
 	SaveProduct(models.Product) *models.Product
 	UpdateProduct(models.Product) *models.Product
-
+	UpdateImage(string, string, string) *models.Product
 }
 
 func NewProRepo() ProductReposiotry {
@@ -31,7 +33,7 @@ func (er *proRepo) PrintProduct() []*models.Product {
 }
 
 func (er *proRepo) PrintProductId(code string) *models.Product {
-	Product := &models.Product{} 
+	Product := &models.Product{}
 	result := gormDB.Preload("ProductlineDetails").Where("ProductCode", code).Find(Product)
 	if err := result.Error; err != nil {
 		log.Print("Error in getting all records")
@@ -60,3 +62,13 @@ func (tr *proRepo) UpdateProduct(Product models.Product) *models.Product {
 	return &Product
 }
 
+func (tr *proRepo) UpdateImage(host string, imagePath string, code string) *models.Product {
+	fmt.Println("repo")
+	var product *models.Product
+	result := gormDB.Model(&product).Where("productCode", code).Update("profileImage", host+imagePath)
+	fmt.Println(result)
+	if err := result.Error; err != nil {
+		log.Print("Error in getting all records")
+	}
+	return product
+}

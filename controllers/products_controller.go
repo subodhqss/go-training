@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -45,6 +46,23 @@ func UpdateProduct(rw http.ResponseWriter, r *http.Request) {
 	ProductService.UpdateProduct(Product)
 	json.NewEncoder(rw).Encode(" updated by PUT method !")
 	json.NewEncoder(rw).Encode(Product)
+}
+
+func ProductImage(rw http.ResponseWriter, r *http.Request) {
+	
+
+	rw.Header().Set("Content-Type", "application/json")
+	code1 := mux.Vars(r)["code"]
+
+	r.ParseMultipartForm(10 << 20)
+	file, header, _ := r.FormFile("myFile")
+	defer file.Close()
+	fmt.Println("controller")
+
+	ProductService.UpdateImage(code1,file,header,r.Host)
+	json.NewEncoder(rw).Encode("product code: "+code1+ " Image updated Succesfully !")
+
+	
 }
 
 

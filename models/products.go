@@ -11,4 +11,5 @@ type Product struct {
 	BuyPrice           float64       `gorm:"column:buyPrice" json:"buy_Price"`
 	MSRP               float32       `gorm:"column:MSRP" json:"MSRP"`
 	ProductlineDetails []Productline `gorm:"foreignKey:ProductLine;references:ProductLine" json:"Payment_details"`
+	ProfileImage       string        `gorm:"column:profileImage"`
 }
