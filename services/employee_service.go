@@ -1,6 +1,11 @@
 package service
 
 import (
+	"encoding/csv"
+	"fmt"
+
+	"os"
+
 	"mime/multipart"
 
 	"github.com/subodhqss/go-training/models"
@@ -12,10 +17,11 @@ type employeService interface {
 	PrintEmploye() []*models.Employee
 	PrintEmployeId(string) *models.Employee
 	SaveEmployee(models.Employee) *models.Employee
+	SaveEmployeeCSV(models.Employee) *models.Employee
 	UpdateEmployee(models.Employee) *models.Employee
 	Update(models.Employee) *models.Employee
 	DeleteEmployee(models.Employee, string) *models.Employee
-	UpdateImage(string, multipart.File, *multipart.FileHeader,string) 
+	UpdateImage(string, multipart.File, *multipart.FileHeader, string)
 
 	// PrintOfficeId(string) *models.Office
 }
@@ -45,6 +51,35 @@ func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee {
 	return empId
 }
 
+func (emp *empServ) SaveEmployeeCSV(Employee models.Employee) *models.Employee {
+
+	csvFile, _ := os.Open("employee.csv")
+	fmt.Println(csvFile)
+	reader := csv.NewReader(csvFile)
+	line, err := reader.ReadAll()
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(line)
+	// line0, _ := strconv.ParseInt(line[0], 0, 10)
+	// line6, _ := strconv.ParseInt(line[6], 0, 10)
+
+	// Employee = models.Employee{
+	// 	EmployeeNumber: int(line0),
+	// 	LastName:       line[1],
+	// 	FirstName:      line[2],
+	// 	Extension:      line[3],
+	// 	Email:          line[4],
+	// 	OfficeCode:     line[5],
+	// 	ReportsToId:    int(line6),
+	// 	JobTitle:       line[7],
+	// 	ProfileImage:   line[8],
+	// }
+
+	empId := emp.empRepo.SaveEmployee(Employee)
+	return empId
+}
+
 func (em *empServ) UpdateEmployee(Employee models.Employee) *models.Employee {
 	empId := em.empRepo.UpdateEmployee(Employee)
 	return empId
@@ -61,9 +96,9 @@ func (em *empServ) DeleteEmployee(Employee models.Employee, eid string) *models.
 	return empId
 }
 
-func (em *empServ) UpdateImage(eid string, file multipart.File, header *multipart.FileHeader,host string) {
-	imagePath := util.UploadFile(file,header,eid)
+func (em *empServ) UpdateImage(eid string, file multipart.File, header *multipart.FileHeader, host string) {
+	imagePath := util.UploadFile(file, header, eid)
 
-	em.empRepo.UpdateImage(host,imagePath,eid)
-	
+	em.empRepo.UpdateImage(host, imagePath, eid)
+
 }

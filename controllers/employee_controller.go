@@ -39,6 +39,17 @@ func CreateEmployee(rw http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(rw).Encode(Employee)
 }
 
+func CreateEmployeeCSV(rw http.ResponseWriter, r *http.Request) {
+	rw.Header().Set("Content-Type", "application/json")
+	var Employee models.Employee
+	json.NewDecoder(r.Body).Decode(&Employee)
+	employeService.SaveEmployeeCSV(Employee)
+	json.NewEncoder(rw).Encode("Employee is Created Succesfully !")
+	json.NewEncoder(rw).Encode(Employee)
+	
+}
+
+
 func UpdateEmployee(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var Employee models.Employee
