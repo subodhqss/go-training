@@ -38,6 +38,14 @@ func CreateEmployee(rw http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(rw).Encode("Employee is Created Succesfully !")
 	json.NewEncoder(rw).Encode(Employee)
 }
+func CreateEmployeeBulk(rw http.ResponseWriter, r *http.Request) {
+	rw.Header().Set("Content-Type", "application/json")
+	var Employee []models.Employee
+	json.NewDecoder(r.Body).Decode(&Employee)
+	employeService.SaveEmployeeBulk(Employee)
+	json.NewEncoder(rw).Encode("Employee is Created Succesfully !")
+	json.NewEncoder(rw).Encode(Employee)
+}
 
 func CreateEmployeeCSV(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")

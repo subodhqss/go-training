@@ -60,6 +60,22 @@ func (_m *ProductReposiotry) SaveProduct(_a0 models.Product) *models.Product {
 	return r0
 }
 
+// UpdateImage provides a mock function with given fields: _a0, _a1, _a2
+func (_m *ProductReposiotry) UpdateImage(_a0 string, _a1 string, _a2 string) *models.Product {
+	ret := _m.Called(_a0, _a1, _a2)
+
+	var r0 *models.Product
+	if rf, ok := ret.Get(0).(func(string, string, string) *models.Product); ok {
+		r0 = rf(_a0, _a1, _a2)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*models.Product)
+		}
+	}
+
+	return r0
+}
+
 // UpdateProduct provides a mock function with given fields: _a0
 func (_m *ProductReposiotry) UpdateProduct(_a0 models.Product) *models.Product {
 	ret := _m.Called(_a0)

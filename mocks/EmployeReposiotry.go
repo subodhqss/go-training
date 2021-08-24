@@ -76,6 +76,11 @@ func (_m *EmployeReposiotry) SaveEmployee(_a0 models.Employee) *models.Employee 
 	return r0
 }
 
+// SaveEmployeeBulk provides a mock function with given fields: _a0
+func (_m *EmployeReposiotry) SaveEmployeeBulk(_a0 []models.Employee) {
+	_m.Called(_a0)
+}
+
 // Update provides a mock function with given fields: _a0
 func (_m *EmployeReposiotry) Update(_a0 models.Employee) *models.Employee {
 	ret := _m.Called(_a0)

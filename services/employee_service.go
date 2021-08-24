@@ -17,6 +17,7 @@ type employeService interface {
 	PrintEmploye() []*models.Employee
 	PrintEmployeId(string) *models.Employee
 	SaveEmployee(models.Employee) *models.Employee
+	SaveEmployeeBulk([]models.Employee) 
 	SaveEmployeeCSV(models.Employee) *models.Employee
 	UpdateEmployee(models.Employee) *models.Employee
 	Update(models.Employee) *models.Employee
@@ -49,6 +50,11 @@ func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee {
 
 	empId := emp.empRepo.SaveEmployee(Employee)
 	return empId
+}
+func (emp *empServ) SaveEmployeeBulk(Employee []models.Employee)  {
+
+	emp.empRepo.SaveEmployeeBulk(Employee)
+	
 }
 
 func (emp *empServ) SaveEmployeeCSV(Employee models.Employee) *models.Employee {

@@ -78,6 +78,27 @@ func (_m *employeService) SaveEmployee(_a0 models.Employee) *models.Employee {
 	return r0
 }
 
+// SaveEmployeeBulk provides a mock function with given fields: _a0
+func (_m *employeService) SaveEmployeeBulk(_a0 []models.Employee) {
+	_m.Called(_a0)
+}
+
+// SaveEmployeeCSV provides a mock function with given fields: _a0
+func (_m *employeService) SaveEmployeeCSV(_a0 models.Employee) *models.Employee {
+	ret := _m.Called(_a0)
+
+	var r0 *models.Employee
+	if rf, ok := ret.Get(0).(func(models.Employee) *models.Employee); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*models.Employee)
+		}
+	}
+
+	return r0
+}
+
 // Update provides a mock function with given fields: _a0
 func (_m *employeService) Update(_a0 models.Employee) *models.Employee {
 	ret := _m.Called(_a0)
