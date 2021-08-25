@@ -9,5 +9,5 @@ type Office struct {
 	Country      string     `gorm:"column:country" json:"contry"`
 	PostalCode   string     `gorm:"column:postalCode" json:"postalCode"`
 	Territory    string     `gorm:"column:territory" json:"territory"`
-	Employees    string     `gorm:"foreignKey:OfficeCode;" json:"employees"`
+	Employees    []Employee `gorm:"foreignKey:OfficeCode;references:OfficeCode" json:"employees"`
 }

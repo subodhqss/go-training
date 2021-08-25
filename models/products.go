@@ -9,5 +9,5 @@ type Product struct {
 	ProductDescription  string       `gorm:"column:productDescription" json:"product_description"`
 	QuantityInStock     string       `gorm:"column:quantityInStock" json:"quantity_in_stock"`
 	BuyPrice            string       `gorm:"column:buyPrice" json:"buy_price"`
-	ProductlineDetails string        `gorm:"foreignKey:ProductLine" json:"payment_details"`
+	ProductlineDetails []Productline `gorm:"foreignKey:ProductLine;references:ProductLine" json:"Payment_details"`
 }

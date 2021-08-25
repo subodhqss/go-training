@@ -8,15 +8,11 @@ import (
 type employeService interface {
 	PrintEmploye() []*models.Employee
 	PrintEmployeId(string) *models.Employee
-	//PrintEmployeEmail(string) *models.Employee
 	SaveEmployee(models.Employee) *models.Employee
-	UpdateEmployee(models.Employee) *models.Employee
-	// Update(models.Employee) *models.Employee
+	// UpdateEmployee(models.Employee) *models.Employee
 	DeleteEmployee(models.Employee, string) *models.Employee
 
 }
-
-
 
 
 type empServ struct {
@@ -40,10 +36,10 @@ func (emp *empServ) SaveEmployee(Employee models.Employee) *models.Employee {
 }
 
 
-func (em *empServ) UpdateEmployee(Employee models.Employee) *models.Employee {
-	empId := em.empRepo.UpdateEmployee(Employee)
-	return empId
-}
+// func (em *empServ) UpdateEmployee(Employee models.Employee) *models.Employee {
+// 	empId := em.empRepo.UpdateEmployee(Employee)
+// 	return empId
+// }
 
 
 func (es *empServ) PrintEmployeId(eid string) *models.Employee {

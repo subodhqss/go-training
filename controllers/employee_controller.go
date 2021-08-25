@@ -12,24 +12,10 @@ import (
 	//   "golang.org/x/crypto/bcrypt"
 )
 
+
+
+
 var employeService = services.NewEmployeService(repository.NewEmpRepo())
-
-// func CreateEmployee(rw http.ResponseWriter, r *http.Request) {
-// 	rw.Header().Set("Content-Type", "application/json")
-// 	var Employee models.Employee
-// 	json.NewDecoder(r.Body).Decode(&Employee)
-
-// 	hasPass, err := bcrypt.GenerateFromPassword([]byte(Employee.Password), 5)
-// 	log.Print("hased Pass :", string(hasPass), Employee.Password)
-// 	if err != nil {
-// 		return
-// 	}
-// 	Employee.Password = string(hasPass)
-// 	data := employeService.SaveEmployee(Employee)
-// 	json.NewEncoder(rw).Encode(data)
-// 	// log.Print("hased Pass :", string(hasPass), emp.Password)
-
-// }
 
 func GetEmploye(rw http.ResponseWriter, r *http.Request) {
 	data := employeService.PrintEmploye()
@@ -37,17 +23,6 @@ func GetEmploye(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	rw.WriteHeader(200)
 	rw.Write(jsonData)
-}
-
-
-
-func UpdateEmployee(rw http.ResponseWriter, r *http.Request) {
-	rw.Header().Set("Content-Type", "application/json")
-	var Employee models.Employee
-	json.NewDecoder(r.Body).Decode(&Employee)
-	employeService.UpdateEmployee(Employee)
-	json.NewEncoder(rw).Encode("Employee is updated by PUT method !")
-	json.NewEncoder(rw).Encode(Employee)
 }
 
 func GetEmployeId(rw http.ResponseWriter, r *http.Request) {
@@ -59,6 +34,16 @@ func GetEmployeId(rw http.ResponseWriter, r *http.Request) {
 	rw.Write(jsonData)
 }
 
+func CreateEmployee(rw http.ResponseWriter, r *http.Request) {
+	rw.Header().Set("Content-Type", "application/json")
+	var Employee models.Employee
+	json.NewDecoder(r.Body).Decode(&Employee)
+	employeService.SaveEmployee(Employee)
+	json.NewEncoder(rw).Encode("Employee is Created Succesfully !")
+	json.NewEncoder(rw).Encode(Employee)
+}
+
+
 func DeleteEmployee(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var Employee models.Employee
@@ -66,3 +51,17 @@ func DeleteEmployee(rw http.ResponseWriter, r *http.Request) {
 	employeService.DeleteEmployee(Employee, vars)
 	json.NewEncoder(rw).Encode("Employee number: " + vars + " Deleted Succesfully !")
 }
+
+
+
+// func UpdateEmployee(rw http.ResponseWriter, r *http.Request) {
+// 	rw.Header().Set("Content-Type", "application/json")
+// 	var Employee models.Employee
+// 	json.NewDecoder(r.Body).Decode(&Employee)
+// 	employeService.UpdateEmployee(Employee)
+// 	json.NewEncoder(rw).Encode("Employee is updated by PUT method !")
+// 	json.NewEncoder(rw).Encode(Employee)
+// }
+
+
+

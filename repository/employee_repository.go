@@ -12,11 +12,10 @@ import (
 type EmployeReposiotry interface {
 	PrintEmploye() []*models.Employee
 	PrintEmployeId(string) *models.Employee
-	//PrintEmployeEmail(string) *models.Employee
 	SaveEmployee(models.Employee) *models.Employee
-	UpdateEmployee(models.Employee) *models.Employee
+	// UpdateEmployee(models.Employee) *models.Employee
 	// Update(models.Employee) *models.Employee
-	 DeleteEmployee(models.Employee, string) *models.Employee
+	DeleteEmployee(models.Employee, string) *models.Employee
 	// SaveEmployee1(models.Employee, string) *models.Employee
 }
 

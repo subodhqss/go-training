@@ -17,8 +17,13 @@ func NewRouter() *mux.Router {
 	employeeSubRoute.Methods(http.MethodGet).HandlerFunc(GetEmploye)
 	employeeSubRoute.Methods(http.MethodGet).Path("/{employeeNumber}").HandlerFunc(GetEmployeId)
 	employeeSubRoute.Methods(http.MethodDelete).Path("/delete/{employeeNumber}").HandlerFunc(DeleteEmployee)
-	
+	employeeSubRoute.Methods(http.MethodGet).Path("/saveEmployee").HandlerFunc(CreateEmployee)
 	router.PathPrefix("/employees").Handler(employeeSubRoute)
+	
+
+
+
+
 	
 	// //customer model functions
 	// router.HandleFunc("/customer", GetCustomer).Methods("GET")

@@ -13,7 +13,7 @@ import (
 )
 
 func TestMain(t *testing.M) {
-	sqldb, err := sql.Open("mysql", fmt.Sprintf("%s:%s@/%s", "root", "8520", "classicmodels"))
+	sqldb, err := sql.Open("mysql", fmt.Sprintf("%s:%s@/%s", "admin", "root", "classicmodels"))
 	if err != nil {
 		log.Fatalf("Unable to connect to test database, exiting: %v", err)
 	}
