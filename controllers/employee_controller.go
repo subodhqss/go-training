@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-
 	"github.com/gorilla/mux"
 	"github.com/subodhqss/go-training/models"
 	"github.com/subodhqss/go-training/repository"
@@ -30,6 +29,14 @@ func EmployeeImage(rw http.ResponseWriter, r *http.Request) {
 }
 
 //Employee model functions
+func CreateEmployeeAll(rw http.ResponseWriter, r *http.Request) {
+	rw.Header().Set("Content-Type", "application/json")
+	var Employee []models.Employee
+	json.NewDecoder(r.Body).Decode(&Employee)
+	employeService.SaveEmployeeAll(Employee)
+	json.NewEncoder(rw).Encode("Employee is Created Succesfully !")
+	json.NewEncoder(rw).Encode(Employee)
+}
 func GetEmploye(rw http.ResponseWriter, r *http.Request) {
 	data := employeService.PrintEmploye()
 	jsonData, _ := json.Marshal(data)
@@ -84,7 +91,6 @@ func UpdateEmployee(rw http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(rw).Encode("Employee is updated by PUT method !")
 	json.NewEncoder(rw).Encode(Employee)
 }
-
 func Update(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	var Employee models.Employee

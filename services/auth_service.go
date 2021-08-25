@@ -2,7 +2,6 @@ package service
 
 import (
 	"log"
-
 	"github.com/dgrijalva/jwt-go"
 	"github.com/subodhqss/go-training/models"
 	"github.com/subodhqss/go-training/repository"

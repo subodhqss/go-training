@@ -1,11 +1,13 @@
 package service
 
 import (
+	"mime/multipart"
+
 	"github.com/subodhqss/go-training/models"
 	"github.com/subodhqss/go-training/repository"
 	"github.com/subodhqss/go-training/util"
-
 )
+
 type employeService interface {
 	PrintEmploye() []*models.Employee
 	PrintEmployeId(string) *models.Employee
@@ -13,14 +15,14 @@ type employeService interface {
 	SaveEmployee(models.Employee) *models.Employee
 	UpdateEmployee(models.Employee) *models.Employee
 	Update(models.Employee) *models.Employee
+	//Employeecsv(models.Employee) *models.Employee
 	DeleteEmployee(models.Employee, string) *models.Employee
-	UpdateImage(string, multipart.File, *multipart.FileHeader,string) 
-	
+	UpdateImage(string, multipart.File, *multipart.FileHeader, string)
+	SaveEmployeeAll([]models.Employee)
 }
 
 type empServ struct {
 	empRepo repository.EmployeReposiotry
-	
 }
 
 func NewEmployeService(empRepo repository.EmployeReposiotry) employeService {
@@ -63,9 +65,15 @@ func (em *empServ) DeleteEmployee(Employee models.Employee, eid string) *models.
 	empId := em.empRepo.DeleteEmployee(Employee, eid)
 	return empId
 }
-func (em *empServ) UpdateImage(eid string, file multipart.File, header  *multipart.FileHeader,host string) {
-	imagePath := util.UploadFile(file,header,eid)
+func (em *empServ) UpdateImage(eid string, file multipart.File, header *multipart.FileHeader, host string) {
+	imagePath := util.UploadFile(file, header, eid)
 
-	em.empRepo.UpdateImage(host,imagePath,eid)
-	
+	em.empRepo.UpdateImage(host, imagePath, eid)
+
+}
+
+func (emp *empServ) SaveEmployeeAll(Employee []models.Employee) {
+
+	emp.empRepo.SaveEmployeeAll(Employee)
+
 }
